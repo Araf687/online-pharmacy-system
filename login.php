@@ -73,7 +73,7 @@
 
                     if (jsonData?.isSuccess) {
                         // $("#successmsg-area").text(jsonData.message);
-                        // console.log(jsonData);
+                        console.log(jsonData);
                         toastr.success(jsonData.message);
                         const loggedInData = {
                             id: jsonData?.data?.user?.id,
