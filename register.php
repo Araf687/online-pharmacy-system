@@ -139,12 +139,7 @@ include('includes/head.php');
                     if (jsonData?.isSuccess) {
                         // console.log(jsonData);
                         toastr.success(jsonData.message);
-                        const loggedInData = {
-                            id: jsonData?.data?.user?.id,
-                            name: jsonData?.data?.user?.first_name,
-                            email: jsonData?.data?.user?.email
-                        }
-                        localStorage.setItem("loggedInData", JSON.stringify(loggedInData))
+                        
                         location.href = 'login.php';
                     } else {
                         toastr.error(jsonData.message + ". " + jsonData.data.error);

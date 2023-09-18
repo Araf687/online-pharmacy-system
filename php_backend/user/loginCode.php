@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo json_encode(["isSuccess" => false, "data" => [], "message" => "Email or password is incorrect"]);
         }
     }catch(Exception $e){
-        echo json_encode(["isSuccess" => false, "data" => [], "message" => "Failed to register"]);
+        echo json_encode(["isSuccess" => false, "data" => [], "message" => "Failed to login"]);
     }
 }
 ?>
