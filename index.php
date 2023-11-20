@@ -47,7 +47,7 @@
         </div>
         <section class="d-flex justify-content-center" style="background-color:white">
             <section class="w-75">
-                <h4 class="my-4">Best Sellig Product</h4>
+                <h4 class="my-4">Best Sellers</h4>
                 <div class="mb-3">
                     <div class="container text-center">
                         <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">

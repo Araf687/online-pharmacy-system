@@ -11,18 +11,7 @@ include('includes/head.php');
                 <div>
                     <h4 class='text-center mb-4' style="color:#047e6a;">Register</h4>
                 </div>
-                <div class="mb-2">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="registerType" style="width:16px"
-                            id="inlineRadio1" value="user" checked>
-                        <label class="form-check-label" for="inlineRadio1">User</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" style="width:16px" name="registerType"
-                            id="inlineRadio2" value="pharmacy_admin">
-                        <label class="form-check-label" for="inlineRadio2">Pharmacy</label>
-                    </div>
-                </div>
+              
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="floatingInput" name="name"
                         placeholder="name@example.com">
@@ -139,12 +128,7 @@ include('includes/head.php');
                     if (jsonData?.isSuccess) {
                         // console.log(jsonData);
                         toastr.success(jsonData.message);
-                        const loggedInData = {
-                            id: jsonData?.data?.user?.id,
-                            name: jsonData?.data?.user?.first_name,
-                            email: jsonData?.data?.user?.email
-                        }
-                        localStorage.setItem("loggedInData", JSON.stringify(loggedInData))
+                        
                         location.href = 'login.php';
                     } else {
                         toastr.error(jsonData.message + ". " + jsonData.data.error);
