@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $name = isset($_POST['name']) ? mysqli_real_escape_string($conn,$_POST['name']) : null;
         $email = isset($_POST['email']) ? mysqli_real_escape_string($conn,$_POST['email']) : null;
         $password = isset($_POST['password']) ? mysqli_real_escape_string($conn,$_POST['password']) : null;
-        $tableName= $_POST['registerType'];
+        $tableName= 'user';
         // echo "sdj";
         // echo json_encode(["isSuccess" => false, "data" => ["name"=>$name, "email"=>$email, "pass"=>$password, "registerType"=>$tableName],"message" => "Failed to add admin"]);
 

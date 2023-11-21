@@ -4,7 +4,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try{
         $email = isset($_POST['email']) ? mysqli_real_escape_string($conn,$_POST['email']) : null;
         $password = isset($_POST['password']) ? mysqli_real_escape_string($conn,$_POST['password']) : null;
-        $tableName= $_POST['registerType'];
+        $tableName= 'user';
 
         $sql = "SELECT * FROM $tableName WHERE `email`='$email' LIMIT 1";
         $result = mysqli_query($conn, $sql);
