@@ -12,35 +12,43 @@ include('./config/dbConn.php');
         </section>
 
     </section>
-    <section class="d-flex justify-content-center bg-light">
-        <section class="w-75">
-            <div class="container pb-5 pt-4">
-                <h3>All Shops</h3>
-                <div class="row">
-                    <?php 
-                        // $allShopQuerry="SELECT * FROM  ";
-                        $allShopQuerry="SELECT *
-                        FROM pharmacy_admin
-                        JOIN pharmacy_address ON pharmacy_admin.id = pharmacy_address.pharmacy_id;
-                        ";
-                        $allShopQuerryRun=mysqli_query($conn, $allShopQuerry);
-                        while($allShopQuerry=mysqli_fetch_array($allShopQuerryRun)){
-                            $allShopQuerryResult= "".$allShopQuerry["id"]."".$allShopQuerry["first_name"]."".$allShopQuerry["last_name"]." ".$allShopQuerry["shop_name"]." ".$allShopQuerry["admin_email"];
-                            $shopId=$allShopQuerry["id"];
-                            $shopName=$allShopQuerry["shop_name"];
-                            $shopImage=$allShopQuerry["shop_image"];
-                            $shopRating=$allShopQuerry["rating"];
-                            $address=$allShopQuerry["address"].", ".$allShopQuerry["city"];
+    <section>
+        <?php 
+                    $id=null;
+                     if (isset($_GET['id'])) {
+                        $id = (int)$_GET['id'];
+                        
+
+                     }
+                        // $shopRow="SELECT * FROM  ";
+                        $shopQuerry="SELECT *
+                        FROM pharmacy_admin AS pa
+                        INNER JOIN pharmacy_address AS pad
+                        ON pa.id = pad.pharmacy_id
+                        WHERE pa.id = $id";
+                        $shopQuerryRun=mysqli_query($conn, $shopQuerry);
+                        while($shopRow=$shopQuerryRun->fetch_assoc()){
+                            $allShopQuerryResult= "".$shopRow["id"]."".$shopRow["first_name"]."".$shopRow["last_name"]." ".$shopRow["shop_name"]." ".$shopRow["admin_email"];
+                            $shopId=$shopRow["id"];
+                            $shopName=$shopRow["shop_name"];
+                            $shopImage=$shopRow["shop_image"];
+                            $shopRating=$shopRow["rating"];
+                            $address=$shopRow["address"].", ".$shopRow["city"];
 
                             $imgSrc=$shopImage?"assets/img/shop/".$shopImage:"assets/img/shop/pharmacy.png";
 
                             ?>
+                            <div style="background-color:#f2f2f2;">
+                                <img src=<?=$imgSrc?> class="card-img-top" style="width:100%;height:500px" alt="...">
+                            </div>
+
+        <section class="w-75">
+            <div class="container pb-5 pt-4">
+                <div class="row">
+
                     <div class="col-md-3 pt-4">
 
                         <div class="card shadow rounded-4" style="width:100%;">
-                            <div class="p-3" style="background-color:#f2f2f2;">
-                                <img src=<?=$imgSrc?> class="card-img-top" style="height:180px;" alt="...">
-                            </div>
 
                             <div class="card-body">
                                 <h5 class="card-title text-center"><?=$shopName?></h5>
@@ -58,7 +66,8 @@ include('./config/dbConn.php');
 
                                         </p>
                                         <div class="d-flex align-items-center" style="height:50px">
-                                            <div class="p-2 border me-2 rounded"><i class="fa-solid fa-location-dot "></i></div>
+                                            <div class="p-2 border me-2 rounded"><i
+                                                    class="fa-solid fa-location-dot "></i></div>
                                             <small><?=$address?></small>
                                         </div>
                                     </div>
@@ -71,12 +80,13 @@ include('./config/dbConn.php');
                             </div>
                         </div>
                     </div>
-                    <?php    
-                        }
-                ?>
+
                 </div>
             </div>
         </section>
+        <?php    
+                        }
+                ?>
 
     </section>
     <footer>
