@@ -9,9 +9,14 @@ include('includes/head.php');
         <div class="loginCard">
             <form id="registerForm" class='shadow'>
                 <div>
+<<<<<<< HEAD
+                    <h4 class='text-center mb-4' style="color:#047e6a;">User Register</h4>
+                </div>
+=======
                     <h4 class='text-center mb-4' style="color:#047e6a;">Register</h4>
                 </div>
               
+>>>>>>> 249bb7af2c956c3f0c6be2d078be9e0273367e97
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="floatingInput" name="name"
                         placeholder="name@example.com">
