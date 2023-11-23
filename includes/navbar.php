@@ -32,8 +32,13 @@ if (isset($_SESSION['userType']) == false) {
             <a href="category.php" class="link-underline-light text-decoration-none me-3">Categories</a>
             <a href="all-shop.php" class="link-underline-light text-decoration-none me-3">Shops</a>
             <a href="" class="link-underline-light text-decoration-none me-3">Help</a>
+<<<<<<< HEAD
             <a href="login.php" class="link-underline-light text-decoration-none"><i class="fa fa-sign-in"></i> login</a>
             <span class="position-relative ms-1 me-3">
+=======
+
+            <span class="position-relative">
+>>>>>>> b7d49a4f13fe872ccaaa9038c0338bb683cbbd3b
                 <span><i class="fa-solid fa-cart-shopping" style="font-size:20px"></i></span>
 
                 <span id="cart" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -55,7 +60,10 @@ if (isset($_SESSION['userType']) == false) {
                 <a href="login.php" onclick="logout()" class="link-underline-light text-decoration-none"><i
                         class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
             <?php } ?>
+<<<<<<< HEAD
 
+=======
+>>>>>>> b7d49a4f13fe872ccaaa9038c0338bb683cbbd3b
         </nav>
     </div>
     <script>

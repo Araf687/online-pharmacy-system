@@ -40,9 +40,6 @@ include('./config/dbConn.php');
                     <div class="col-md-12 pt-4">
 
                         <div class="card shadow rounded-4" style="width:100%;">
-                            <div class="p-3" style="background-color:#f2f2f2;">
-                                <img src=<?=$imgSrc?> class="card-img-top" style="height:180px;" alt="...">
-                            </div>
 
                             <div class="card-body">
                                 <h5 class="card-title text-center"><?=$shopName?></h5>
@@ -62,6 +59,8 @@ include('./config/dbConn.php');
                                         <div class="d-flex align-items-center" style="height:50px">
                                             <div class="p-2 border me-2 rounded"><i
                                                     class="fa-solid fa-location-dot "></i></div>
+                                            <div class="p-2 border me-2 rounded"><i
+                                                    class="fa-solid fa-location-dot "></i></div>
                                             <small><?=$address?></small>
                                         </div>
                                     </div>
@@ -74,12 +73,13 @@ include('./config/dbConn.php');
                             </div>
                         </div>
                     </div>
-                    <?php    
-                        }
-                ?>
+
                 </div>
             </div>
         </section>
+        <?php    
+                        }
+                ?>
 
     </section>
     <footer>
