@@ -32,10 +32,8 @@ if (isset($_SESSION['userType']) == false) {
             <a href="category.php" class="link-underline-light text-decoration-none me-3">Categories</a>
             <a href="all-shop.php" class="link-underline-light text-decoration-none me-3">Shops</a>
             <a href="" class="link-underline-light text-decoration-none me-3">Help</a>
-<<<<<<< HEAD
             <a href="login.php" class="link-underline-light text-decoration-none"><i class="fa fa-sign-in"></i> login</a>
-=======
-            <span class="position-relative">
+            <span class="position-relative ms-1 me-3">
                 <span><i class="fa-solid fa-cart-shopping" style="font-size:20px"></i></span>
 
                 <span id="cart" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -47,7 +45,7 @@ if (isset($_SESSION['userType']) == false) {
             if (isset($_SESSION['userType']) == false) {
                 ?>
 
-                <a href="login.php" class="link-underline-light text-decoration-none ms-4"><i
+                <a href="login.php" class="link-underline-light text-decoration-none"><i
                         class="fa-solid fa-arrow-right-to-bracket"></i> login</a>
                 <?php
             } else {
@@ -58,8 +56,6 @@ if (isset($_SESSION['userType']) == false) {
                         class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
             <?php } ?>
 
-
->>>>>>> 249bb7af2c956c3f0c6be2d078be9e0273367e97
         </nav>
     </div>
     <script>

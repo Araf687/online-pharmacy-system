@@ -12,30 +12,32 @@ include('./config/dbConn.php');
         </section>
 
     </section>
+
     <section class="d-flex justify-content-center bg-light">
         <section class="w-75">
             <div class="container pb-5 pt-4">
-                <h3>All Shops</h3>
                 <div class="row">
                     <?php 
-                        // $allShopQuerry="SELECT * FROM  ";
-                        $allShopQuerry="SELECT *
+                    $id=null;
+                    if(isset($_GET['id'])){
+                        $id=$_GET['id'];
+                    }
+                        // $shopQueryRow="SELECT * FROM  ";
+                        $shopQuerry="SELECT *
                         FROM pharmacy_admin
-                        JOIN pharmacy_address ON pharmacy_admin.id = pharmacy_address.pharmacy_id;
-                        ";
-                        $allShopQuerryRun=mysqli_query($conn, $allShopQuerry);
-                        while($allShopQuerry=mysqli_fetch_array($allShopQuerryRun)){
-                            $allShopQuerryResult= "".$allShopQuerry["id"]."".$allShopQuerry["first_name"]."".$allShopQuerry["last_name"]." ".$allShopQuerry["shop_name"]." ".$allShopQuerry["admin_email"];
-                            $shopId=$allShopQuerry["id"];
-                            $shopName=$allShopQuerry["shop_name"];
-                            $shopImage=$allShopQuerry["shop_image"];
-                            $shopRating=$allShopQuerry["rating"];
-                            $address=$allShopQuerry["address"].", ".$allShopQuerry["city"];
-
+                        INNER JOIN pharmacy_address ON pharmacy_admin.id = pharmacy_address.pharmacy_id
+                        WHERE pharmacy_admin.id = 5";
+                        $shopQueryResult=mysqli_query($conn, $shopQuerry);
+                        while($shopQueryRow=$shopQueryResult->fetch_assoc()){
+                            $shopId=$shopQueryRow["id"];
+                            $shopName=$shopQueryRow["shop_name"];
+                            $shopImage=$shopQueryRow["shop_image"];
+                            $shopRating=$shopQueryRow["rating"];
+                            $address=$shopQueryRow["address"].", ".$shopQueryRow["city"];
                             $imgSrc=$shopImage?"assets/img/shop/".$shopImage:"assets/img/shop/pharmacy.png";
 
                             ?>
-                    <div class="col-md-3 pt-4">
+                    <div class="col-md-12 pt-4">
 
                         <div class="card shadow rounded-4" style="width:100%;">
                             <div class="p-3" style="background-color:#f2f2f2;">
@@ -58,7 +60,8 @@ include('./config/dbConn.php');
 
                                         </p>
                                         <div class="d-flex align-items-center" style="height:50px">
-                                            <div class="p-2 border me-2 rounded"><i class="fa-solid fa-location-dot "></i></div>
+                                            <div class="p-2 border me-2 rounded"><i
+                                                    class="fa-solid fa-location-dot "></i></div>
                                             <small><?=$address?></small>
                                         </div>
                                     </div>
