@@ -13,11 +13,8 @@ include('./config/dbConn.php');
 
     </section>
 
-    <section class="d-flex justify-content-center bg-light">
-        <section class="w-75">
-            <div class="container pb-5 pt-4">
-                <div class="row">
-                    <?php 
+    <section>
+        <?php 
                     $id=null;
                     if(isset($_GET['id'])){
                         $id=$_GET['id'];
@@ -37,51 +34,61 @@ include('./config/dbConn.php');
                             $imgSrc=$shopImage?"assets/img/shop/".$shopImage:"assets/img/shop/pharmacy.png";
 
                             ?>
-                    <div class="col-md-12 pt-4">
+                            <div class="p-3" >
+                                <img src=<?=$imgSrc?> class="card-img-top" style="height:180px;" alt="...">
+                            </div>
+        <section class="d-flex justify-content-center bg-light">
+            <section class="w-75">
+                <div class="container pb-5 pt-4">
+                    <div class="row">
+                        <div class="col-md-12 pt-4">
 
-                        <div class="card shadow rounded-4" style="width:100%;">
+                            <div class="card shadow rounded-4" style="width:100%;">
 
-                            <div class="card-body">
-                                <h5 class="card-title text-center"><?=$shopName?></h5>
-                                <div>
-                                    <div class="my-1">
-                                        <p class="text-center">
-                                            <?php 
+                                <div class="card-body">
+                                    <h5 class="card-title text-center"><?=$shopName?></h5>
+                                    <div>
+                                        <div class="my-1">
+                                            <p class="text-center">
+                                                <?php 
                                         for ($i = 1; $i <= 5; $i++) {
                                         ?>
-                                            <i class="fa-regular fa-star"></i>
-                                            <?php
+                                                <i class="fa-regular fa-star"></i>
+                                                <?php
                                         }
                                         
                                         ?>
 
-                                        </p>
-                                        <div class="d-flex align-items-center" style="height:50px">
-                                            <div class="p-2 border me-2 rounded"><i
-                                                    class="fa-solid fa-location-dot "></i></div>
-                                            <div class="p-2 border me-2 rounded"><i
-                                                    class="fa-solid fa-location-dot "></i></div>
-                                            <small><?=$address?></small>
+                                            </p>
+                                            <div class="d-flex align-items-center" style="height:50px">
+                                                <div class="p-2 border me-2 rounded"><i
+                                                        class="fa-solid fa-location-dot "></i></div>
+                                                <div class="p-2 border me-2 rounded"><i
+                                                        class="fa-solid fa-location-dot "></i></div>
+                                                <small><?=$address?></small>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                </div>
-                                <div class="text-center border-top">
-                                    <a href=<?php echo "shop.php?id=".$shopId;?> style="color:#022314">Visit <i
-                                            class="fa-solid fa-arrow-right ps-1"></i></a>
+                                    </div>
+                                    <div class="text-center border-top">
+                                        <a href=<?php echo "shop.php?id=".$shopId;?> style="color:#022314">Visit <i
+                                                class="fa-solid fa-arrow-right ps-1"></i></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
-            </div>
+            </section>
+
         </section>
         <?php    
                         }
                 ?>
 
     </section>
+
     <footer>
         <?php include("./includes/footer.php") ?>
     </footer>
