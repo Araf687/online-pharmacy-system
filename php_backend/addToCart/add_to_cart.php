@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $currentQuantity = $row['qty'];
         $newQuantity = $currentQuantity + $qty;
 
-        $updateCartSql = "UPDATE cartitem SET qty = $newQuantity WHERE prod_id = $productId";
+        $updateCartSql = "UPDATE cartitem SET qty = $newQuantity WHERE prod_id = $product_id";
         $updateQueryResult=mysqli_query($conn, $updateCartSql);
         
         if($updateQueryResult) {
