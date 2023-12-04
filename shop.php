@@ -39,14 +39,14 @@ include('./config/dbConn.php');
         ?>
         <div class="d-flex">
             <div class="w-25">
+                <img src="assets/img/map.jpeg" class="card-img-top" style="height:300px" alt="...">
             </div>
             <div class="w-75"><img src=<?= $imgSrc ?> class="card-img-top" style="height:300px" alt="..."></div>
         </div>
-
         <section class="d-flex">
-            <div class="w-25">
-                <p class="text-center">Category List</p>
-                <div class="sidebar bg-light px-4 bg-white" style="height:300px;overflow-y:scroll">
+            <div class="w-25" style="background-color:#d3f9ee;">
+                <p class="text-center bg-success p-1 text-light fs-5">Category List</p>
+                <div class="sidebar px-4" style="height:500px;overflow-y:scroll;">
                     <ul class="list-unstyled">
                         <?php
                         $categoryQuerry = "SELECT `id`,`cat_name` FROM category";
@@ -97,49 +97,52 @@ include('./config/dbConn.php');
                 </div>
             </div>
             <div class="w-75">
-                <div class="row my-3 gap-2">
-                    <?php
-                    $productQuerry = "SELECT * from product WHERE pharmacy_id=$id";
-                    $prdQuerryResult = $conn->query($productQuerry);
-                    $rowCount = $prdQuerryResult->num_rows;
-                    if ($rowCount > 0) {
-                        while ($productRow = $prdQuerryResult->fetch_assoc()) {
-                            $prdId = $productRow["prd_id"];
-                            $prdName = $productRow["prd_name"];
-                            $prdPrice = $productRow["prd_price"];
-                            $prdImage = $productRow["prd_image"];
-                            $prdDescription = $productRow["prd_description"];
-                            $prdCategoryId = $productRow["prd_cat_id"];
-                            $prdSubCategoryId = $productRow["prd_sub_cat_id"];
+                <div class="container">
+                    <div class="row my-3">
+                        <?php
+                        $productQuerry = "SELECT * from product WHERE pharmacy_id=$id";
+                        $prdQuerryResult = $conn->query($productQuerry);
+                        $rowCount = $prdQuerryResult->num_rows;
+                        if ($rowCount > 0) {
+                            while ($productRow = $prdQuerryResult->fetch_assoc()) {
+                                $prdId = $productRow["prd_id"];
+                                $prdName = $productRow["prd_name"];
+                                $prdPrice = $productRow["prd_price"];
+                                $prdImage = $productRow["prd_image"];
+                                $prdDescription = $productRow["prd_description"];
+                                $prdCategoryId = $productRow["prd_cat_id"];
+                                $prdSubCategoryId = $productRow["prd_sub_cat_id"];
 
-                            $imgSrc = "../pipharm-admin-panel/assets/images/product/" . $prdImage;
-                            ?>
-                            <div class="col-md-3">
-                                <div class="card p-2 rounded-3" style="width: 100%;">
-                                    <img src=<?= $imgSrc ?> class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title text-center">
-                                            <?= $prdName ?>
-                                        </h5>
-                                        <div class="d-flex justify-content-center align-items-center mb-2">
-                                            <span class="input-group-addon decrement">
-                                                <i class="fas fa-minus"></i>
-                                            </span>
-                                            <input type="text" id="quantity" class="form-control text-center mx-3" value="1">
-                                            <span class="input-group-addon increment">
-                                                <i class="fas fa-plus"></i>
-                                            </span>
+                                $imgSrc = "../pipharm-admin-panel/assets/images/product/" . $prdImage;
+                                ?>
+                                <div class="col-md-3">
+                                    <div class="card p-2 rounded-3" style="width: 100%;">
+                                        <img src=<?= $imgSrc ?> class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center">
+                                                <?= $prdName ?>
+                                            </h5>
+                                            <div class="d-flex justify-content-center align-items-center mb-2">
+                                                <span type="button" class="btn input-group-addon btn-number" data-type="minus"
+                                                    data-field=<?= "quantity_" . $prdId ?>> <i class="fas fa-minus"></i></span>
+                                                <input type="text" id=<?= "quantity_" . $prdId ?>
+                                                    class="form-control text-center mx-3" value="1">
+                                                <span type="button" class="btn input-group-addon btn-number" data-type="plus"
+                                                    data-field=<?= "quantity_" . $prdId ?>> <i class="fas fa-plus"></i> </span>
+                                            </div>
+
+                                            <a href="#" class="btn btn-primary w-100 rounded-5" onclick="addToCart('<?=$prdId?>')">Add to Cart</a>
                                         </div>
-                                        <a href="#" class="btn btn-primary w-100 rounded-5">Add to Cart</a>
                                     </div>
                                 </div>
-                            </div>
-                            <?php
+                                <?php
+                            }
                         }
-                    }
-                    ?>
+                        ?>
 
+                    </div>
                 </div>
+
             </div>
         </section>
         </div>
@@ -172,21 +175,39 @@ include('./config/dbConn.php');
                 parentAnchor.querySelector('span').textContent = '+';
             });
         });
-        $(document).ready(function () {
-            $('.increment').click(function () {
-                var value = parseInt($('#quantity').val(), 10);
-                value = isNaN(value) ? 0 : value;
-                value++;
-                $('#quantity').val(value);
-            });
 
-            $('.decrement').click(function () {
-                var value = parseInt($('#quantity').val(), 10);
-                value = isNaN(value) ? 0 : value;
-                value--;
-                $('#quantity').val(value < 1 ? 1 : value);
+        $(document).ready(function () {
+            $('.btn-number').click(function (e) {
+                e.preventDefault();
+
+                var fieldName = $(this).attr('data-field');
+                var type = $(this).attr('data-type');
+                var input = $("input[id='" + fieldName + "']");
+                var currentVal = parseInt(input.val());
+
+                if (!isNaN(currentVal)) {
+                    if (type === 'minus') {
+                        if (currentVal > 0) {
+                            input.val(currentVal - 1);
+                        }
+                    } else if (type === 'plus') {
+                        input.val(currentVal + 1);
+                    }
+                } else {
+                    input.val(0);
+                }
             });
         });
+            // Function to add to cart
+            function addToCart(productId) {
+                var quantity = parseInt($("#quantity_" + productId).val());
+                // Perform action to add product with productId and quantity to cart
+                // For example, use AJAX to send this data to the server (e.g., PHP endpoint)
+                // $.post('add_to_cart.php', { productId: productId, quantity: quantity }, function(data) {
+                //     // Handle response from server (e.g., success message)
+                // });
+                alert('Added ' + quantity + ' items of product with ID ' + productId + ' to cart');
+            }
     </script>
 </body>
 
