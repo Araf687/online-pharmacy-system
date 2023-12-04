@@ -18,8 +18,6 @@ include('./config/dbConn.php');
         $id = null;
         if (isset($_GET['id'])) {
             $id = (int) $_GET['id'];
-
-
         }
 
         $shopQuerry = "SELECT *
@@ -40,9 +38,15 @@ include('./config/dbConn.php');
 
         ?>
         <div class="d-flex">
-            <div style="width:20%">
+            <div class="w-25">
+            </div>
+            <div class="w-75"><img src=<?= $imgSrc ?> class="card-img-top" style="height:300px" alt="..."></div>
+        </div>
 
-                <div class="sidebar bg-light py-3 px-4 bg-white" style="height:300px;overflow-y:scroll">
+        <section class="d-flex">
+            <div class="w-25">
+                <p class="text-center">Category List</p>
+                <div class="sidebar bg-light px-4 bg-white" style="height:300px;overflow-y:scroll">
                     <ul class="list-unstyled">
                         <?php
                         $categoryQuerry = "SELECT `id`,`cat_name` FROM category";
@@ -91,14 +95,8 @@ include('./config/dbConn.php');
 
                     </ul>
                 </div>
-
             </div>
-            <div style="width:80%"><img src=<?= $imgSrc ?> class="card-img-top" style="height:300px" alt="..."></div>
-        </div>
-
-
-        <section>
-            <div class="container">
+            <div class="w-75">
                 <div class="row my-3 gap-2">
                     <?php
                     $productQuerry = "SELECT * from product WHERE pharmacy_id=$id";
