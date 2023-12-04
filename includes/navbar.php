@@ -1,8 +1,4 @@
-<?php
-if (isset($_SESSION['userType']) == false) {
 
-}
-?>
 <section class="d-flex justify-content-between align-items-center py-1 bg-white">
     <a href="index.php" style="text-decoration:none">
         <div class="d-flex">
@@ -40,20 +36,20 @@ if (isset($_SESSION['userType']) == false) {
                 </span>
             </span>
 
-            <?php
-            if (isset($_SESSION['userType']) == false) {
-                ?>
-
-                <a href="login.php" class="link-underline-light text-decoration-none"><i
-                        class="fa-solid fa-arrow-right-to-bracket"></i> login</a>
+            <span class="ms-3">
                 <?php
-            } else {
-                ?>
+                if (isset($_SESSION['userType']) == false) {
+                    ?>
+                    <a href="login.php" class="link-underline-light text-decoration-none"><i
+                            class="fa-solid fa-arrow-right-to-bracket"></i> login</a>
+                    <?php
+                } else {
+                    ?>
+                    <a href="login.php" onclick="logout()" class="link-underline-light text-decoration-none"><i
+                            class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+                <?php } ?>
+            </span>
 
-
-                <a href="login.php" onclick="logout()" class="link-underline-light text-decoration-none"><i
-                        class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
-            <?php } ?>
 
 
         </nav>

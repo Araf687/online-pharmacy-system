@@ -57,34 +57,32 @@ include('./config/dbConn.php');
 
                                 $rowCount = $subCategoryQresult->num_rows;
                                 if ($rowCount > 0) { ?>
-                        <button href="#services"
-                            class="w-100 btn btn-toggle d-flex justify-content-between align-items-center"
-                            data-bs-toggle="collapse">
-                            <?= $catName ?> <span class="fw-bold">+</span>
-                        </button>
-                        <li>
-                            <ul class="collapse bg-light-subtle" id="services">
-                                <?php
+                                    <button href="#services"
+                                        class="w-100 btn btn-toggle d-flex justify-content-between align-items-center"
+                                        data-bs-toggle="collapse">
+                                        <?= $catName ?> <span class="fw-bold">+</span>
+                                    </button>
+                                    <li>
+                                        <ul class="collapse bg-light-subtle" id="services">
+                                            <?php
                                             while ($subCategoryRow = $subCategoryQresult->fetch_assoc()) {
                                                 $subCategoryId = $subCategoryRow["id"];
                                                 $subCategoryName = $subCategoryRow["sub_category_name"];
+                                                ?>
+                                                <li><a href="#" class="link-dark rounded ">
+                                                        <?= $subCategoryName ?>
+                                                    </a></li>
+                                                <?php
+                                            }
                                             ?>
-                                <li><a href="#" class="link-dark rounded "><?= $subCategoryName?></a></li>
-                                <?php
-                                            } 
-                                            ?>
-                            </ul>
-                        </li>
+                                        </ul>
+                                    </li>
 
-                        <?php
-                                } else {
-                                    ?>
-                        <li>
-                            <button href="#" class="btn btn-toggle w-100 text-start"
-                                catId=<?= $catId ?>><?= $catName ?></button>
-                        </li>
+                                <?php } else { ?>
+                                    <li><button href="#" class="btn btn-toggle w-100 text-start" catId=<?= $catId ?>><?= $catName ?></button></li>
 
-                        <?php
+
+                                    <?php
                                 }
 
                             }
@@ -118,27 +116,27 @@ include('./config/dbConn.php');
 
                             $imgSrc = "../pipharm-admin-panel/assets/images/product/" . $prdImage;
                             ?>
-                    <div class="col-md-3">
-                        <div class="card p-2 rounded-3" style="width: 100%;">
-                            <img src=<?= $imgSrc ?> class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title text-center">
-                                    <?= $prdName ?>
-                                </h5>
-                                <div class="d-flex justify-content-center align-items-center mb-2">
-                                    <span class="input-group-addon decrement">
-                                        <i class="fas fa-minus"></i>
-                                    </span>
-                                    <input type="text" id="quantity" class="form-control text-center mx-3" value="1">
-                                    <span class="input-group-addon increment">
-                                        <i class="fas fa-plus"></i>
-                                    </span>
+                            <div class="col-md-3">
+                                <div class="card p-2 rounded-3" style="width: 100%;">
+                                    <img src=<?= $imgSrc ?> class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center">
+                                            <?= $prdName ?>
+                                        </h5>
+                                        <div class="d-flex justify-content-center align-items-center mb-2">
+                                            <span class="input-group-addon decrement">
+                                                <i class="fas fa-minus"></i>
+                                            </span>
+                                            <input type="text" id="quantity" class="form-control text-center mx-3" value="1">
+                                            <span class="input-group-addon increment">
+                                                <i class="fas fa-plus"></i>
+                                            </span>
+                                        </div>
+                                        <a href="#" class="btn btn-primary w-100 rounded-5">Add to Cart</a>
+                                    </div>
                                 </div>
-                                <a href="#" class="btn btn-primary w-100 rounded-5">Add to Cart</a>
                             </div>
-                        </div>
-                    </div>
-                    <?php
+                            <?php
                         }
                     }
                     ?>
@@ -149,7 +147,7 @@ include('./config/dbConn.php');
         </div>
         </div>
     </section>
-    
+
 
     </div>
     </div>
@@ -165,32 +163,32 @@ include('./config/dbConn.php');
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-    // Change the '+' and '-' signs on collapse/expand
-    document.querySelectorAll('.sidebar .collapse').forEach(collapseElement => {
-        collapseElement.addEventListener('show.bs.collapse', function() {
-            const parentAnchor = this.previousElementSibling;
-            parentAnchor.querySelector('span').textContent = '-';
+        // Change the '+' and '-' signs on collapse/expand
+        document.querySelectorAll('.sidebar .collapse').forEach(collapseElement => {
+            collapseElement.addEventListener('show.bs.collapse', function () {
+                const parentAnchor = this.previousElementSibling;
+                parentAnchor.querySelector('span').textContent = '-';
+            });
+            collapseElement.addEventListener('hide.bs.collapse', function () {
+                const parentAnchor = this.previousElementSibling;
+                parentAnchor.querySelector('span').textContent = '+';
+            });
         });
-        collapseElement.addEventListener('hide.bs.collapse', function() {
-            const parentAnchor = this.previousElementSibling;
-            parentAnchor.querySelector('span').textContent = '+';
-        });
-    });
-    $(document).ready(function() {
-        $('.increment').click(function() {
-            var value = parseInt($('#quantity').val(), 10);
-            value = isNaN(value) ? 0 : value;
-            value++;
-            $('#quantity').val(value);
-        });
+        $(document).ready(function () {
+            $('.increment').click(function () {
+                var value = parseInt($('#quantity').val(), 10);
+                value = isNaN(value) ? 0 : value;
+                value++;
+                $('#quantity').val(value);
+            });
 
-        $('.decrement').click(function() {
-            var value = parseInt($('#quantity').val(), 10);
-            value = isNaN(value) ? 0 : value;
-            value--;
-            $('#quantity').val(value < 1 ? 1 : value);
+            $('.decrement').click(function () {
+                var value = parseInt($('#quantity').val(), 10);
+                value = isNaN(value) ? 0 : value;
+                value--;
+                $('#quantity').val(value < 1 ? 1 : value);
+            });
         });
-    });
     </script>
 </body>
 
