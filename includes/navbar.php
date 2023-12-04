@@ -32,7 +32,6 @@ if (isset($_SESSION['userType']) == false) {
             <a href="category.php" class="link-underline-light text-decoration-none me-3">Categories</a>
             <a href="all-shop.php" class="link-underline-light text-decoration-none me-3">Shops</a>
             <a href="" class="link-underline-light text-decoration-none me-3">Help</a>
-            <a href="login.php" class="link-underline-light text-decoration-none"><i class="fa fa-sign-in"></i> login</a>
             <span class="position-relative">
                 <span><i class="fa-solid fa-cart-shopping" style="font-size:20px"></i></span>
 
