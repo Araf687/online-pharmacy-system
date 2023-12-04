@@ -131,7 +131,8 @@ include('./config/dbConn.php');
                                                     data-field=<?= "quantity_" . $prdId ?>> <i class="fas fa-plus"></i> </span>
                                             </div>
 
-                                            <a href="#" class="btn btn-primary w-100 rounded-5" onclick="addToCart('<?=$prdId?>')">Add to Cart</a>
+                                            <a href="#" class="btn btn-primary w-100 rounded-5"
+                                                onclick='<?php echo "addToCart($prdId,$prdPrice )" ?>'>Add to Cart</a>
                                         </div>
                                     </div>
                                 </div>
@@ -198,17 +199,53 @@ include('./config/dbConn.php');
                 }
             });
         });
-            // Function to add to cart
-            function addToCart(productId) {
-                var quantity = parseInt($("#quantity_" + productId).val());
-                // Perform action to add product with productId and quantity to cart
-                // For example, use AJAX to send this data to the server (e.g., PHP endpoint)
-                // $.post('add_to_cart.php', { productId: productId, quantity: quantity }, function(data) {
-                //     // Handle response from server (e.g., success message)
-                // });
-                alert('Added ' + quantity + ' items of product with ID ' + productId + ' to cart');
-            }
+        // Function to add to cart
+        function addToCart(productId, productPrice) {
+            var quantity = parseInt($("#quantity_" + productId).val());
+            // Perform action to add product with productId and quantity to cart
+            // For example, use AJAX to send this data to the server (e.g., PHP endpoint)
+            // $.post('add_to_cart.php', { productId: productId, quantity: quantity }, function(data) {
+            //     // Handle response from server (e.g., success message)
+            // });
+            var dataToSend = {
+                id: productId,
+                qty: quantity,
+                price: productPrice
+            };
+            $.ajax({
+                type: "POST",
+                url: "php_backend/addToCart/add_to_cart.php", // Replace with your backend PHP file
+                data: dataToSend,
+                success: function (response) {
+                    console.log(response)
+                    // Handle the response from the server
+                    const res = JSON.parse(response);
+
+                    if (res.type == "add") {
+                        console.log("added item")
+                        //update cart
+                        var currentValue = parseInt($("#cart").text());
+                        var incrementedValue = currentValue + 1;
+                        $("#cart").text(incrementedValue);
+                    }
+                    else{
+                        console.log("added updated");
+                    }
+
+
+                    // Example: Display a success message to the user
+                    // alert('Data sent successfully to backend');
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText); // Log any errors to the console
+                    // Example: Display an error message to the user
+                    alert('Error sending data to backend');
+                }
+            });
+            // alert('Added ' + quantity + ' items of product with ID ' + productId + ' to cart');
+        }
     </script>
+
 </body>
 
 </html>

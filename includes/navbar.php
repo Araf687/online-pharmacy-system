@@ -36,7 +36,7 @@
                 </span>
             </span>
 
-            <span class="ms-3">
+            <span class="ms-4">
                 <?php
                 if (isset($_SESSION['userType']) == false) {
                     ?>
