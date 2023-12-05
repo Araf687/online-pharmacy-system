@@ -19,6 +19,7 @@ include('./config/dbConn.php');
         if (isset($_GET['id'])) {
             $id = (int) $_GET['id'];
         }
+        echo var_dump($_SESSION);
 
         $shopQuerry = "SELECT *
                         FROM pharmacy_admin AS pa

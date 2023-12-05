@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION['user_img']=$tableName=='user'?$row['image']:$row['admin_image'];
                     $_SESSION['loggedInId']=$row['id'];
 
-                    echo json_encode(["isSuccess" => true, "data" => ["user"=>$row], "message" => "Logged in successfully."]);
+                    echo json_encode(["isSuccess" => true, "data" => ["user"=>$row,"session"=>$_SESSION], "message" => "Logged in successfully."]);
                 }
                 else {
                     echo json_encode(["isSuccess" => false, "data" => [], "message" => "Email or password is incorrect"]);

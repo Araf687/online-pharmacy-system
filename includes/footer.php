@@ -55,3 +55,5 @@
 
 
 </div>
+<!-- all modals -->
+<?php include("cart/cartModal.php")?>
