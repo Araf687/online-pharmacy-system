@@ -45,7 +45,7 @@
                     <?php
                 } else {
                     ?>
-                    <a href="login.php" onclick="logout()" class="link-underline-light text-decoration-none"><i
+                    <a href="logout.php" class="link-underline-light text-decoration-none"><i
                             class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
                 <?php } ?>
             </span>
@@ -54,11 +54,5 @@
 
         </nav>
     </div>
-    <script>
-        const logout = () => {
-            localStorage.removeItem('loggedInData');
-            <?php session_destroy(); ?>
-        }
-    </script>
-    
+
 </section>

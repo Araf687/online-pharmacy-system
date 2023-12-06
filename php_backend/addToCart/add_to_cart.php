@@ -1,7 +1,9 @@
 <?php
 include('../../config/dbConn.php');
+session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve data sent via AJAX
+    $userId=$_SESSION['loggedInId'];
     $product_id = intval($_POST['id']);
     $qty = intval($_POST['qty']);
     $price = intval($_POST['price']);
@@ -25,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode(["isSuccess" => false,"type"=>"update", "data" => ["error"=>mysqli_error($conn)], "message" => "Failed to update Cart Item"]);
         }
     }else{
-        $addToCartQuery = "INSERT INTO cartitem (`prod_id`, `qty`, `cust_id`) VALUES ($product_id, $qty, $price)";
+        $addToCartQuery = "INSERT INTO cartitem (`prod_id`, `qty`,`price`, `cust_id`) VALUES ($product_id, $qty, $price,$userId)";
         $result = mysqli_query($conn, $addToCartQuery );
     
         // Example: Display received data
