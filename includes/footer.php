@@ -25,9 +25,9 @@
                 <p style="text-align:left;color:#b9997c;">About Us</p>
                 <div style="text-align:left;">
                     <ul style="list-style:none;padding-left:0;" class="footer-about-list">
-                        <li  class="py-1"> <a href="" class="text-decoration-none me-3">Blog</a></li>
+                        <li class="py-1"> <a href="" class="text-decoration-none me-3">Blog</a></li>
                         <li class="py-1"> <a href="" class="text-decoration-none me-3">Contact</a> </li>
-                        <li class="py-1"> <a href="" class="text-decoration-none me-3">Privacy Policy</a> </li>   
+                        <li class="py-1"> <a href="" class="text-decoration-none me-3">Privacy Policy</a> </li>
                     </ul>
                 </div>
 
@@ -36,9 +36,9 @@
                 <p style="text-align:left;color:#b9997c;">Customer Care</p>
                 <div style="text-align:left;">
                     <ul style="list-style:none;padding-left:0;" class="footer-about-list">
-                        <li  class="py-1"> <a href="" class="text-decoration-none me-3">Help Center</a></li>
+                        <li class="py-1"> <a href="" class="text-decoration-none me-3">Help Center</a></li>
                         <li class="py-1"> <a href="" class="text-decoration-none me-3">Payment</a> </li>
-                        <li class="py-1"> <a href="" class="text-decoration-none me-3">Terms and Conditions</a> </li>    
+                        <li class="py-1"> <a href="" class="text-decoration-none me-3">Terms and Conditions</a> </li>
                     </ul>
                     <div>
                         <p class="text-light">Social Links</p>
@@ -56,4 +56,7 @@
 
 </div>
 <!-- all modals -->
-<?php include("cart/cartModal.php")?>
+<?php include("cart/cartModal.php") ?>
+<!-- jquery link -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

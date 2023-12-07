@@ -35,4 +35,7 @@
     <link rel="stylesheet" href="assets/css/cartModalStyle.css">
 
 </head>
-<?php session_start() ?>
+<?php 
+session_start(); 
+include('./config/dbConn.php');
+?>

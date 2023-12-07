@@ -9,52 +9,50 @@ include('includes/head.php');
         <div class="loginCard">
             <form id="registerForm" class='shadow'>
                 <div>
-<<<<<<< HEAD
-                    <h4 class='text-center mb-4' style="color:#047e6a;">User Register</h4>
+                    <<<<<<< HEAD <h4 class='text-center mb-4' style="color:#047e6a;">User Register</h4>
                 </div>
-=======
-                    <h4 class='text-center mb-4' style="color:#047e6a;">Register</h4>
-                </div>
-              
->>>>>>> 249bb7af2c956c3f0c6be2d078be9e0273367e97
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInput" name="name"
-                        placeholder="name@example.com">
-                    <label for="floatingInput">Name</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="floatingInput" name="email"
-                        placeholder="name@example.com" onblur="checkMail(this.value)">
-                    <label for="floatingInput">Email address</label>
-                    <div>
-                        <small style="color:red;display:none;" id="emailError">Invalid email address</small>
-                    </div>
-                </div>
+                =======
+                <h4 class='text-center mb-4' style="color:#047e6a;">Register</h4>
+        </div>
 
-                <div class="form-floating mb-3">
-                    <input type="password" class="form-control" id="pass" name="password"
-                        placeholder="Password" onblur="checkPass(this.value)">
-                    <label for="floatingPassword">Password</label>
-                    <div>
-                        <small class='mt-1' style="color:red;display:none;" id="passError">Password must be of 8
-                            characters</small>
-                    </div>
-                </div>
-                <div class="form-floating">
-                    <input type="password" class="form-control" id="confirmPass"
-                        placeholder="confirmPassword" onblur="checkPassMatch()">
-                    <label for="floatingPassword">Confirm Password</label>
-                    <div>
-                        <small style="color:red;display:none;" id="passConfirmError">Password does not
-                            match</small>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary mt-4 w-100 mb-2" aria-label="Close">SUBMIT</button>
-                <div>
-                    <p><small>Already have an account? <a href="login.php"><strong class="text-primary">Login</strong>
-                            </a></small></p>
-                </div>
-            </form>
+        >>>>>>> 249bb7af2c956c3f0c6be2d078be9e0273367e97
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" name="name" placeholder="name@example.com">
+            <label for="floatingInput">Name</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com"
+                onblur="checkMail(this.value)">
+            <label for="floatingInput">Email address</label>
+            <div>
+                <small style="color:red;display:none;" id="emailError">Invalid email address</small>
+            </div>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="pass" name="password" placeholder="Password"
+                onblur="checkPass(this.value)">
+            <label for="floatingPassword">Password</label>
+            <div>
+                <small class='mt-1' style="color:red;display:none;" id="passError">Password must be of 8
+                    characters</small>
+            </div>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="confirmPass" placeholder="confirmPassword"
+                onblur="checkPassMatch()">
+            <label for="floatingPassword">Confirm Password</label>
+            <div>
+                <small style="color:red;display:none;" id="passConfirmError">Password does not
+                    match</small>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-4 w-100 mb-2" aria-label="Close">SUBMIT</button>
+        <div>
+            <p><small>Already have an account? <a href="login.php"><strong class="text-primary">Login</strong>
+                    </a></small></p>
+        </div>
+        </form>
         </div>
     </section>
     <script src="assets/js/validations.js"></script>
@@ -89,7 +87,7 @@ include('includes/head.php');
 
             pass = $("#pass").val();
             passRetype = $("#confirmPass").val();
-            console.log(pass,passRetype,$("#pass"),document.getElementById("pass"))
+            console.log(pass, passRetype, $("#pass"), document.getElementById("pass"))
 
             if (pass !== '' && passRetype !== '') {
                 if (pass === passRetype) {
@@ -132,16 +130,29 @@ include('includes/head.php');
 
                     if (jsonData?.isSuccess) {
                         // console.log(jsonData);
-                        toastr.success(jsonData.message);
-                        
+                        Swal.fire({
+                            title: "Good job!",
+                            text: "Registered Successfully!",
+                            icon: "success"
+                        });
+
                         location.href = 'login.php';
                     } else {
-                        toastr.error(jsonData.message + ". " + jsonData.data.error);
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: jsonData.message,
+                        });
                     }
                 });
 
                 request.fail(function (jqXHR, textStatus, errorThrown) {
                     console.error("The following error occurred: " + textStatus, errorThrown);
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Something went wrong!",
+                    });
                 });
                 request.always(function () { });
             });

@@ -2,7 +2,7 @@
 <html lang="en">
 <?php
 include('./includes/head.php');
-include('./config/dbConn.php');
+
 ?>
 
 <body class='bg-light-subtle'>
@@ -16,8 +16,8 @@ include('./config/dbConn.php');
 
         <?php
         $id = null;
-        if(isset($_GET['id'])) {
-            $id = (int)$_GET['id'];
+        if (isset($_GET['id'])) {
+            $id = (int) $_GET['id'];
         }
 
         $shopQuerry = "SELECT *
@@ -27,21 +27,21 @@ include('./config/dbConn.php');
                         WHERE pa.id = $id";
         $shopQuerryRun = mysqli_query($conn, $shopQuerry);
         $shopRow = $shopQuerryRun->fetch_assoc();
-        $allShopQuerryResult = "".$shopRow["id"]."".$shopRow["first_name"]."".$shopRow["last_name"]." ".$shopRow["shop_name"]." ".$shopRow["admin_email"];
+        $allShopQuerryResult = "" . $shopRow["id"] . "" . $shopRow["first_name"] . "" . $shopRow["last_name"] . " " . $shopRow["shop_name"] . " " . $shopRow["admin_email"];
         $shopId = $shopRow["id"];
         $shopName = $shopRow["shop_name"];
         $shopImage = $shopRow["shop_image"];
         $shopRating = $shopRow["rating"];
-        $address = $shopRow["address"].", ".$shopRow["city"];
+        $address = $shopRow["address"] . ", " . $shopRow["city"];
 
-        $imgSrc = $shopImage ? "assets/img/shop/".$shopImage : "assets/img/shop/pharmacy.png";
+        $imgSrc = $shopImage ? "assets/img/shop/" . $shopImage : "assets/img/shop/pharmacy.png";
 
         ?>
         <div class="d-flex">
             <div class="w-25">
                 <img src="assets/img/map.jpeg" class="card-img-top" style="height:300px" alt="...">
             </div>
-            <a href="login.php" id="loginPageLink" style="display:none" >login</a>
+            <a href="login.php" id="loginPageLink" style="display:none">login</a>
             <div class="w-75"><img src=<?= $imgSrc ?> class="card-img-top" style="height:300px" alt="..."></div>
         </div>
         <section class="d-flex">
@@ -52,8 +52,8 @@ include('./config/dbConn.php');
                         <?php
                         $categoryQuerry = "SELECT `id`,`cat_name` FROM category";
                         $result = $conn->query($categoryQuerry);
-                        if($result->num_rows > 0) {
-                            while($row = $result->fetch_assoc()) {
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
                                 $catId = $row["id"];
                                 $catName = $row["cat_name"];
 
@@ -61,7 +61,7 @@ include('./config/dbConn.php');
                                 $subCategoryQresult = $conn->query($subCategoryQuerry);
 
                                 $rowCount = $subCategoryQresult->num_rows;
-                                if($rowCount > 0) { ?>
+                                if ($rowCount > 0) { ?>
                                     <button href="#services"
                                         class="w-100 btn btn-toggle d-flex justify-content-between align-items-center"
                                         data-bs-toggle="collapse">
@@ -70,7 +70,7 @@ include('./config/dbConn.php');
                                     <li>
                                         <ul class="collapse bg-light-subtle" id="services">
                                             <?php
-                                            while($subCategoryRow = $subCategoryQresult->fetch_assoc()) {
+                                            while ($subCategoryRow = $subCategoryQresult->fetch_assoc()) {
                                                 $subCategoryId = $subCategoryRow["id"];
                                                 $subCategoryName = $subCategoryRow["sub_category_name"];
                                                 ?>
@@ -98,17 +98,17 @@ include('./config/dbConn.php');
                 </div>
             </div>
             <div class="w-75">
-            
+
                 <div class="container">
-                    
+
                     <div class="row my-3">
                         <?php
                         $userId = isset($_SESSION["loggedInId"]) ? $_SESSION["loggedInId"] : null;
                         $productQuerry = "SELECT * from product WHERE pharmacy_id=$id";
                         $prdQuerryResult = $conn->query($productQuerry);
                         $rowCount = $prdQuerryResult->num_rows;
-                        if($rowCount > 0) {
-                            while($productRow = $prdQuerryResult->fetch_assoc()) {
+                        if ($rowCount > 0) {
+                            while ($productRow = $prdQuerryResult->fetch_assoc()) {
 
                                 $prdId = $productRow["prd_id"];
                                 $prdName = $productRow["prd_name"];
@@ -118,7 +118,7 @@ include('./config/dbConn.php');
                                 $prdCategoryId = $productRow["prd_cat_id"];
                                 $prdSubCategoryId = $productRow["prd_sub_cat_id"];
 
-                                $imgSrc = "../pipharm-admin-panel/assets/images/product/".$prdImage;
+                                $imgSrc = "../pipharm-admin-panel/assets/images/product/" . $prdImage;
                                 ?>
                                 <div class="col-md-3">
                                     <div class="card p-2 rounded-3" style="width: 100%;">
@@ -129,13 +129,13 @@ include('./config/dbConn.php');
                                             </h5>
                                             <div class="d-flex justify-content-center align-items-center mb-2">
                                                 <span type="button" class="btn input-group-addon btn-number" data-type="minus"
-                                                    data-field=<?= "quantity_".$prdId ?>> <i class="fas fa-minus"></i></span>
-                                                <input type="text" id=<?= "quantity_".$prdId ?>
+                                                    data-field=<?= "quantity_" . $prdId ?>> <i class="fas fa-minus"></i></span>
+                                                <input type="text" id=<?= "quantity_" . $prdId ?>
                                                     class="form-control text-center mx-3" value="1">
                                                 <span type="button" class="btn input-group-addon btn-number" data-type="plus"
-                                                    data-field=<?= "quantity_".$prdId ?>> <i class="fas fa-plus"></i> </span>
+                                                    data-field=<?= "quantity_" . $prdId ?>> <i class="fas fa-plus"></i> </span>
                                             </div>
-                                            
+
                                             <a href="#" class="btn btn-primary w-100 rounded-5"
                                                 onclick='<?php echo "addToCart($prdId,$prdPrice,$userId)" ?>'>Add to Cart</a>
                                         </div>
@@ -190,6 +190,7 @@ include('./config/dbConn.php');
                 var type = $(this).attr('data-type');
                 var input = $("input[id='" + fieldName + "']");
                 var currentVal = parseInt(input.val());
+                console.log(currentVal, input, type, fieldName)
 
                 if (!isNaN(currentVal)) {
                     if (type === 'minus') {
@@ -247,7 +248,7 @@ include('./config/dbConn.php');
                     }
                 });
             }
-            else{
+            else {
                 console.log("asd");
                 document.getElementById('loginPageLink').click();
             }
@@ -255,6 +256,7 @@ include('./config/dbConn.php');
             // alert('Added ' + quantity + ' items of product with ID ' + productId + ' to cart');
         }
     </script>
+
 
 </body>
 

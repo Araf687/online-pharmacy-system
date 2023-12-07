@@ -2,7 +2,6 @@
 <html lang="en">
 <?php 
 include('./includes/head.php');
-include('./config/dbConn.php');
 ?>
 
 <body class='bg-light-subtle'>

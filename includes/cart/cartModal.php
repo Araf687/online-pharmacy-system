@@ -8,7 +8,7 @@
       $itemCount = 0;
       $userId = null;
 
-      if($isUserLoggedIn) {
+      if ($isUserLoggedIn) {
         $userId = $_SESSION["loggedInId"];
         $cartItemSql = "SELECT c.id, p.prd_name, p.prd_price,p.prd_image, c.qty
         FROM cartitem c
@@ -16,7 +16,7 @@
         WHERE c.cust_id = $userId";
 
         $cartItemResult = mysqli_query($conn, $cartItemSql);
-        if($cartItemResult) {
+        if ($cartItemResult) {
           $itemCount = mysqli_num_rows($cartItemResult);
         }
       }
@@ -34,20 +34,20 @@
         <!-- Your cart content goes here -->
         <?php
 
-        if($itemCount > 0) {
-          while($row = mysqli_fetch_array($cartItemResult)) {
+        if ($itemCount > 0) {
+          while ($row = mysqli_fetch_array($cartItemResult)) {
             $cartId = $row["id"];
             $product_name = $row["prd_name"];
             $product_image = $row["prd_image"];
             $product_price = $row["prd_price"];
             $quantity = $row["qty"];
 
-            $imgSrc = "../pipharm-admin-panel/assets/images/product/".$product_image;
+            $imgSrc = "../pipharm-admin-panel/assets/images/product/" . $product_image;
             ?>
             <div>
               <div class="d-flex justify-content-between align-items-center bg-white p-2 shadow ">
 
-              <!-- image  -->
+                <!-- image  -->
                 <div class="p-2 bir img-thumbnail"><img src=<?= $imgSrc ?> alt="" style="height:60px"></div>
 
                 <!-- inputs  -->
@@ -55,27 +55,28 @@
                   <p style="line-height:0px;font-weight:600" class="text-center fs-5">
                     <?= $product_name ?>
                   </p>
-                  <div class="input-group" id=<?= "editCartItem_".$cartId ?>>
-                    <div class="input-group-prepend" id=<?="plus_".$cartId?> style="display:none">
-                      <span class="input-group-text btn-number" data-type="minus" data-field=<?= "qty_".$cartId ?>><i
+                  <div class="input-group" id=<?= "editCartItem_" . $cartId ?>>
+                    <div class="input-group-prepend" id=<?= "plus_" . $cartId ?> style="display:none">
+                      <span class="input-group-text btn-number" data-type="minus" data-field=<?= "qty_" . $cartId ?>><i
                           class="fas fa-minus"></i></span>
                     </div>
                     <input type="text" class="form-control text-center" aria-label="Amount (to the nearest dollar)"
-                      id=<?= "qty_".$cartId ?> style="height:30px;" value=<?= $quantity ?> readonly>
+                      id=<?= "qty_" . $cartId ?> style="height:30px;" value=<?= $quantity ?> readonly>
 
-                    <div class="input-group-append" id=<?="minus_".$cartId?> style="display:none">
-                      <span class="input-group-text btn-number" data-type="plus" data-field=<?= "itemQty_".$cartId ?>> <i
+                    <div class="input-group-append" id=<?= "minus_" . $cartId ?> style="display:none">
+                      <span class="input-group-text btn-number" data-type="plus" data-field=<?= "qty_" . $cartId ?>> <i
                           class="fas fa-plus"></i></span>
                     </div>
                   </div>
                 </div>
 
                 <!-- //actions -->
-                <div id=<?="actionOpt_".$cartId?>>
-                  <i class="fa-regular fa-pen-to-square text-primary" onclick=<?php echo "clickEditCartItem($cartId)"?>></i>
-                  <i class="fa-solid fa-trash text-danger" onclick=<?php echo "clickDeleteCartItem($cartId)"?>></i>
+                <div id=<?= "actionOpt_" . $cartId ?>>
+                  <i class="fa-regular fa-pen-to-square text-primary" onclick=<?php echo "clickEditCartItem($cartId)" ?>></i>
+                  <i class="fa-solid fa-trash text-danger" onclick=<?php echo "clickDeleteCartItem($cartId)" ?>></i>
                 </div>
-                <div id=<?="back_".$cartId?> style="display:none"><i class="fa-solid fa-arrow-left-long"></i></div>
+
+                <div id=<?= "back_" . $cartId ?> style="display:none"><i class="fa-regular fa-circle-xmark" onclick=<?php echo "cancelUpdateCartItem($cartId,$quantity)" ?>></i><i class="fa-regular fa-circle-check" onclick=<?php echo "updateCartItem($cartId,$quantity)" ?>></i></div>
               </div>
             </div>
 
