@@ -2,6 +2,7 @@ const clickEditCartItem = (cartId) => {
   console.log("cartsd id", cartId, document.getElementById(`plus_${cartId}`));
   document.getElementById(`plus_${cartId}`).style.display = "block";
   document.getElementById(`minus_${cartId}`).style.display = "block";
+
   document.getElementById(`actionOpt_${cartId}`).style.display = "none";
   document.getElementById(`back_${cartId}`).style.display = "block";
 };
@@ -14,6 +15,8 @@ const cancelUpdateCartItem = (cartId, prevQty) => {
   input.value = prevQty;
   document.getElementById(`actionOpt_${cartId}`).style.display = "block";
   document.getElementById(`back_${cartId}`).style.display = "none";
+  document.getElementById(`plus_${cartId}`).style.display = "none";
+  document.getElementById(`minus_${cartId}`).style.display = "none";
 };
 
 const updateCartItem = (cartId, prevQty) => {

@@ -45,7 +45,7 @@
             $imgSrc = "../pipharm-admin-panel/assets/images/product/" . $product_image;
             ?>
             <div>
-              <div class="d-flex justify-content-between align-items-center bg-white p-2 shadow ">
+              <div class="d-flex justify-content-between align-items-center bg-white p-2 shadow mb-4">
 
                 <!-- image  -->
                 <div class="p-2 bir img-thumbnail"><img src=<?= $imgSrc ?> alt="" style="height:60px"></div>
@@ -86,7 +86,7 @@
         ?>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary w-100">Checkout</button>
       </div>
     </div>
   </div>
