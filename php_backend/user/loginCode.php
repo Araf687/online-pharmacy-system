@@ -22,14 +22,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     echo json_encode(["isSuccess" => true, "data" => ["user"=>$row,"session"=>$_SESSION], "message" => "Logged in successfully."]);
                 }
                 else {
-                    echo json_encode(["isSuccess" => false, "data" => [], "message" => "Email or password is incorrect"]);
+                    echo json_encode(["isSuccess" => false, "data" => ["error"=>mysqli_error($conn)], "message" => "Email or password is incorrect"]);
                 }
                 
             } else {
-                echo json_encode(["isSuccess" => false, "data" => [], "message" => "Email or password is incorrect"]);
+                echo json_encode(["isSuccess" => false, "data" => ["error"=>mysqli_error($conn)], "message" => "Email or password is incorrect"]);
             }
         }else{
-            echo json_encode(["isSuccess" => false, "data" => [], "message" => "Email or password is incorrect"]);
+            echo json_encode(["isSuccess" => false, "data" => ["error"=>mysqli_error($conn)], "message" => "Email or password is incorrect"]);
         }
     }catch(Exception $e){
         echo json_encode(["isSuccess" => false, "data" => [], "message" => "Failed to login"]);

@@ -9,23 +9,22 @@
         </section>
     </section>
     <section>
-        <section style="background-color: #eee;">
+        <section style="background-color: #eee; min-height:91.3vh">
             <div class="container py-4">
+
 
                 <div class="row">
                     <div class="col-lg-4">
-                        <div class="card mb-4">
+                        <div class="card mb-4" style="border-radius:5px">
                             <div class="card-body text-center">
                                 <img src="./assets/img/user/user-girl.png" alt="avatar" class="rounded-circle img-fluid"
                                     style="width: 150px;">
                                 <h5 class="my-3">Papiya Sultana</h5>
                                 <p class="text-muted mb-1">Customer Type: Platinum</p>
-                                <p class="text-muted mb-4" style="font-size:14px; font-weight:600">Chandgaon Abashik,
-                                    Road No-14,Bahaddarhat, Chittagong</p>
                             </div>
                         </div>
 
-                        <div class="card mb-4 mb-lg-0">
+                        <!-- <div class="card mb-4 mb-lg-0">
                             <div class="card-body p-0">
                                 <ul class="list-group list-group-flush rounded-3">
                                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
@@ -50,53 +49,39 @@
                                     </li>
                                 </ul>
                             </div>
+                        </div> -->
+                        <div class="card mb-4" style="border-radius:5px">
+                            <div class="card-body">
+                                <h5 class="card-title mb-4">User Information</h5>
+                                <div>
+                                    <i class="fa-regular fa-user me-4"></i>
+                                    <span>Papiya Sultana</span>
+                                </div>
+                                <hr>
+                                <div>
+                                    <i class="fa-regular fa-envelope me-4"></i>
+                                    <span>Papiya Sultana</span>
+                                </div>
+                                <hr>
+                                <div>
+                                    <i class="fa-solid fa-phone me-4"></i>
+                                    <span>Papiya Sultana</span>
+                                </div>
+                                <hr>
+                                <div>
+                                    <i class="fa-solid fa-location-dot me-4"></i>
+                                    <span>Papiya
+                                        Sultannnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnna</span>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
                     <div class="col-lg-8">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <p class="mb-0">Full Name</p>
-                                    </div>
-                                    <div class="col-sm-9">Papiya Sultana</p>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <p class="mb-0">Email</p>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <p class="text-muted mb-0">papiya@example.com</p>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <p class="mb-0">Mobile</p>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <p class="text-muted mb-0">01614756856</p>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <p class="mb-0">Address</p>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <p class="text-muted mb-0">Chandgaon Abashik, Road No-14,Bahaddarhat, Chittagong
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="card mb-3 mb-md-0">
-                                    <div class="card-body" style="height:355px; overflow-y:scroll">
+                                <div class="card mb-3 mb-md-0" style="border-radius:10px">
+                                    <div class="card-body" style="min-height:82vh; overflow-y:scroll">
                                         <p class="mb-4"><span class="text-primary font-italic me-1">
                                                 Orders</span>
                                             Status

@@ -58,3 +58,43 @@ const updateCartItem = (cartId, prevQty) => {
 
   }
 };
+
+ // Function to fetch cart items via PHP and display in modal
+ $('#cartModal').on('show.bs.modal', function () {
+  console.log("cart modal show");
+  // Fetch cart items
+  $.ajax({
+      type: 'GET',
+      url: 'php_backend/addToCart/fetch_cart_item.php', // Change to your PHP script to fetch cart items
+      success: function (response) {
+          $('#cartItems').html(response);
+      },
+      error: function () {
+          $('#cartItems').html('<p>Failed to fetch cart items.</p>');
+      }
+  });
+});
+
+
+
+function clickCartItemIncDecBtn(event, element){
+      event.preventDefault();
+
+      var fieldName = $(element).attr('data-field');
+      var type = $(element).attr('data-type');
+      var input = $("input[id='" + fieldName + "']");
+      var currentVal = parseInt(input.val());
+      console.log(currentVal,input,type,fieldName)
+
+      if (!isNaN(currentVal)) {
+          if (type === 'minus') {
+              if (currentVal > 0) {
+                  input.val(currentVal - 1);
+              }
+          } else if (type === 'plus') {
+              input.val(currentVal + 1);
+          }
+      } else {
+          input.val(0);
+      }
+}
