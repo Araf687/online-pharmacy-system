@@ -17,7 +17,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary w-100">Checkout</button>
+        <a href="checkout.php"><button type="button" class="btn btn-primary w-100">Checkout</button></a>
       </div>
     </div>
   </div>

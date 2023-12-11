@@ -32,6 +32,7 @@
     <!-- main style link  -->
     <link rel="stylesheet" href="assets/css/mainStyle.css">
     <link rel="stylesheet" href="assets/css/cartModalStyle.css">
+    <link rel="stylesheet" href="assets/css/checkout.css">
 
 </head>
 <?php 

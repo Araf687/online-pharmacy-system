@@ -149,6 +149,8 @@
         </section>
     </section>
 
+    <?php include('./includes/script.php')?>
+
 </body>
 
 </html>
