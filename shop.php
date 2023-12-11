@@ -118,7 +118,7 @@ include('./includes/head.php');
                                 $prdCategoryId = $productRow["prd_cat_id"];
                                 $prdSubCategoryId = $productRow["prd_sub_cat_id"];
 
-                                $imgSrc = "../admin-panel-PiPharm-main/assets/images/product/" . $prdImage;
+                                $imgSrc = "../pipharm-admin-panel/assets/images/product/" . $prdImage;
                                 ?>
                                 <div class="col-md-3">
                                     <div class="card p-2 rounded-3" style="width: 100%;">

@@ -11,67 +11,91 @@
     <section>
         <section style="background-color: #eee; min-height:91.3vh">
             <div class="container py-4">
-
-
                 <div class="row">
                     <div class="col-lg-4">
+                        <?php
+                        $userId = $_SESSION["loggedInId"];
+                        $sql = "SELECT u.*, ua.* FROM user u
+                                JOIN user_address ua ON u.id = ua.user_id
+                                WHERE u.id = $userId AND u.status='active'";
+                        $result = mysqli_query($conn, $sql);
+
+                      
+                        while ($row = $result->fetch_assoc()) {
+                            $userId = $row["id"];
+                            $username = $row["name"];
+                            $email = $row["email"];
+                            $image = $row["image"];
+                            $phone = $row["phone"];
+                            $type = $row["type"];
+                            $status = $row["status"];
+                            $user_address_id = $row["address_id"];
+                            $house_name = $row["house_name"];
+                            $street = $row["street"];
+                            $post_office = $row["post_office"];
+                            $city = $row["city"];
+
+                            $image_src = $image ? "./assets/img/user/" . $image : "./assets/img/user/user.png";
+                            
+                        }
+                        ?>
+                        <input type="text" name="user_id" value=<?= $userId ?> style="display:none" />
                         <div class="card mb-4" style="border-radius:5px">
+
                             <div class="card-body text-center">
-                                <img src="./assets/img/user/user-girl.png" alt="avatar" class="rounded-circle img-fluid"
+                                <p style="text-align:right;"><i class="fa-solid fa-user-pen fs-4" style="cursor:pointer;" ></i></p>
+                                <img src=<?= $image_src ?> alt="avatar" class="rounded-circle img-fluid"
                                     style="width: 150px;">
-                                <h5 class="my-3">Papiya Sultana</h5>
-                                <p class="text-muted mb-1">Customer Type: Platinum</p>
+                                <h5 class="mt-3 mb-0">
+                                    <?= $username ?>
+                                </h5>
+                                <p class="text-muted mb-1 fs-">
+                                    <?= $type ?>
+                                </p>
                             </div>
                         </div>
-
-                        <!-- <div class="card mb-4 mb-lg-0">
-                            <div class="card-body p-0">
-                                <ul class="list-group list-group-flush rounded-3">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                        <i class="fas fa-globe fa-lg text-warning"></i>
-                                        <p class="mb-0">https://mdbootstrap.com</p>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                        <i class="fab fa-github fa-lg" style="color: #333333;"></i>
-                                        <p class="mb-0">mdbootstrap</p>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                        <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
-                                        <p class="mb-0">@mdbootstrap</p>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                        <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
-                                        <p class="mb-0">mdbootstrap</p>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                        <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
-                                        <p class="mb-0">mdbootstrap</p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div> -->
                         <div class="card mb-4" style="border-radius:5px">
                             <div class="card-body">
                                 <h5 class="card-title mb-4">User Information</h5>
                                 <div>
                                     <i class="fa-regular fa-user me-4"></i>
-                                    <span>Papiya Sultana</span>
+                                    <span>
+                                        <?= $username ?>
+                                    </span>
                                 </div>
                                 <hr>
                                 <div>
                                     <i class="fa-regular fa-envelope me-4"></i>
-                                    <span>Papiya Sultana</span>
+                                    <span>
+                                        <?= $email ?>
+                                    </span>
                                 </div>
                                 <hr>
                                 <div>
                                     <i class="fa-solid fa-phone me-4"></i>
-                                    <span>Papiya Sultana</span>
+                                    <span>
+                                        <?= $phone != '' ? $phone : "N/A" ?>
+                                    </span>
+                                </div>
+
+                                <hr>
+                                <div>
+                                    <i class="fa-regular fa-id-badge me-4"></i>
+                                    <span>
+                                        <?= $type ?>
+                                    </span>
+                                </div>
+                                <hr>
+                                <div>
+                                    <i class="fa-solid fa-user-check me-4"></i>
+                                    <span>
+                                        <?= ucfirst($status) ?>
+                                    </span>
                                 </div>
                                 <hr>
                                 <div>
                                     <i class="fa-solid fa-location-dot me-4"></i>
-                                    <span>Papiya
-                                        Sultannnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnna</span>
+                                    <span>Address</span>
                                 </div>
                             </div>
                         </div>

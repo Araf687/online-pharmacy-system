@@ -7,8 +7,9 @@ $itemCount = 0;
 $userId = null;
 
 if ($isUserLoggedIn) {
-
+   
     $userId = $_SESSION['loggedInId'];
+    
     $cartItemSql = "SELECT c.id, p.prd_name, p.prd_price,p.prd_image, c.qty
         FROM cartitem c
         JOIN product p ON c.prod_id = p.prd_id
@@ -28,7 +29,7 @@ if ($itemCount > 0) {
         $product_price = $row['prd_price'];
         $quantity = $row['qty'];
 
-        $imgSrc = '../admin-panel-PiPharm-main/assets/images/product/' . $product_image;
+        $imgSrc = '../pipharm-admin-panel/assets/images/product/' . $product_image;
         ?>
 
         <div>
@@ -64,8 +65,8 @@ if ($itemCount > 0) {
                 </div>
 
                 <div id=<?= 'back_' . $cartId ?> style='display:none'>
-                    <i class='fa-regular fa-circle-xmark' onclick=<?php echo "cancelUpdateCartItem($cartId,$quantity)" ?>></i>
-                    <i class='fa-regular fa-circle-check' onclick=<?php echo "updateCartItem($cartId,$quantity)" ?>></i>
+                    <i class='fa-regular fa-circle-xmark' style="color:red" onclick=<?php echo "cancelUpdateCartItem($cartId,$quantity)" ?>></i>
+                    <i class='fa-regular fa-circle-check' style="color:green" onclick=<?php echo "updateCartItem($cartId,$quantity)" ?>></i>
                 </div>
             </div>
         </div>
@@ -73,7 +74,7 @@ if ($itemCount > 0) {
 
     }
 } else {
-    echo "<h1>Your cart is empty.$isUserLoggedIn .$itemCount .$userId .</h1>";
+    echo "<h1>Your cart is empty.</h1>";
 }
 
 ?>
