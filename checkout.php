@@ -30,17 +30,22 @@
                      WHERE cartitem.cust_id = $userId";
                         $result = mysqli_query($conn, $sql);
                         $i = $total_qty = $total = 0;
-                        ;
+                        $pharmacy_id_list=[];
 
                         $row_count = mysqli_num_rows($result);
 
                         while ($row = mysqli_fetch_array($result)) {
                             $cart_item_id = $row["id"];
+                            $pharmacy_id = $row["pharmacy_id"];
                             $product_id = $row["prod_id"];
                             $product_name = $row["prd_name"];
                             $product_price = $row["price"];
                             $product_image = $row["prd_image"];
                             $product_qty = $row["qty"];
+
+                            if(!in_array($pharmacy_id, $pharmacy_id_list)){
+                                $pharmacy_id_list[] = $pharmacy_id;
+                            }
 
 
 
@@ -90,28 +95,84 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 p-4" style="background-color:#75aa22">
-                        <div class="tab">
-                            <button class="tablinks" onclick="openCity(event, 'London')">Card</button>
-                            <button class="tablinks" onclick="openCity(event, 'Paris')">Bkash</button>
-                            <button class="tablinks" onclick="openCity(event, 'Tokyo')">Nagad</button>
-                        </div>
 
-                        <div id="London" class="tabcontent">
-                            <h3>London</h3>
-                            <p>London is the capital city of England.</p>
-                        </div>
 
-                        <div id="Paris" class="tabcontent">
-                            <h3>Paris</h3>
-                            <p>Paris is the capital of France.</p>
-                        </div>
+                    <div class="col-md-4 bg-white rounded-lg shadow-sm p-4">
+                        <!-- Credit card form tabs -->
+                        <ul role="tablist" class="nav bg-light nav-pills rounded-pill nav-fill mb-3">
+                            <li class="nav-item">
+                                <a data-toggle="pill" href="#nav-tab-card" class="nav-link active rounded-pill">
+                                    <i class="fa fa-credit-card"></i>
+                                    Credit Card
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a data-toggle="pill" href="#nav-tab-paypal" class="nav-link rounded-pill">
+                                    <i class="fa fa-paypal"></i>
+                                    Bkash
+                                    <!-- <img src="assets/img/checkout/bkash-logo2.png" alt=""> -->
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a data-toggle="pill" href="#nav-tab-bank" class="nav-link rounded-pill">
+                                    <i class="fa fa-university"></i>
+                                    Nagad
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- End -->
 
-                        <div id="Tokyo" class="tabcontent">
-                            <h3>Tokyo</h3>
-                            <p>Tokyo is the capital of Japan.</p>
+
+                        <!-- Credit card form content -->
+                        <div class="tab-content">
+
+                            <!-- credit card info-->
+                            <div id="nav-tab-card" class="tab-pane fade show active">
+                                <p class="alert alert-success">Some text success or error</p>
+                                <?php include("./includes/paymentForm/Card.php")?>
+                            </div>
+                            <!-- End -->
+
+                            <!-- Paypal info -->
+                            <div id="nav-tab-paypal" class="tab-pane fade">
+                                <p>Paypal is easiest way to pay online</p>
+                                <p>
+                                    <button type="button" class="btn btn-primary rounded-pill"><i
+                                            class="fa fa-paypal mr-2"></i> Log into my Paypal</button>
+                                </p>
+                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur
+                                    adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                                    dolore magna aliqua.
+                                </p>
+                            </div>
+                            <!-- End -->
+
+                            <!-- bank transfer info -->
+                            <div id="nav-tab-bank" class="tab-pane fade">
+                                <h6>Bank account details</h6>
+                                <dl>
+                                    <dt>Bank</dt>
+                                    <dd> THE WORLD BANK</dd>
+                                </dl>
+                                <dl>
+                                    <dt>Account number</dt>
+                                    <dd>7775877975</dd>
+                                </dl>
+                                <dl>
+                                    <dt>IBAN</dt>
+                                    <dd>CZ7775877975656</dd>
+                                </dl>
+                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur
+                                    adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                                    dolore magna aliqua.
+                                </p>
+                            </div>
+                            <!-- End -->
                         </div>
+                        <!-- End -->
+
                     </div>
+
                 </div>
             </section>
         </section>

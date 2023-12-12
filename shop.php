@@ -137,7 +137,7 @@ include('./includes/head.php');
                                             </div>
 
                                             <a href="#" class="btn btn-primary w-100 rounded-5"
-                                                onclick='<?php echo "addToCart($prdId,$prdPrice,$userId)" ?>'>Add to Cart</a>
+                                                onclick='<?php echo "addToCart($prdId,$prdPrice,$userId,$id)" ?>'>Add to Cart</a>
                                         </div>
                                     </div>
                                 </div>
@@ -183,7 +183,7 @@ include('./includes/head.php');
         });
 
         // Function to add to cart
-        function addToCart(productId, productPrice, userId, element) {
+        function addToCart(productId, productPrice, userId, pharmacyId) {
             var quantity = parseInt($("#quantity_" + productId).val());
             // Perform action to add product with productId and quantity to cart
             // For example, use AJAX to send this data to the server (e.g., PHP endpoint)
@@ -193,7 +193,8 @@ include('./includes/head.php');
             var dataToSend = {
                 id: productId,
                 qty: quantity,
-                price: productPrice
+                price: productPrice,
+                pharmacy_id:pharmacyId,
             };
             if (userId) {
                 $.ajax({

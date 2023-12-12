@@ -7,6 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $product_id = intval($_POST['id']);
     $qty = intval($_POST['qty']);
     $price = intval($_POST['price']);
+    $pharmacy_id = intval($_POST['pharmacy_id']);
     $data=array("product_id"=>$product_id,"qty"=>$qty,"price"=>$price);
 
     $isProductExistQuery="SELECT * FROM cartitem WHERE prod_id = $product_id";
@@ -27,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode(["isSuccess" => false,"type"=>"update", "data" => ["error"=>mysqli_error($conn)], "message" => "Failed to update Cart Item"]);
         }
     }else{
-        $addToCartQuery = "INSERT INTO cartitem (`prod_id`, `qty`,`price`, `cust_id`) VALUES ($product_id, $qty, $price,$userId)";
+        $addToCartQuery = "INSERT INTO cartitem (`prod_id`, `qty`,`price`, `cust_id`,`pharmacy_id`) VALUES ($product_id, $qty, $price,$userId,$pharmacy_id)";
         $result = mysqli_query($conn, $addToCartQuery );
     
         // Example: Display received data
