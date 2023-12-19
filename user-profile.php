@@ -20,7 +20,7 @@
                                 WHERE u.id = $userId AND u.status='active'";
                         $result = mysqli_query($conn, $sql);
 
-                      
+
                         while ($row = $result->fetch_assoc()) {
                             $userId = $row["id"];
                             $username = $row["name"];
@@ -36,14 +36,15 @@
                             $city = $row["city"];
 
                             $image_src = $image ? "./assets/img/user/" . $image : "./assets/img/user/user.png";
-                            
+
                         }
                         ?>
                         <input type="text" name="user_id" value=<?= $userId ?> style="display:none" />
                         <div class="card mb-4" style="border-radius:5px">
 
                             <div class="card-body text-center">
-                                <p style="text-align:right;"><i class="fa-solid fa-user-pen fs-4" style="cursor:pointer;" ></i></p>
+                                <p style="text-align:right;"><i class="fa-solid fa-user-pen fs-4"
+                                        style="cursor:pointer;"></i></p>
                                 <img src=<?= $image_src ?> alt="avatar" class="rounded-circle img-fluid"
                                     style="width: 150px;">
                                 <h5 class="mt-3 mb-0">
@@ -106,36 +107,45 @@
                             <div class="col-md-12">
                                 <div class="card mb-3 mb-md-0" style="border-radius:10px">
                                     <div class="card-body" style="min-height:82vh; overflow-y:scroll">
-                                        <p class="mb-4"><span class="text-primary font-italic me-1">
-                                                Orders</span>
+                                        <p class="mb-4">
+                                            <span class="text-primary font-italic me-1">Orders</span>
                                             Status
                                         </p>
                                         <div class="px-2">
-                                            <div class="d-flex justify-content-between py-1 px-2 mb-3"
-                                                style="background-color:#f2f30659;border-radius:6px;">
-                                                <p class="mb-1">Order:201</p>
-                                                <p class="mb-1">Transaction: BDT 1050</p>
-                                                <p class="mb-1">Delivery: Pending</p>
-                                            </div>
-                                            <div class="d-flex justify-content-between py-1 px-2 mb-3"
-                                                style="background-color:#cffcd4;border-radius:6px;">
-                                                <p class="mb-1">Order:201</p>
-                                                <p class="mb-1">Transaction: BDT 1050</p>
-                                                <p class="mb-1">Delivery: Completed</p>
-                                            </div>
-                                            <div class="d-flex justify-content-between py-1 px-2 mb-3"
-                                                style="background-color:#cffcd4;border-radius:6px;">
-                                                <p class="mb-1 ">Order:201</p>
-                                                <p class="mb-1 ">Transaction: BDT 1050</p>
-                                                <p class="mb-1 ">Delivery: Completed</p>
-                                            </div>
+                                            <?php
+                                            settype($user_id,"integer");
 
-                                            <div class="d-flex justify-content-between py-1 px-2 mb-3"
-                                                style="background-color:#f4450559;border-radius:6px;">
-                                                <p class="mb-1 ">Order:201</p>
-                                                <p class="mb-1 ">Transaction: BDT 1050</p>
-                                                <p class="mb-1 ">Delivery: Canceled</p>
-                                            </div>
+                                            // Query to fetch orders for a specific user
+                                            $sql_all_orders = "SELECT * FROM orders WHERE `cust_id` = '$user_id'";
+
+                                            $result_all_orders = $conn->query($conn,$sql_all_orders);
+
+                                            while ($row = $result_all_orders->fetch_assoc()) {
+                                                // Display order information (Modify this part as needed)
+                                                $orderCode = $row["order_code"];
+                                                $total = $row["sale_amount"] + $row["tax"] + $row["shipping_cost"];
+                                                $order_status = $row["order_status"];
+                                                $delivery_status = $row["delivery_status"];
+
+
+                                                ?>
+                                                <div class="d-flex justify-content-between py-1 px-2 mb-3"
+                                                    style="background-color:#f2f30659;border-radius:6px;">
+                                                    <p class="mb-1">
+                                                        <?= $orderCode ?>
+                                                    </p>
+                                                    <p class="mb-1">Transaction: BDT
+                                                        <?= $total ?>
+                                                    </p>
+                                                    <p class="mb-1">Order:
+                                                        <?= $order_status ?>
+                                                    </p>
+                                                    <p class="mb-1">Delivery:
+                                                        <?= $delivery_status ?>
+                                                    </p>
+                                                </div>
+                                            <?php } ?>
+
                                         </div>
 
 
@@ -149,7 +159,7 @@
         </section>
     </section>
 
-    <?php include('./includes/script.php')?>
+    <?php include('./includes/script.php') ?>
 
 </body>
 
