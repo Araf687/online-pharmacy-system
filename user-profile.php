@@ -113,13 +113,13 @@
                                         </p>
                                         <div class="px-2">
                                             <?php
-                                            settype($user_id,"integer");
-
+                                            
                                             // Query to fetch orders for a specific user
-                                            $sql_all_orders = "SELECT * FROM orders WHERE `cust_id` = '$user_id'";
+                                            $sql_all_orders = "SELECT * FROM orders WHERE `cust_id` = $userId";
 
-                                            $result_all_orders = $conn->query($conn,$sql_all_orders);
-
+                                            $result_all_orders = mysqli_query($conn,$sql_all_orders);
+                                            print_r($result_all_orders);
+                                            
                                             while ($row = $result_all_orders->fetch_assoc()) {
                                                 // Display order information (Modify this part as needed)
                                                 $orderCode = $row["order_code"];
