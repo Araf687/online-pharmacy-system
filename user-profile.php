@@ -112,39 +112,75 @@
                                             Status
                                         </p>
                                         <div class="px-2">
-                                            <?php
-                                            
-                                            // Query to fetch orders for a specific user
-                                            $sql_all_orders = "SELECT * FROM orders WHERE `cust_id` = $userId";
+                                            <table
+                                                style="font-family: arial, sans-serif;border-collapse: collapse;width: 100%;">
+                                                <tr>
+                                                    <th style="text-align: left;padding: 8px;">Order Code</th>
+                                                    <th style="text-align: left;padding: 8px;">Amount</th>
+                                                    <th style="text-align: left;padding: 8px;">Order Status</th>
+                                                    <th style="text-align: left;padding: 8px;">Delivery Status</th>
 
-                                            $result_all_orders = mysqli_query($conn,$sql_all_orders);
-                                            print_r($result_all_orders);
-                                            
-                                            while ($row = $result_all_orders->fetch_assoc()) {
-                                                // Display order information (Modify this part as needed)
-                                                $orderCode = $row["order_code"];
-                                                $total = $row["sale_amount"] + $row["tax"] + $row["shipping_cost"];
-                                                $order_status = $row["order_status"];
-                                                $delivery_status = $row["delivery_status"];
+                                                </tr>
+                                                <?php
+                                                // Query to fetch orders for a specific user
+                                                $sql_all_orders = "SELECT * FROM orders WHERE `cust_id` = $userId";
 
+                                                $result_all_orders = mysqli_query($conn, $sql_all_orders);
+                                                // print_r($result_all_orders);
+                                                
+                                                while ($row = $result_all_orders->fetch_assoc()) {
+                                                    // Display order information (Modify this part as needed)
+                                                    $orderCode = $row["order_code"];
+                                                    $total = $row["sale_amount"] + $row["tax"] + $row["shipping_cost"];
+                                                    $order_status = $row["order_status"];
+                                                    $delivery_status = $row["delivery_status"];
 
+                                                    $rowColor = "rgba(154, 154, 154, 0.2)";
+                                                    if($delivery_status == "on-the-way"){
+                                                        
+                                                        $rowColor="rgba(122, 186, 66, 0.2)" ;
+                                                    }
+                                                    else if($delivery_status == "completed"){
+                                                        $rowColor= "rgba(66, 186, 150, 0.2)";
+                                                    }
+                                                    else if($delivery_status == "packaging"){
+                                                        $rowColor= "rgba(200, 219, 27, 0.2)";
+                                                    }
+                                                  
+                                                      
                                                 ?>
-                                                <div class="d-flex justify-content-between py-1 px-2 mb-3"
-                                                    style="background-color:#f2f30659;border-radius:6px;">
-                                                    <p class="mb-1">
-                                                        <?= $orderCode ?>
-                                                    </p>
-                                                    <p class="mb-1">Transaction: BDT
-                                                        <?= $total ?>
-                                                    </p>
-                                                    <p class="mb-1">Order:
-                                                        <?= $order_status ?>
-                                                    </p>
-                                                    <p class="mb-1">Delivery:
-                                                        <?= $delivery_status ?>
-                                                    </p>
-                                                </div>
-                                            <?php } ?>
+
+                                                    <tr style='background-color:<?=$rowColor?>;border-radius:6px;'>
+                                                        <td style="text-align: left;padding: 8px;">
+
+                                                            <?= $orderCode ?>
+
+                                                        </td>
+                                                        <td style="text-align: left;padding: 8px;">
+                                                            BDT
+                                                            <?= $total ?>
+
+                                                        </td>
+                                                        <td style="text-align: left;padding: 8px;">
+
+                                                            <?= $order_status ?>
+
+                                                        </td>
+                                                        <td style="text-align: left;padding: 8px;">
+
+
+                                                            <?= $delivery_status ?>
+
+                                                        </td>
+
+                                                    </tr>
+
+                                                <?php } ?>
+                                            </table>
+
+                                            <!-- <div class="d-flex justify-content-between py-1 px-2 mb-3"
+                                                >
+                                            </div> -->
 
                                         </div>
 
