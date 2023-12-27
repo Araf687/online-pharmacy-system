@@ -9,8 +9,8 @@
         </section>
     </section>
     <section>
-        <section style="background-color: #eee; min-height:91.3vh">
-            <div class="container py-4">
+        <section class="d-flex align-items-center" style="background-color: #eee; height:92.5vh">
+            <div class="container">
                 <div class="row">
                     <div class="col-lg-4">
                         <?php
@@ -40,7 +40,7 @@
                         }
                         ?>
                         <input type="text" name="user_id" value=<?= $userId ?> style="display:none" />
-                        <div class="card mb-4" style="border-radius:5px">
+                        <div class="card mb-4 p-2" style="border-radius:5px">
 
                             <div class="card-body text-center">
                                 <p style="text-align:right;"><i class="fa-solid fa-user-pen fs-4"
@@ -55,7 +55,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="card mb-4" style="border-radius:5px">
+                        <div class="card py-1" style="border-radius:5px">
                             <div class="card-body">
                                 <h5 class="card-title mb-4">User Information</h5>
                                 <div>
@@ -102,11 +102,11 @@
                         </div>
 
                     </div>
-                    <div class="col-lg-8">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card mb-3 mb-md-0" style="border-radius:10px">
-                                    <div class="card-body" style="min-height:82vh; overflow-y:scroll">
+                    <div class="col-lg-8 ">
+                        <div class="row ">
+                            <div class="col-md-12 ">
+                                <div class="card mb-md-0" style="border-radius:10px">
+                                    <div class="card-body" style="height:83.5vh; overflow-y:scroll">
                                         <p class="mb-4">
                                             <span class="text-primary font-italic me-1">Orders</span>
                                             Status
@@ -136,21 +136,26 @@
                                                     $delivery_status = $row["delivery_status"];
 
                                                     $rowColor = "rgba(154, 154, 154, 0.2)";
-                                                    if($delivery_status == "on-the-way"){
-                                                        
-                                                        $rowColor="rgba(122, 186, 66, 0.2)" ;
-                                                    }
-                                                    else if($delivery_status == "completed"){
-                                                        $rowColor= "rgba(66, 186, 150, 0.2)";
-                                                    }
-                                                    else if($delivery_status == "packaging"){
-                                                        $rowColor= "rgba(200, 219, 27, 0.2)";
-                                                    }
-                                                  
-                                                      
-                                                ?>
+                                                    $fontColor = "#9a9a9a;";
 
-                                                    <tr style='background-color:<?=$rowColor?>;border-radius:6px;'>
+                                                    if ($delivery_status == "on-the-way") {
+
+                                                        $rowColor = "rgba(122, 186, 66, 0.2)";
+                                                        $fontColor = "#448108";
+                                                    } else if ($delivery_status == "completed") {
+                                                        $rowColor = "rgba(66, 186, 150, 0.2)";
+                                                        $fontColor = "#42ba96";
+
+                                                    } else if ($delivery_status == "packaging") {
+                                                        $rowColor = "rgba(200, 219, 27, 0.2)";
+                                                        $fontColor = "#aaae38";
+                                                    }
+
+
+                                                    ?>
+
+                                                    <tr
+                                                        style='background-color:<?= $rowColor ?>;border-radius:6px;color:<?= $fontColor ?>'>
                                                         <td style="text-align: left;padding: 8px;">
 
                                                             <?= $orderCode ?>
