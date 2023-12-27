@@ -34,7 +34,7 @@ include('./includes/head.php');
                         $imgSrc = $shopImage ? "assets/img/shop/" . $shopImage : "assets/img/shop/pharmacy.png";
 
                         ?>
-                        <div class="col-md-3 pt-4">
+                        <div class="col-md-3 pt-4" >
 
                             <div class="card shadow rounded-4" style="width:100%;">
                                 <div class="p-3" style="background-color:#f2f2f2;">

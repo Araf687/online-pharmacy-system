@@ -30,7 +30,15 @@
             <span class="position-relative mt-1" data-toggle="modal" data-target="#cartModal">
                 <span><i class="fa-solid fa-cart-shopping" style="font-size:20px"></i></span>
                 <span id="cart" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    0
+                    <?php
+                    if (isset($_SESSION['loggedInId'])) {
+                        $userId=$_SESSION['loggedInId'];
+                        $sql="SELECT * FROM cartitem WHERE `cust_id`=$userId";
+                        $result=mysqli_query($conn,$sql);
+                        $row_count = mysqli_num_rows($result);
+                        echo $row_count;
+                    }
+                    ?>
                 </span>
             </span>
 

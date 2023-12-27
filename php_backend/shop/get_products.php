@@ -1,9 +1,11 @@
 <?php
 include("../../config/dbConn.php");
+session_start();
 $userId = isset($_SESSION["loggedInId"]) ? $_SESSION["loggedInId"] : null;
 $pharmacy_id = isset($_POST["shopId"]) ? $_POST["shopId"] : 0;
 $category_id = isset($_POST['category_id']) ? $_POST['category_id'] : null;
 $sub_category_id = isset($_POST['sub_category_id']) ? $_POST['sub_category_id'] : null;
+
 
 
 $fetch_product_sql1 = "SELECT * from product WHERE `pharmacy_id`=$pharmacy_id";
@@ -47,7 +49,7 @@ if ($rowCount > 0) {
 
                     <a href="#" class="btn btn-primary w-100 rounded-5"
                         onclick='<?php echo "addToCart($prdId,$prdPrice,$userId,$pharmacy_id)" ?>'>Add to
-                        Cart</a>
+                        Cart </a>
                 </div>
             </div>
         </div>

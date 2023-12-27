@@ -81,16 +81,15 @@ include('./includes/head.php');
     </section>
     <script src="assets/js/all_shop.js"></script>
     <script>
-        loadAllProducts(<?=$id?>)
+        loadAllProducts(<?=$id?>);
+        
     </script>
 
     <footer>
         <?php include("./includes/footer.php") ?>
     </footer>
-    <script>var shopId = <?php echo $shopId; ?>;</script>
+    <script>var shopId = <?=$shopId?>;</script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-
 
 
 </body>

@@ -32,7 +32,7 @@ if ($itemCount > 0) {
         $imgSrc = '../pipharm-admin-panel/assets/images/product/' . $product_image;
         ?>
 
-        <div>
+        <div id='<?=$cartId?>'>
             <div class='d-flex justify-content-between align-items-center bg-white p-2 shadow mb-4'>
 
                 <!-- image  -->
@@ -61,7 +61,7 @@ if ($itemCount > 0) {
                 <!-- //actions -->
                 <div id=<?= 'actionOpt_' . $cartId ?>>
                     <i class='fa-regular fa-pen-to-square text-primary' onclick=<?php echo "clickEditCartItem($cartId)" ?>></i>
-                    <i class='fa-solid fa-trash text-danger' onclick=<?php echo "clickDeleteCartItem($cartId)" ?>></i>
+                    <i class='fa-solid fa-trash text-danger' onclick="clickDeleteCartItem(<?php echo $cartId; ?>, '<?php echo $product_name; ?>')"></i>
                 </div>
 
                 <div id=<?= 'back_' . $cartId ?> style='display:none'>
