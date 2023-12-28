@@ -28,7 +28,7 @@
                             $image_src = $Sub_category_image ? "../pipharm-admin-panel/assets/images/sub_categories/" . $Sub_category_image : "assets/img/default.jpg";
 
                             ?>
-                            <a href=<?= "all_sub_category.php?sub_category_id=" . $id ?> class="col-md-3 pt-3">
+                            <a href=<?="all-shop.php?category_id=".$category_id."&sub_category_id=" . $id ?> class="col-md-3 pt-3">
 
                                 <div class="card text-bg-dark" style="border-radius:10px; width:100%;">
                                     <img src=<?= $image_src ?> class="card-img" alt="" style="border-radius:10px; height:220px">

@@ -17,24 +17,37 @@ include('./includes/head.php');
                 <h3>All Shops</h3>
                 <div class="row">
                     <?php
-                    // $allShopQuerry="SELECT * FROM  ";
-                    $allShopQuerry = "SELECT *
+                    $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : null;
+                    $sub_category_id = isset($_GET['sub_category_id']) ? $_GET['sub_category_id'] : null;
+                    $query1 = "SELECT *
                         FROM pharmacy_admin
                         JOIN pharmacy_address ON pharmacy_admin.id = pharmacy_address.pharmacy_id;
                         ";
-                    $allShopQuerryRun = mysqli_query($conn, $allShopQuerry);
-                    while ($allShopQuerry = mysqli_fetch_array($allShopQuerryRun)) {
-                        $allShopQuerryResult = "" . $allShopQuerry["id"] . "" . $allShopQuerry["first_name"] . "" . $allShopQuerry["last_name"] . " " . $allShopQuerry["shop_name"] . " " . $allShopQuerry["admin_email"];
-                        $shopId = $allShopQuerry["id"];
-                        $shopName = $allShopQuerry["shop_name"];
-                        $shopImage = $allShopQuerry["shop_image"];
-                        $shopRating = $allShopQuerry["rating"];
-                        $address = $allShopQuerry["address"] . ", " . $allShopQuerry["city"];
+                    // echo $category_id . "  " . $sub_category_id;
+                    $query2 = "SELECT DISTINCT s.*, sa.*
+                    FROM pharmacy_admin s
+                    INNER JOIN product p ON s.id = p.pharmacy_id
+                    INNER JOIN sub_category sc ON p.prd_sub_cat_id = sc.id
+                    LEFT JOIN pharmacy_address sa ON s.id = sa.pharmacy_id
+                    WHERE sc.category_id = $category_id AND sc.id=$sub_category_id";
+
+                    
+
+                    $allShopQueryRun = mysqli_query($conn, $allShopQuery);
+                    echo var_dump($allShopQueryRun);
+
+                    while ($allShopQuery = mysqli_fetch_array($allShopQueryRun)) {
+                        $allShopQueryResult = "" . $allShopQuery["id"] . "" . $allShopQuery["first_name"] . "" . $allShopQuery["last_name"] . " " . $allShopQuery["shop_name"] . " " . $allShopQuery["admin_email"];
+                        $shopId = $allShopQuery["id"];
+                        $shopName = $allShopQuery["shop_name"];
+                        $shopImage = $allShopQuery["shop_image"];
+                        $shopRating = $allShopQuery["rating"];
+                        $address = $allShopQuery["address"] . ", " . $allShopQuery["city"];
 
                         $imgSrc = $shopImage ? "assets/img/shop/" . $shopImage : "assets/img/shop/pharmacy.png";
 
                         ?>
-                        <div class="col-md-3 pt-4" >
+                        <div class="col-md-3 pt-4">
 
                             <div class="card shadow rounded-4" style="width:100%;">
                                 <div class="p-3" style="background-color:#f2f2f2;">
@@ -75,7 +88,7 @@ include('./includes/head.php');
                                 </div>
                             </div>
                         </div>
-                    <?php
+                        <?php
                     }
                     ?>
                 </div>
