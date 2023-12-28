@@ -12,19 +12,20 @@
     <section class="d-flex justify-content-center bg-light">
         <section class="w-75">
             <div class="container pb-5 pt-4">
-                <h3>All Categories</h3>
-                <div class="row">
+                <h3>All Sub Categories</h3>
+                <div class="row" style="min-height:39.6vh">
                     <?php
-                    $sql = 'SELECT * FROM category';
+                    $category_id=$_GET["sub_category_id"];
+                    $sql = "SELECT * FROM sub_category WHERE `category_id`=$category_id" ;
                     $result = mysqli_query($conn, $sql);
                     $row_count = mysqli_num_rows($result);
                     if ($row_count > 0) {
                         while ($row = mysqli_fetch_array($result)) {
                             $id = $row['id'];
-                            $category_name = $row['cat_name'];
-                            $category_image = $row['cat_image'];
+                            $sub_category_name = $row['sub_category_name'];
+                            $Sub_category_image = $row['sub_category_image'];
 
-                            $image_src = $category_image ? "../pipharm-admin-panel/assets/images/categories/" . $category_image : "assets/img/default.jpg";
+                            $image_src = $Sub_category_image ? "../pipharm-admin-panel/assets/images/sub_categories/" . $Sub_category_image : "assets/img/default.jpg";
 
                             ?>
                             <a href=<?= "all_sub_category.php?sub_category_id=" . $id ?> class="col-md-3 pt-3">
@@ -35,7 +36,7 @@
                                         <div class="d-flex justify-content-center align-items-center"
                                             style="height:100%;background-color:#057e547a;border-radius:10px">
                                             <p class="card-text text-light fs-4"><small>
-                                                    <?= $category_name ?>
+                                                    <?= $sub_category_name ?>
                                                 </small></p>
                                         </div>
                                     </div>
