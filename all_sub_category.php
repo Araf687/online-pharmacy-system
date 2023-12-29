@@ -12,14 +12,17 @@
     <section class="d-flex justify-content-center bg-light">
         <section class="w-75">
             <div class="container pb-5 pt-4">
-                <h3>All Sub Categories</h3>
-                <div class="row" style="min-height:39.6vh">
+
+                <div class="row" style="min-height:43.9vh">
                     <?php
-                    $category_id=$_GET["sub_category_id"];
-                    $sql = "SELECT * FROM sub_category WHERE `category_id`=$category_id" ;
+                    $category_id = $_GET["sub_category_id"];
+                    $sql = "SELECT * FROM sub_category WHERE `category_id`=$category_id";
                     $result = mysqli_query($conn, $sql);
                     $row_count = mysqli_num_rows($result);
                     if ($row_count > 0) {
+                        ?>
+                        <h3>All Sub Categories</h3>
+                        <?php
                         while ($row = mysqli_fetch_array($result)) {
                             $id = $row['id'];
                             $sub_category_name = $row['sub_category_name'];
@@ -28,7 +31,8 @@
                             $image_src = $Sub_category_image ? "../pipharm-admin-panel/assets/images/sub_categories/" . $Sub_category_image : "assets/img/default.jpg";
 
                             ?>
-                            <a href=<?="all-shop.php?category_id=".$category_id."&sub_category_id=" . $id ?> class="col-md-3 pt-3">
+                            <a href=<?= "all-shop.php?category_id=" . $category_id . "&sub_category_id=" . $id ?>
+                                class="col-md-3 pt-3">
 
                                 <div class="card text-bg-dark" style="border-radius:10px; width:100%;">
                                     <img src=<?= $image_src ?> class="card-img" alt="" style="border-radius:10px; height:220px">
@@ -48,9 +52,21 @@
                         }
                     } else {
                         ?>
-                        <div class="p-5">
-                            <h5 class="text-center">Categories not found!</h5>
+                        <div style="min-height:43.9vh" class="d-flex align-items-center justify-content-center">
+                            <div class="p-5">
+                                <h5 class="text-center">Sub Categories not found!</h5>
+                                <div class="text-center">
+                                    <a href=<?= "all-shop.php?category_id=" . $category_id ?>>
+                                        <button type="button" class="btn btn-primary">Go to Shop <i
+                                                class="fa-solid fa-arrow-right ms-1"></i></button>
+                                    </a>
+                                </div>
+
+
+                            </div>
+
                         </div>
+
                         <?php
                     }
                     ?>

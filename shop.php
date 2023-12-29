@@ -45,7 +45,7 @@ include('./includes/head.php');
             <div class="w-75"><img src=<?= $imgSrc ?> class="card-img-top" style="height:300px" alt="..."></div>
         </div>
         <section class="d-flex">
-            <div class="w-25" style="background-color:#d3f9ee;">
+            <div class="w-25" style="background-color:#f5f6fa;">
                 <p class="text-center bg-success p-1 text-light fs-5">Category List</p>
                 <div class="sidebar px-4 pt-2" style="height:500px;overflow-y:scroll;">
                     <ul class="list-unstyled" id="category_list">
