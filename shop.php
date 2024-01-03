@@ -34,15 +34,73 @@ include('./includes/head.php');
         $shopRating = $shopRow["rating"];
         $address = $shopRow["address"] . ", " . $shopRow["city"];
 
-        $imgSrc = $shopImage ? "assets/img/shop/" . $shopImage : "assets/img/shop/pharmacy.png";
+        $imgSrc = $shopImage ? "../pipharm-admin-panel/assets/images/store/banner/" . $shopImage : "assets/img/shop/pharmacy.png";
 
         ?>
         <div class="d-flex">
             <div class="w-25">
                 <img src="assets/img/map.jpeg" class="card-img-top" style="height:300px" alt="...">
+
             </div>
             <a href="login.php" id="loginPageLink" style="display:none">login</a>
-            <div class="w-75"><img src=<?= $imgSrc ?> class="card-img-top" style="height:300px" alt="..."></div>
+            <div class="w-75" > 
+                <?php
+                $sliderImageSql = "SELECT * FROM slider WHERE `admin_id`=$id";
+                $fetchResult = mysqli_query($conn, $sliderImageSql);
+                $rowCount = mysqli_num_rows($fetchResult);
+                ?>
+                
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <?php
+                        $listIndex = 1;
+                        if ($row_count > 0) {
+                            $slider_image_src_array=[];
+                            while ($row = mysqli_fetch_array($fetchResult)) {
+                                $slider_image= $row["slider_image"];
+                                $image_src=$slider_image?"../pipharm-admin-panel/assets/images/slider/".$slider_image:"assets/img/default.jpg";
+                                $slider_image_src_array[]=$image_src;
+                                ?>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="<?= $listIndex ?>"></li>
+                                <?php
+                            }
+
+                        }
+                        ?>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src=<?= $imgSrc ?> alt="First slide" height=300>
+                        </div>
+                        <?php
+                        $listIndex = 1;
+                        
+                        if ($row_count > 0) {
+                            foreach ($slider_image_src_array as $src) {
+                               
+                               
+                                ?>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100" src=<?=$src?> alt="Second slide" height=300>
+                                </div>
+
+                                <?php
+                            }
+
+                        }
+                        ?>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
         </div>
         <section class="d-flex">
             <div class="w-25" style="background-color:#f5f6fa;">
@@ -59,7 +117,7 @@ include('./includes/head.php');
                 <div class="container">
 
                     <div class="row my-3" id="product_list">
-                       
+
 
                     </div>
                 </div>
@@ -81,14 +139,14 @@ include('./includes/head.php');
     </section>
     <script src="assets/js/all_shop.js"></script>
     <script>
-        loadAllProducts(<?=$id?>);
-        
+        loadAllProducts(<?= $id ?>);
+
     </script>
 
     <footer>
         <?php include("./includes/footer.php") ?>
     </footer>
-    <script>var shopId = <?=$shopId?>;</script>
+    <script>var shopId = <?= $shopId ?>;</script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 

@@ -63,7 +63,7 @@ include('./includes/head.php');
                             $shopRating = $allShopQuery["rating"];
                             $address = $allShopQuery["address"] . ", " . $allShopQuery["city"];
 
-                            $imgSrc = $shopImage ? "assets/img/shop/" . $shopImage : "assets/img/shop/pharmacy.png";
+                            $imgSrc = $shopImage ? "../pipharm-admin-panel/assets/images/store/banner/" . $shopImage : "assets/img/shop/pharmacy.png";
 
                             ?>
                             <div class="col-md-3 pt-4">
