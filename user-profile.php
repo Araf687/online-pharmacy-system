@@ -43,8 +43,8 @@
                         <div class="card mb-4 p-2" style="border-radius:5px">
 
                             <div class="card-body text-center">
-                                <p style="text-align:right;"><i class="fa-solid fa-user-pen fs-4"
-                                        style="cursor:pointer;"></i></p>
+                                <!-- <p style="text-align:right;"><i class="fa-solid fa-user-pen fs-4"
+                                        style="cursor:pointer;"></i></p> -->
                                 <img src=<?= $image_src ?> alt="avatar" class="rounded-circle img-fluid"
                                     style="width: 150px;">
                                 <h5 class="mt-3 mb-0">
@@ -53,6 +53,13 @@
                                 <p class="text-muted mb-1 fs-">
                                     <?= $type ?>
                                 </p>
+                                <!-- Button trigger modal -->
+                                <a href="userLocation.php">
+                                    <button type="button" class="btn btn-primary">
+                                        <i class="fa-solid fa-user-pen " style="cursor:pointer;"></i> Edit Profile
+                                    </button>
+                                </a>
+
                             </div>
                         </div>
                         <div class="card py-1" style="border-radius:5px">
@@ -198,6 +205,9 @@
                 </div>
             </div>
         </section>
+   
+
+
     </section>
 
     <?php include('./includes/script.php') ?>

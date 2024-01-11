@@ -1,11 +1,11 @@
-.modal-dialog {
+.modal-dialog-extraFeature {
     position: fixed;
     margin: auto;
     width: 400px;
     height: 100%;
     right: 0px;
 }
-.modal-content {
+.modal-content-extraFeature {
     height: 100%;
     overflow-y: scroll;
     background-color: #e9f1f5;

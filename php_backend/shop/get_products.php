@@ -1,7 +1,7 @@
 <?php
 include("../../config/dbConn.php");
 session_start();
-$userId = isset($_SESSION["loggedInId"]) ? $_SESSION["loggedInId"] : null;
+$userId = isset($_SESSION["loggedInId"]) ? $_SESSION["loggedInId"] : -1;
 $pharmacy_id = isset($_POST["shopId"]) ? $_POST["shopId"] : 0;
 $category_id = isset($_POST['category_id']) ? $_POST['category_id'] : null;
 $sub_category_id = isset($_POST['sub_category_id']) ? $_POST['sub_category_id'] : null;

@@ -1,8 +1,8 @@
 <!-- Add Bootstrap CSS and JavaScript CDNs to your HTML file -->
 <div class="modal right fade come-from-modal" id="cartModal" tabindex="-1" role="dialog"
   aria-labelledby="cartModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
+  <div class="modal-dialog modal-dialog-extraFeature" role="document">
+    <div class="modal-content modal-content-extraFeature">
 
       <div class="modal-header d-flex justify-content-between align-items-center">
         <h5 class="modal-title fs-3" id="cartModalLabel">Your Cart <span>

@@ -59,7 +59,7 @@ $(document).ready(function () {
 });
 
 // Function to add to cart
-function addToCart(productId, productPrice, userId, pharmacyId) {
+function addToCart(productId, productPrice, userId=null, pharmacyId) {
   var quantity = parseInt($("#quantity_" + productId).val());
   // Perform action to add product with productId and quantity to cart
   // For example, use AJAX to send this data to the server (e.g., PHP endpoint)
@@ -72,7 +72,7 @@ function addToCart(productId, productPrice, userId, pharmacyId) {
     price: productPrice,
     pharmacy_id: pharmacyId,
   };
-  if (userId) {
+  if (userId!=-1) {
     $.ajax({
       type: "POST",
       url: "php_backend/addToCart/add_to_cart.php", // Replace with your backend PHP file

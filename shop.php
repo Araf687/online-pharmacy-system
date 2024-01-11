@@ -43,24 +43,30 @@ include('./includes/head.php');
 
             </div>
             <a href="login.php" id="loginPageLink" style="display:none">login</a>
-            <div class="w-75" > 
+            <div class="w-75">
                 <?php
-                $sliderImageSql = "SELECT * FROM slider WHERE `admin_id`=$id";
-                $fetchResult = mysqli_query($conn, $sliderImageSql);
-                $rowCount = mysqli_num_rows($fetchResult);
-                ?>
+                $row_count = 0;
                 
+                if ($id) {
+                    $sliderImageSql = "SELECT * FROM slider WHERE `admin_id`=$id";
+                    $fetchResult = mysqli_query($conn, $sliderImageSql);
+                    $rowCount = mysqli_num_rows($fetchResult);
+                }
+
+                ?>
+
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                         <?php
                         $listIndex = 1;
+                       
                         if ($row_count > 0) {
-                            $slider_image_src_array=[];
+                            $slider_image_src_array = [];
                             while ($row = mysqli_fetch_array($fetchResult)) {
-                                $slider_image= $row["slider_image"];
-                                $image_src=$slider_image?"../pipharm-admin-panel/assets/images/slider/".$slider_image:"assets/img/default.jpg";
-                                $slider_image_src_array[]=$image_src;
+                                $slider_image = $row["slider_image"];
+                                $image_src = $slider_image ? "../pipharm-admin-panel/assets/images/slider/" . $slider_image : "assets/img/default.jpg";
+                                $slider_image_src_array[] = $image_src;
                                 ?>
                                 <li data-target="#carouselExampleIndicators" data-slide-to="<?= $listIndex ?>"></li>
                                 <?php
@@ -75,14 +81,14 @@ include('./includes/head.php');
                         </div>
                         <?php
                         $listIndex = 1;
-                        
+
                         if ($row_count > 0) {
                             foreach ($slider_image_src_array as $src) {
-                               
-                               
+
+
                                 ?>
                                 <div class="carousel-item">
-                                    <img class="d-block w-100" src=<?=$src?> alt="Second slide" height=300>
+                                    <img class="d-block w-100" src=<?= $src ?> alt="Second slide" height=300>
                                 </div>
 
                                 <?php
@@ -139,6 +145,7 @@ include('./includes/head.php');
     </section>
     <script src="assets/js/all_shop.js"></script>
     <script>
+
         loadAllProducts(<?= $id ?>);
 
     </script>
