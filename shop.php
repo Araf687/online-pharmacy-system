@@ -34,12 +34,36 @@ include('./includes/head.php');
         $shopRating = $shopRow["rating"];
         $address = $shopRow["address"] . ", " . $shopRow["city"];
 
+        $pharmacy_latitude=isset($shopRow["latitude"])?$shopRow["latitude"]:null;
+        $pharmacy_longitude=isset($shopRow["longitude"])?$shopRow["longitude"]:null;
+
+        $user_latitude=isset($_SESSION['userLatitude'])?$_SESSION['userLatitude']:null;
+        $user_longitude=isset($_SESSION['userLongitude'])?$_SESSION['userLongitude']:null;
+     
+
+        
+
         $imgSrc = $shopImage ? "../pipharm-admin-panel/assets/images/store/banner/" . $shopImage : "assets/img/shop/pharmacy.png";
 
         ?>
         <div class="row">
             <div class="col-md-3">
+
+            <!-- map section  -->
                 <div id="map" style="height:350px;opacity:1;pointer-events:auto" class="mb-2 rounded shadow border-1"></div>
+                <?php
+                if($pharmacy_latitude&&$pharmacy_longitude&&$user_latitude&&$user_longitude){
+                    echo "<script>$(document).ready(function() {showDistance([$user_latitude,$user_longitude],[$pharmacy_latitude,$pharmacy_longitude])})</script>";
+                }
+                else if($pharmacy_latitude&&$pharmacy_longitude){
+                    echo "<script>$(document).ready(function() {showUserLocationOnMap([$pharmacy_latitude,$pharmacy_longitude])})</script>";
+                }
+                else if($pharmacy_latitude&&$pharmacy_longitude){
+                    echo "<script>$(document).ready(function() {showUserLocationOnMap([$user_latitude,$user_longitude])})</script>";
+                }
+                ?>
+
+                <!-- category ist section  -->
                 <div style="background-color:#f5f6fa;">
                     <p class="text-center bg-success p-1 text-light fs-5">Category List</p>
                     <div class="sidebar px-4 pt-2" style="height:500px;overflow-y:scroll;">
@@ -149,9 +173,13 @@ include('./includes/head.php');
     <footer>
         <?php include("./includes/footer.php") ?>
     </footer>
+
     <!--Leaflet js link. Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- leaflet routing machine js file link -->
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
     <script src="assets/js/map/map.js"></script>
     <script>var shopId = <?= $shopId ?>;</script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
