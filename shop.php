@@ -37,20 +37,30 @@ include('./includes/head.php');
         $imgSrc = $shopImage ? "../pipharm-admin-panel/assets/images/store/banner/" . $shopImage : "assets/img/shop/pharmacy.png";
 
         ?>
-        <div class="d-flex">
-            <div class="w-25">
-                <img src="assets/img/map.jpeg" class="card-img-top" style="height:300px" alt="...">
+        <div class="row">
+            <div class="col-md-3">
+                <div id="map" style="height:350px;opacity:1;pointer-events:auto" class="mb-2 rounded shadow border-1"></div>
+                <div style="background-color:#f5f6fa;">
+                    <p class="text-center bg-success p-1 text-light fs-5">Category List</p>
+                    <div class="sidebar px-4 pt-2" style="height:500px;overflow-y:scroll;">
+                        <ul class="list-unstyled" id="category_list">
+
+                        </ul>
+
+                    </div>
+                </div>
 
             </div>
             <a href="login.php" id="loginPageLink" style="display:none">login</a>
-            <div class="w-75">
+            <div class="col-md-9">
                 <?php
                 $row_count = 0;
-                
+
                 if ($id) {
                     $sliderImageSql = "SELECT * FROM slider WHERE `admin_id`=$id";
                     $fetchResult = mysqli_query($conn, $sliderImageSql);
                     $rowCount = mysqli_num_rows($fetchResult);
+                    $row1 = $fetchResult->fetch_assoc();
                 }
 
                 ?>
@@ -59,16 +69,18 @@ include('./includes/head.php');
                     <ol class="carousel-indicators">
                         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                         <?php
-                        $listIndex = 1;
-                       
+                        $listIndex = 0;
+
                         if ($row_count > 0) {
                             $slider_image_src_array = [];
-                            while ($row = mysqli_fetch_array($fetchResult)) {
+                            while ($row = $fetchResult->fetch_assoc()) {
+                                $listIndex = $listIndex + 1;
                                 $slider_image = $row["slider_image"];
                                 $image_src = $slider_image ? "../pipharm-admin-panel/assets/images/slider/" . $slider_image : "assets/img/default.jpg";
                                 $slider_image_src_array[] = $image_src;
                                 ?>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="<?= $listIndex ?>"></li>
+
+                                <li data-target="#carouselExampleIndicators" data-slide-to='<?= "$listIndex" ?>'></li>
                                 <?php
                             }
 
@@ -79,13 +91,12 @@ include('./includes/head.php');
                         <div class="carousel-item active">
                             <img class="d-block w-100" src=<?= $imgSrc ?> alt="First slide" height=300>
                         </div>
+
                         <?php
                         $listIndex = 1;
 
                         if ($row_count > 0) {
                             foreach ($slider_image_src_array as $src) {
-
-
                                 ?>
                                 <div class="carousel-item">
                                     <img class="d-block w-100" src=<?= $src ?> alt="Second slide" height=300>
@@ -106,30 +117,15 @@ include('./includes/head.php');
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
+
+
+                <div class="row my-3" id="product_list">
+
+
+                </div>
             </div>
         </div>
-        <section class="d-flex">
-            <div class="w-25" style="background-color:#f5f6fa;">
-                <p class="text-center bg-success p-1 text-light fs-5">Category List</p>
-                <div class="sidebar px-4 pt-2" style="height:500px;overflow-y:scroll;">
-                    <ul class="list-unstyled" id="category_list">
 
-                    </ul>
-
-                </div>
-            </div>
-            <div class="w-75">
-
-                <div class="container">
-
-                    <div class="row my-3" id="product_list">
-
-
-                    </div>
-                </div>
-
-            </div>
-        </section>
         </div>
         </div>
     </section>
@@ -153,8 +149,13 @@ include('./includes/head.php');
     <footer>
         <?php include("./includes/footer.php") ?>
     </footer>
+    <!--Leaflet js link. Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="assets/js/map/map.js"></script>
     <script>var shopId = <?= $shopId ?>;</script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 
 
 </body>

@@ -40,3 +40,7 @@ const showUserLocationOnMap = (latitude, longitude) => {
     document.getElementById("LatLong").value = `${lat}, ${lng}`;
   });
 };
+
+const showDistance=(center,destination)=>{
+
+}

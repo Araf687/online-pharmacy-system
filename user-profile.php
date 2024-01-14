@@ -1,8 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php include('./includes/head.php') ?>
+<?php
+include('./includes/head.php');
+?>
 
 <body>
+    <?php if (isset($_SESSION['userUpdate'])) {
+        echo "<script> Swal.fire({
+        title: 'Good job!',
+        text: 'User Update Successfully',
+        icon: 'success'
+      })</script>";
+      unset($_SESSION['userUpdate']);
+    } ?>
     <section class="d-flex justify-content-center position-sticky shadow stickyNav" style="background-color:white">
         <section class="w-75">
             <?php include('./includes/navbar.php') ?>
@@ -205,7 +215,7 @@
                 </div>
             </div>
         </section>
-   
+
 
 
     </section>

@@ -32,11 +32,11 @@ if ($rowCount > 0) {
         $prdCategoryId = $productRow["prd_cat_id"];
         $prdSubCategoryId = $productRow["prd_sub_cat_id"];
 
-        $imgSrc = "../pipharm-admin-panel/assets/images/product/" . $prdImage;
+        $imgSrc = $prdImage?"../pipharm-admin-panel/assets/images/product/" . $prdImage:'assets/img/default.jpg';
         ?>
         <div class="col-md-3">
             <div class="card p-2 rounded-3" style="width: 100%;">
-                <img src=<?= $imgSrc ?> class="card-img-top" alt="...">
+                <img src=<?= $imgSrc ?> class="card-img-top" alt="..." onerror="this.src='assets/img/default.jpg'">
                 <div class="card-body">
                     <h5 class="card-title text-center">
                         <?= $prdName ?>

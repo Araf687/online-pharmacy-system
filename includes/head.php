@@ -9,8 +9,8 @@
     <!-- jquery link -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
-   <!-- sweet alert link  -->
-   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- sweet alert link  -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- font awesome link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -24,20 +24,37 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
-        
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
- 
+    <!-- leaflet link  -->
+    
+  <!-- //leaflet src link  -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <!-- leaflet routing machine link -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
 
     <!-- main style link  -->
     <link rel="stylesheet" href="assets/css/mainStyle.css">
     <link rel="stylesheet" href="assets/css/cartModalStyle.css">
     <link rel="stylesheet" href="assets/css/checkout.css">
 
+    <style>
+    #map {
+      opacity: 0.5;
+      /* Reduced opacity to indicate disabled state */
+      height: 500px;
+      pointer-events: none;
+      /* Disable pointer events */
+    }
+  </style>
+
 </head>
-<?php 
-session_start(); 
+<?php
+session_start();
 include('./config/dbConn.php');
 ?>

@@ -74,12 +74,12 @@ include('./includes/check-login.php');
                                     $shopRating = $row["rating"];
                                     $address = $row["address"] . ", " . $row["city"];
 
-                                    $imgSrc = $shopImage ? "assets/img/shop/" . $shopImage : "assets/img/shop/pharmacy.png";
+                                    $imgSrc = $shopImage ? "../pipharm-admin-panel/assets/images/store/banner/" . $shopImage : "assets/img/shop/pharmacy.png";
                                     ?>
                                     <div class="col-md-3 col-sm-4 col-xs-6">
                                         <div class="card shadow rounded-4" style="width:100%;">
                                             <div class="p-3" style="background-color:#f2f2f2;">
-                                                <img src=<?= $imgSrc ?> class="card-img-top" style="height:180px;" alt="...">
+                                                <img src=<?= $imgSrc ?> class="card-img-top" style="height:180px;" alt="..." onerror="this.src='assets/img/default.jpg'">
                                             </div>
 
                                             <div class="card-body">
