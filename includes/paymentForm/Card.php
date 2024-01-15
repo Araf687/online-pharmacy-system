@@ -28,9 +28,9 @@
 </div> -->
 
 <form role="form" action="php_backend/order/order_confirm.php" method="post">
-   <input type="text" name="pharmacy_id_list" value=<?=implode(", ", $pharmacy_id_list)?> >
-   <input type="text" name="user_id" value=<?=$userId?> >
-   <input type="text" name="payment_method" value="card" >
+   <input type="text" name="pharmacy_id_list" value=<?=implode(", ", $pharmacy_id_list)?> class="d-none" >
+   <input type="text" name="user_id" value=<?=$userId?> class="d-none">
+   <input type="text" name="payment_method" value="card" class="d-none">
     <div class="form-group">
         <label for="username">Full name (on the card)</label>
         <input type="text" name="username" placeholder="Jason Doe" required class="form-control" required>

@@ -47,7 +47,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 } else {
                     echo "cart item not deleted";
                 }
-
+                
+                $_SESSION['order_status'] = true;
+                header( "Location: ../../user-profile.php" );  
 
             } else {
                 echo "order not added" . " " . $deleteCartItemSQL;

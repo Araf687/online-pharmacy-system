@@ -2,17 +2,28 @@
 <html lang="en">
 <?php
 include('./includes/head.php');
+include('./includes/supportiveFunctions/supportiveFunctions.php');
 ?>
 
 <body>
-    <?php if (isset($_SESSION['userUpdate'])) {
+    <?php
+    if (isset($_SESSION['userUpdate'])) {
         echo "<script> Swal.fire({
         title: 'Good job!',
         text: 'User Update Successfully',
         icon: 'success'
       })</script>";
-      unset($_SESSION['userUpdate']);
-    } ?>
+        unset($_SESSION['userUpdate']);
+    } 
+    else if(isset($_SESSION['order_status'])){
+        echo "<script> Swal.fire({
+            title: 'Good job!',
+            text: 'User Update Successfully',
+            icon: 'success'
+          })</script>";
+            unset($_SESSION['order_status']);
+    }
+        ?>
     <section class="d-flex justify-content-center position-sticky shadow stickyNav" style="background-color:white">
         <section class="w-75">
             <?php include('./includes/navbar.php') ?>
@@ -22,7 +33,7 @@ include('./includes/head.php');
         <section class="d-flex align-items-center" style="background-color: #eee; height:92.5vh">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <?php
                         $userId = $_SESSION["loggedInId"];
                         $sql = "SELECT u.*, ua.* FROM user u
@@ -119,7 +130,7 @@ include('./includes/head.php');
                         </div>
 
                     </div>
-                    <div class="col-lg-8 ">
+                    <div class="col-lg-9 ">
                         <div class="row ">
                             <div class="col-md-12 ">
                                 <div class="card mb-md-0" style="border-radius:10px">
@@ -129,13 +140,14 @@ include('./includes/head.php');
                                             Status
                                         </p>
                                         <div class="px-2">
-                                            <table
+                                            <table class="table"
                                                 style="font-family: arial, sans-serif;border-collapse: collapse;width: 100%;">
                                                 <tr>
                                                     <th style="text-align: left;padding: 8px;">Order Code</th>
                                                     <th style="text-align: left;padding: 8px;">Amount</th>
                                                     <th style="text-align: left;padding: 8px;">Order Status</th>
                                                     <th style="text-align: left;padding: 8px;">Delivery Status</th>
+                                                    <th style="text-align: left;padding: 8px;">Date</th>
 
                                                 </tr>
                                                 <?php
@@ -151,6 +163,7 @@ include('./includes/head.php');
                                                     $total = $row["sale_amount"] + $row["tax"] + $row["shipping_cost"];
                                                     $order_status = $row["order_status"];
                                                     $delivery_status = $row["delivery_status"];
+                                                    $date_time = $row["created_date"];
 
                                                     $rowColor = "rgba(154, 154, 154, 0.2)";
                                                     $fontColor = "#9a9a9a;";
@@ -172,7 +185,7 @@ include('./includes/head.php');
                                                     ?>
 
                                                     <tr
-                                                        style='background-color:<?= $rowColor ?>;border-radius:6px;color:<?= $fontColor ?>'>
+                                                        style='margin-bottom:5px;background-color:<?= $rowColor ?>;border-radius:6px;color:<?= $fontColor ?>'>
                                                         <td style="text-align: left;padding: 8px;">
 
                                                             <?= $orderCode ?>
@@ -192,6 +205,12 @@ include('./includes/head.php');
 
 
                                                             <?= $delivery_status ?>
+
+                                                        </td>
+                                                        <td style="text-align: left;padding: 8px;">
+
+
+                                                            <?= formatDateTime($date_time) ?>
 
                                                         </td>
 
