@@ -1,4 +1,6 @@
 var map = L.map("map").setView([24.0, 90.0], 7);
+let currentMarker=null;
+
 
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:

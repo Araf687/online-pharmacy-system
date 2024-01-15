@@ -6,6 +6,9 @@
     <meta name="author" content="WeNowhere">
     <title>Online Medicine Systems</title>
 
+    <link rel="icon" href="assets/img/favicon/medicine.png" type="image/x-icon">
+  <link rel="shortcut icon" href="assets/img/favicon/medicine.png" type="image/x-icon">
+
     <!-- jquery link -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
