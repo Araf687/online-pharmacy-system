@@ -36,7 +36,7 @@ if ($rowCount > 0) {
         ?>
         <div class="col-md-3">
             <div class="card p-2 rounded-3" style="width: 100%;">
-                <img src=<?= $imgSrc ?> class="card-img-top" alt="..." onerror="this.src='assets/img/default.jpg'">
+                <img src=<?= $imgSrc ?> class="card-img-top" alt="..." onerror="this.src='assets/img/default.jpg'" m>
                 <div class="card-body">
                     <h5 class="card-title text-center">
                         <?= $prdName ?>
