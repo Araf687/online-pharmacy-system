@@ -143,7 +143,7 @@ include('./includes/head.php');
                 </div>
 
 
-                <div class="row my-3" id="product_list">
+                <div class="row my-3 g-4" id="product_list">
 
 
                 </div>

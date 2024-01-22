@@ -7,14 +7,17 @@
 <script>
 $(document).ready(function () {
   $('.btn-number').click(function (e) {
-      console.log("asas")
       e.preventDefault();
 
       var fieldName = $(this).attr('data-field');
       var type = $(this).attr('data-type');
       var input = $("input[id='" + fieldName + "']");
       var currentVal = parseInt(input.val());
-      console.log(currentVal,input,type,fieldName)
+      const productId=parseInt(fieldName.split("_")[1]);
+      const productQuantity=parseInt($(`#product_qty_${productId}`).val());
+
+    //   console.log(currentVal,input,type,fieldName)
+    //   console.log(productId,productQuantity)
 
       if (!isNaN(currentVal)) {
           if (type === 'minus') {

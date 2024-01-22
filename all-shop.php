@@ -75,7 +75,7 @@ include('./includes/head.php');
 
                                     <div class="card-body">
                                         <h5 class="card-title text-center">
-                                            <?= $shopName ?>
+                                            <?= ucwords($shopName) ?>
                                         </h5>
                                         <div>
                                             <div class="my-1">
