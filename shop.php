@@ -34,14 +34,14 @@ include('./includes/head.php');
         $shopRating = $shopRow["rating"];
         $address = $shopRow["address"] . ", " . $shopRow["city"];
 
-        $pharmacy_latitude=isset($shopRow["latitude"])?$shopRow["latitude"]:null;
-        $pharmacy_longitude=isset($shopRow["longitude"])?$shopRow["longitude"]:null;
+        $pharmacy_latitude = isset($shopRow["latitude"]) ? $shopRow["latitude"] : null;
+        $pharmacy_longitude = isset($shopRow["longitude"]) ? $shopRow["longitude"] : null;
 
-        $user_latitude=isset($_SESSION['userLatitude'])?$_SESSION['userLatitude']:null;
-        $user_longitude=isset($_SESSION['userLongitude'])?$_SESSION['userLongitude']:null;
-     
+        $user_latitude = isset($_SESSION['userLatitude']) ? $_SESSION['userLatitude'] : null;
+        $user_longitude = isset($_SESSION['userLongitude']) ? $_SESSION['userLongitude'] : null;
 
-        
+
+
 
         $imgSrc = $shopImage ? "../pipharm-admin-panel/assets/images/store/banner/" . $shopImage : "assets/img/shop/pharmacy.png";
 
@@ -49,16 +49,15 @@ include('./includes/head.php');
         <div class="row">
             <div class="col-md-3">
 
-            <!-- map section  -->
-                <div id="map" style="height:350px;opacity:1;pointer-events:auto" class="mb-2 rounded shadow border-1"></div>
+                <!-- map section  -->
+                <div id="map" style="height:350px;opacity:1;pointer-events:auto" class="mb-2 rounded shadow border-1">
+                </div>
                 <?php
-                if($pharmacy_latitude&&$pharmacy_longitude&&$user_latitude&&$user_longitude){
+                if ($pharmacy_latitude && $pharmacy_longitude && $user_latitude && $user_longitude) {
                     echo "<script>$(document).ready(function() {showDistance([$user_latitude,$user_longitude],[$pharmacy_latitude,$pharmacy_longitude])})</script>";
-                }
-                else if($pharmacy_latitude&&$pharmacy_longitude){
+                } else if ($pharmacy_latitude && $pharmacy_longitude) {
                     echo "<script>$(document).ready(function() {showUserLocationOnMap([$pharmacy_latitude,$pharmacy_longitude])})</script>";
-                }
-                else if($pharmacy_latitude&&$pharmacy_longitude){
+                } else if ($pharmacy_latitude && $pharmacy_longitude) {
                     echo "<script>$(document).ready(function() {showUserLocationOnMap([$user_latitude,$user_longitude])})</script>";
                 }
                 ?>
@@ -113,7 +112,8 @@ include('./includes/head.php');
                     </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img class="d-block w-100" src=<?= $imgSrc ?> alt="First slide" height=300>
+                            <img class="d-block w-100" src=<?= $imgSrc ?> onerror="this.src='assets/img/default.jpg'" alt="First slide"
+                                height=300>
                         </div>
 
                         <?php
