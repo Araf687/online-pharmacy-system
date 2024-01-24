@@ -27,6 +27,7 @@
             <a href="category.php" class="link-underline-light text-decoration-none me-3">Categories</a>
             <a href="all-shop.php" class="link-underline-light text-decoration-none me-3">Shops</a>
             <a href="" class="link-underline-light text-decoration-none me-3">Help</a>
+            <a href="search.php" class="link-underline-light text-decoration-none me-3">Search</a>
             <span class="position-relative mt-1" data-toggle="modal" data-target="#cartModal">
                 <span><i class="fa-solid fa-cart-shopping" style="font-size:20px"></i></span>
                 <span id="cart" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
