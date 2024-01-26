@@ -50,7 +50,7 @@ include('./includes/head.php');
             <div class="col-md-3">
 
                 <!-- map section  -->
-                <div id="map" style="height:350px;opacity:1;pointer-events:auto" class="mb-2 rounded shadow border-1">
+                <div id="map" style="height:350px;opacity:1;pointer-events:auto;z-index: 1;" class="mb-2 rounded shadow border-1">
                 </div>
                 <?php
                 if ($pharmacy_latitude && $pharmacy_longitude && $user_latitude && $user_longitude) {

@@ -137,7 +137,7 @@ if(!isset($_SESSION['loggedInId'])){
 
           </div>
           <div class="col-md-5">
-            <div id="map" class="mb-2 rounded shadow"></div>
+            <div id="map" class="mb-2 rounded shadow" style="z-index: 1;"></div>
 
             <p class="text-center" style="font-size:18px">You can also drag the blue marker to set the specific
               location.
