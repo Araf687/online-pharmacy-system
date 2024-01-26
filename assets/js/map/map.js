@@ -51,12 +51,38 @@ const showUserLocationOnMap = (latitude, longitude) => {
 };
 
 const showDistance=(center,destination)=>{
+  // Create custom markers
+const startIcon = L.icon({
+  iconUrl: 'assets/img/map/location3.png',
+  iconSize: [42, 42],
+  iconAnchor: [16, 32],
+  popupAnchor: [0, -32],
+});
+
+const endIcon = L.icon({
+  iconUrl: 'assets/img/map/location.png',
+  iconSize: [42, 42],
+  iconAnchor: [16, 32],
+  popupAnchor: [0, -32],
+});
+
   const control= L.Routing.control({
     waypoints: [
       L.latLng(center[0], center[1]),
       L.latLng(destination[0], destination[1])
     ],
-    routeWhileDragging: true
+    routeWhileDragging: true,
+    createMarker: function(i, waypoint, n) {
+      // Use different icons for start and end points
+      const icon = i === 0 ? startIcon : (i === n - 1 ? endIcon : null);
+  
+      const marker = L.marker(waypoint.latLng, {
+        draggable: true,
+        icon: icon,
+      });
+  
+      return marker;
+    },
   }).addTo(map);
 
   // Listen for the routeselected event

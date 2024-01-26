@@ -31,7 +31,7 @@
                             class="fa-brands fa-searchengin me-1"></i>Nearest Pharmacy</button>
                 </div>
                 <div class="col-md-12">
-                    <div id="testMap"></div>
+                    <div id="map"></div>
                     <div class="row" id="searchResult">
 
                     </div>
@@ -45,10 +45,20 @@
         <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
 
         <script>
+            const userLat = parseFloat($('#userLat').val());
+            const userLong = parseFloat($('#userLong').val());
+
+            // Assuming you have a Leaflet map instance
+            var map = L.map('map').setView([51.505, -0.09], 13);
+
+            // Add a tile layer
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
             const handleClickSearchNearestPharmacy = () => {
                 console.log("asda");
-                const userLat = $('#userLat').val();
-                const userLong = $('#userLong').val();
+
 
                 // Fetch data using AJAX
                 $.ajax({
@@ -62,14 +72,7 @@
                         const resultData = JSON.parse(data);
                         const resultedPharmacyList = resultData.data.resultData;
                         console.log(resultData, resultedPharmacyList);
-                        resultedPharmacyList.forEach(element => {
-                            const lat1 = parseInt(userLat);
-                            const long1 = parseInt(userLong);
-                            const lat2 = parseInt(element.latitude);
-                            const long2 = parseInt(element.longitude);
-                            distance(lat1, long1, lat2, long2);
-                            console.log(lat1, long1, lat2, long2);
-                        });
+                        checkDistance(resultedPharmacyList);
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         console.log("Error fetching data:", errorThrown);
@@ -77,29 +80,29 @@
                 });
             };
 
-            const distance = (latitude1, longitude1, latitude2, longitude2) => {
-                // Replace 'YOUR_API_KEY' with your OpenRouteService API key
-                const apiKey = '5b3ce3597851110001cf62487c2dcc7104274a92936bd95838f2af37';
+            const checkDistance = (objectArray) => {
+                // Iterate over the array and calculate distance for each pair
+                objectArray.forEach(function (element) {
+                    var start = L.latLng(userLat, userLong);
+                    var end = L.latLng(parseFloat(element.latitude), parseFloat(element.longitude));
 
-                // Replace these coordinates with your start and end points
-                const start = [latitude1, longitude1];
-                const end = [latitude2, longitude2];
+                    var control = L.Routing.control({
+                        waypoints: [start, end],
+                    });
 
-                // Construct the API URL
-                const apiUrl = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${apiKey}&start=${start.join(',')}&end=${end.join(',')}`;
+                    // Listen for the routeselected event
+                    control.on('routeselected', function (event) {
+                        // Access the route information including distance
+                        var route = event.route;
+                        var distance = route.summary.totalDistance;
+                        console.log('Route Distance:', distance);
+                    });
 
-                // Make a request to the OpenRouteService API
-                fetch(apiUrl)
-                    .then(response => response.json())
-                    .then(data => {
-                        // Extract the distance from the API response
-                        const distance = data.features[0].properties.segments[0].distance;
-                        console.log(`Distance: ${distance} meters`);
-                    })
-                    .catch(error => console.log('Error fetching data from OpenRouteService:', error));
+                    // Add the control to the map
+                    control.addTo(map);
+                });
 
-
-            };
+            }
         </script>
 
 
