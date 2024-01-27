@@ -10,7 +10,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     pa.shop_name,
     pa.shop_image,
     pad.latitude,
-    pad.longitude
+    pad.longitude,
+    pad.address
 FROM
     pharmacy_admin pa
 JOIN
@@ -29,11 +30,13 @@ JOIN
                 $shopImage=$row["shop_image"];
                 $latitude=$row["latitude"];
                 $longitude=$row["longitude"];
+                $address=$row["address"];
 
                 $dataArray=array(
                     "id"=>$id,
                     "shopName"=>$shopName,
                     "shopImage"=>$shopImage,
+                    "address"=>$address,
                     "latitude"=>$latitude,
                     "longitude"=>$longitude,
                 );
@@ -41,6 +44,9 @@ JOIN
                 $resultData[]=$dataArray;
             }
             echo json_encode(["isSuccess" => true, "data" => ["resultData" => $resultData], "message" => "Succeed to search pharmacy"]);
+        }
+        else{
+            echo json_encode(["isSuccess" => false, "data" => ["status" => "notFound"], "message" => "No Pharmacy Found"]);
         }
     }
     else{

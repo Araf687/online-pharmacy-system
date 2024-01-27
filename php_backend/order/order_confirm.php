@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sql_getCartItem = "SELECT * from cartitem WHERE `cust_id`=$user_id AND pharmacy_id=$id";
         $result_getCartItem = mysqli_query($conn, $sql_getCartItem);
         $cartItem_row_count = mysqli_num_rows($result_getCartItem);
-        $orderCode = 'ORD#' . $user_id . '-' . $id . '-' . time();
+        $orderCode = 'ORD@' . $user_id . '-' . $id . '-' . time();
         $allCartItemId = '';
         $total_sale_amount = 0;
         if ($cartItem_row_count > 0) {

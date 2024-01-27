@@ -17,8 +17,6 @@ $main_sql = ($category_id && $sub_category_id) ?
         $fetch_product_sql2 : $fetch_product_sql1);
 
 
-
-
 $prdQuerryResult = $conn->query($main_sql);
 $rowCount = $prdQuerryResult->num_rows;
 if ($rowCount > 0) {

@@ -6,6 +6,12 @@ if (isset($_POST['shopId'])) {
     $categoryQuerry = "SELECT `id`,`cat_name` FROM category";
     $result = $conn->query($categoryQuerry);
     if ($result->num_rows > 0) {
+        ?>
+        <li><button href="#" class="btn btn-toggle w-100 text-start" onclick="selectCategory('<?=$shopId?>','')">
+                <?= "All Medicine" ?>
+            </button></li>
+        <?php
+
         while ($row = $result->fetch_assoc()) {
             $catId = $row["id"];
             $catName = $row["cat_name"];
@@ -28,21 +34,21 @@ if (isset($_POST['shopId'])) {
                             $subCategoryId = $subCategoryRow["id"];
                             $subCategoryName = $subCategoryRow["sub_category_name"];
                             ?>
-                            
-                            <li class="list-item px-5 py-2" style="cursor:pointer"  onclick='<?= "selectCategory($shopId,$catId,$subCategoryId)" ?>'>
-                                <span
-                                    class="link-dark rounded ">
+
+                            <li class="list-item px-5 py-2" style="cursor:pointer"
+                                onclick='<?= "selectCategory($shopId,$catId,$subCategoryId)" ?>'>
+                                <span class="link-dark rounded ">
                                     <?= $subCategoryName ?>
                                 </span>
-                                
+
                             </li>
-                            
+
                             <?php
                         }
                         ?>
-                        
+
                     </ul>
-                    
+
                 </li>
 
             <?php } else { ?>
@@ -66,11 +72,11 @@ if (isset($_POST['shopId'])) {
         $('.list-item').removeClass('custom-highlight');
 
         // Add highlighting to the clicked item and set CSS properties
-      $(this).addClass('custom-highlight').css({
-        'border-radius':'6px',
-        'background-color': '#a2f4a5', // Change this to the color you want for highlighting
-        'color': 'black' // Change text color for better visibility
-      });
+        $(this).addClass('custom-highlight').css({
+            'border-radius': '6px',
+            'background-color': '#a2f4a5', // Change this to the color you want for highlighting
+            'color': 'black' // Change text color for better visibility
+        });
         // Remove CSS properties from other list items
         $('.list-item').not(this).css({
             'background-color': '',

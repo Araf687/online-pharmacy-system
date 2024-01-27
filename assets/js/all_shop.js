@@ -1,32 +1,33 @@
-
 // Function to load all products
 function loadAllProducts(shopId) {
   $.ajax({
     url: "php_backend/shop/get_products.php",
     type: "POST",
-    data:{shopId:shopId},
+    data: { shopId: shopId },
     success: function (response) {
-      console.log(response)
       $("#product_list").html(response);
     },
   });
 }
 
 //   Get products based on category selection
-function selectCategory(shopId,category_id, sub_category_id) {
-  console.log(shopId, category_id, sub_category_id)
-    $.ajax({
-      url: "php_backend/shop/get_products.php",
-      type: "POST",
-      data: { shopId:shopId,category_id: category_id, sub_category_id: sub_category_id },
-      success: function (response) {
-          $("#product_list").html(response);
-        console.log(response);
-      },
-    });
-    //     }
-  }
-  
+function selectCategory(shopId, category_id, sub_category_id) {
+
+  $.ajax({
+    url: "php_backend/shop/get_products.php",
+    type: "POST",
+    data: {
+      shopId: shopId,
+      category_id: category_id,
+      sub_category_id: sub_category_id,
+    },
+    success: function (response) {
+      $("#product_list").html(response);
+    },
+  });
+  //     }
+}
+
 $(document).ready(function () {
   // Change the '+' and '-' signs on collapse/expand
   document.querySelectorAll(".sidebar .collapse").forEach((collapseElement) => {
@@ -46,20 +47,44 @@ $(document).ready(function () {
     type: "POST",
     data: { shopId: shopId },
     success: function (response) {
-    
       $("#category_list").html(response);
     },
   });
 
-
-
-
+  // search medicine
+  // Listen for changes in the search input
+  $("#searchInput").on("input", function () {
+    // Fetch data when the search input changes
+    fetchDataSearchTerm($(this).val());
+  });
 
 
 });
 
+//fetch medicine data by name
+
+function fetchDataSearchTerm(searchTerm) {
+  
+  // Make an AJAX request to the search.php script
+  $.ajax({
+      url: 'php_backend/shop/searchMedicine.php',
+      method: 'POST',
+      data: {shopId:shopId, searchTerm: searchTerm },
+      success: function (response) {
+      
+          
+          $("#product_list").html(response);
+
+    
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+          console.error('Error fetching data:', errorThrown);
+      }
+  });
+}
+
 // Function to add to cart
-function addToCart(productId, productPrice, userId=null, pharmacyId) {
+function addToCart(productId, productPrice, userId = null, pharmacyId) {
   var quantity = parseInt($("#quantity_" + productId).val());
   // Perform action to add product with productId and quantity to cart
   // For example, use AJAX to send this data to the server (e.g., PHP endpoint)
@@ -72,7 +97,7 @@ function addToCart(productId, productPrice, userId=null, pharmacyId) {
     price: productPrice,
     pharmacy_id: pharmacyId,
   };
-  if (userId!=-1) {
+  if (userId != -1) {
     $.ajax({
       type: "POST",
       url: "php_backend/addToCart/add_to_cart.php", // Replace with your backend PHP file

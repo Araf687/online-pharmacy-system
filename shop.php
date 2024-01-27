@@ -15,9 +15,13 @@ include('./includes/head.php');
     <section>
 
         <?php
-        $id = null;
+        $id = $name = null;
         if (isset($_GET['id'])) {
             $id = (int) $_GET['id'];
+        }
+        if (isset($_GET['name'])) {
+            $name = $_GET['name'];
+            echo "<script>$(document).ready(function () {fetchDataSearchTerm('$name')});</script>";
         }
 
         $shopQuerry = "SELECT *
@@ -50,7 +54,8 @@ include('./includes/head.php');
             <div class="col-md-3">
 
                 <!-- map section  -->
-                <div id="map" style="height:350px;opacity:1;pointer-events:auto;z-index: 1;" class="mb-2 rounded shadow border-1">
+                <div id="map" style="height:350px;opacity:1;pointer-events:auto;z-index: 1;"
+                    class="mb-2 rounded shadow border-1">
                 </div>
                 <?php
                 if ($pharmacy_latitude && $pharmacy_longitude && $user_latitude && $user_longitude) {
@@ -112,8 +117,25 @@ include('./includes/head.php');
                     </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img class="d-block w-100" src=<?= $imgSrc ?> onerror="this.src='assets/img/default.jpg'" alt="First slide"
-                                height=300>
+                            <img class="d-block w-100" src=<?= $imgSrc ?> onerror="this.src='assets/img/default.jpg'"
+                                alt="First slide" height=300>
+                            <!-- Overlay div -->
+                            <div class="overlay d-flex justify-content-center align-items-center">
+                                <div class="overlay-content">
+                                    <!-- Overlay content goes here -->
+                                    <h1 class="text-center">
+                                        <?= ucwords($shopName) ?>
+                                    </h1>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="searchInput"
+                                            placeholder="Search Medicine..." aria-label="Search"
+                                            aria-describedby="search-btn" style="min-width:450px">
+
+                                    </div>
+
+
+                                </div>
+                            </div>
                         </div>
 
                         <?php
@@ -141,6 +163,7 @@ include('./includes/head.php');
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
+
 
 
                 <div class="row my-3 g-4" id="product_list">
