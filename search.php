@@ -293,7 +293,7 @@
 
                         // Wait for distance calculations to complete
                         const newPharmacyList = await getRouteDistance(resultedPharmacyList);
-                        showNearestPharmacy(resultedPharmacyList);
+                        showNearestPharmacy(resultedPharmacyList,searchData);
                     }
                     else {
                         hideLoadingMessage();
@@ -328,7 +328,7 @@
             };
 
 
-            const showNearestPharmacy = (newPharmacyList) => {
+            const showNearestPharmacy = (newPharmacyList,searchData) => {
 
                 // Sorting the array based on the 'distance' property
                 newPharmacyList.sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
@@ -337,7 +337,7 @@
                 clearDiv(cardParent);
 
                 newPharmacyList.forEach(element => {
-                    createShopCard(element, cardParent);
+                    createShopCard(element, cardParent,searchData);
                 });
                 hideLoadingMessage();
             }
@@ -371,7 +371,7 @@
                 return objectArray;
             };
 
-            const createShopCard = (cardData, cardParent) => {
+            const createShopCard = (cardData, cardParent,searchData) => {
 
                 // Sample data
                 const imgSrc = "../pipharm-admin-panel/assets/images/store/banner/" + cardData.shopImage;
@@ -379,6 +379,7 @@
                 const address = cardData.address;
                 const distance = cardData.distance;
                 const shopId = cardData.id;
+                const href=searchData?`shop.php?id=${shopId}&medicine_name=${searchData}`:`shop.php?id='${shopId}'`;
 
                 // Create a new div element
                 const cardContainer = document.createElement('div');
@@ -408,7 +409,7 @@
                                     </div>
                                 </div>
                                 <div class="text-center border-top">
-                                    <a href="shop.php?id=${shopId}" style="color:#022314">Visit <i class="fa-solid fa-arrow-right ps-1"></i></a>
+                                    <a href=${href} style="color:#022314">Visit <i class="fa-solid fa-arrow-right ps-1"></i></a>
                                 </div>
                             </div>
                         </div>

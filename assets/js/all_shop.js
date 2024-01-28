@@ -12,7 +12,6 @@ function loadAllProducts(shopId) {
 
 //   Get products based on category selection
 function selectCategory(shopId, category_id, sub_category_id) {
-
   $.ajax({
     url: "php_backend/shop/get_products.php",
     type: "POST",
@@ -57,29 +56,32 @@ $(document).ready(function () {
     // Fetch data when the search input changes
     fetchDataSearchTerm($(this).val());
   });
-
-
 });
 
 //fetch medicine data by name
 
 function fetchDataSearchTerm(searchTerm) {
-  
   // Make an AJAX request to the search.php script
   $.ajax({
-      url: 'php_backend/shop/searchMedicine.php',
-      method: 'POST',
-      data: {shopId:shopId, searchTerm: searchTerm },
-      success: function (response) {
-      
-          
-          $("#product_list").html(response);
-
-    
-      },
-      error: function (jqXHR, textStatus, errorThrown) {
-          console.error('Error fetching data:', errorThrown);
+    url: "php_backend/shop/searchMedicine.php",
+    method: "POST",
+    data: { shopId: shopId, searchTerm: searchTerm },
+    success: function (response) {
+      if (searchTerm) {
+        $("#searchingMessage").show();
+        $("#searchingMessage").text(
+          `Showing searching result for: ${searchTerm}`
+        );
       }
+      else{
+        $("#searchingMessage").hide();
+      }
+
+      $("#product_list").html(response);
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.error("Error fetching data:", errorThrown);
+    },
   });
 }
 

@@ -15,13 +15,13 @@ include('./includes/head.php');
     <section>
 
         <?php
-        $id = $name = null;
+        $id = $medicine_name = null;
         if (isset($_GET['id'])) {
             $id = (int) $_GET['id'];
         }
-        if (isset($_GET['name'])) {
-            $name = $_GET['name'];
-            echo "<script>$(document).ready(function () {fetchDataSearchTerm('$name')});</script>";
+        if (isset($_GET['medicine_name'])) {
+            $medicine_name = $_GET['medicine_name'];
+            echo "<script>$(document).ready(function () {fetchDataSearchTerm('$medicine_name')});</script>";
         }
 
         $shopQuerry = "SELECT *
@@ -127,12 +127,14 @@ include('./includes/head.php');
                                         <?= ucwords($shopName) ?>
                                     </h1>
                                     <div class="input-group">
+                                        <?php 
+                                        $searchInputValue=isset($_GET['medicine_name'])?$_GET['medicine_name']:'';
+                                        ?>
                                         <input type="text" class="form-control" id="searchInput"
                                             placeholder="Search Medicine..." aria-label="Search"
-                                            aria-describedby="search-btn" style="min-width:450px">
+                                            aria-describedby="search-btn" style="min-width:450px" value=<?=$searchInputValue?>>
 
                                     </div>
-
 
                                 </div>
                             </div>
@@ -165,8 +167,10 @@ include('./includes/head.php');
                 </div>
 
 
-
-                <div class="row my-3 g-4" id="product_list">
+             
+                <h4 id="searchingMessage" class="mt-3"></h4>
+               
+                <div class="row mb-3 g-4 mt-1" id="product_list">
 
 
                 </div>
