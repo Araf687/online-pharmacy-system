@@ -29,16 +29,16 @@ function selectCategory(shopId, category_id, sub_category_id) {
 
 $(document).ready(function () {
   // Change the '+' and '-' signs on collapse/expand
-  document.querySelectorAll(".sidebar .collapse").forEach((collapseElement) => {
-    collapseElement.addEventListener("show.bs.collapse", function () {
-      const parentAnchor = this.previousElementSibling;
-      parentAnchor.querySelector("span").textContent = "-";
-    });
-    collapseElement.addEventListener("hide.bs.collapse", function () {
-      const parentAnchor = this.previousElementSibling;
-      parentAnchor.querySelector("span").textContent = "+";
-    });
-  });
+  // document.querySelectorAll(".sidebar .collapse").forEach((collapseElement) => {
+  //   collapseElement.addEventListener("show.bs.collapse", function () {
+  //     const parentAnchor = this.previousElementSibling;
+  //     parentAnchor.querySelector("span").textContent = "-";
+  //   });
+  //   collapseElement.addEventListener("hide.bs.collapse", function () {
+  //     const parentAnchor = this.previousElementSibling;
+  //     parentAnchor.querySelector("span").textContent = "+";
+  //   });
+  // });
 
   // Load categories
   $.ajax({
@@ -72,8 +72,7 @@ function fetchDataSearchTerm(searchTerm) {
         $("#searchingMessage").text(
           `Showing searching result for: ${searchTerm}`
         );
-      }
-      else{
+      } else {
         $("#searchingMessage").hide();
       }
 
@@ -88,6 +87,7 @@ function fetchDataSearchTerm(searchTerm) {
 // Function to add to cart
 function addToCart(productId, productPrice, userId = null, pharmacyId) {
   var quantity = parseInt($("#quantity_" + productId).val());
+
   // Perform action to add product with productId and quantity to cart
   // For example, use AJAX to send this data to the server (e.g., PHP endpoint)
   // $.post('add_to_cart.php', { productId: productId, quantity: quantity }, function(data) {
@@ -119,7 +119,7 @@ function addToCart(productId, productPrice, userId = null, pharmacyId) {
           $(inputId).val(1);
           Swal.fire({
             title: "Good job!",
-            text: "Aded Cart Item Successfully",
+            text: "Added Cart Item Successfully",
             icon: "success",
           });
         } else {
@@ -127,7 +127,7 @@ function addToCart(productId, productPrice, userId = null, pharmacyId) {
           $(inputId).val(1);
           Swal.fire({
             title: "Good job!",
-            text: "Upodated Cart Item Successfully",
+            text: "Updated Cart Item Successfully",
             icon: "success",
           });
         }
@@ -147,3 +147,27 @@ function addToCart(productId, productPrice, userId = null, pharmacyId) {
 
   // alert('Added ' + quantity + ' items of product with ID ' + productId + ' to cart');
 }
+
+const clickDecreasePrdQty = (productId) => {
+  console.log(productId);
+  const currentValue = parseInt($(`#quantity_${productId}`).val());
+  const newValue = currentValue - 1;
+  if (currentValue > 1) {
+    $(`quantity_${productId}`).val(newValue);
+  }
+};
+const clickIncreasePrdQty = (productId, productQty) => {
+  console.log(productId);
+  const currentValue = parseInt($(`#quantity_${productId}`).val());
+  const newValue = currentValue + 1;
+  if (currentValue == parseInt(productQty)) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: `We have only ${productQty} in stock.`,
+    });
+  } else {
+    
+    $(`#quantity_${productId}`).val(newValue);
+  }
+};

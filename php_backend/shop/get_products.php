@@ -51,11 +51,12 @@ if ($rowCount > 0) {
                         <div>
 
                             <div class="d-flex justify-content-center align-items-center mb-2">
-                                <span type="button" class="btn input-group-addon btn-number" data-type="minus"
-                                    data-field=<?= "quantity_" . $prdId ?>> <i class="fas fa-minus"></i></span>
+                                <span type="button" class="btn input-group-addon" onclick="clickDecreasePrdQty('<?= $prdId ?>')"> <i
+                                        class="fas fa-minus"></i></span>
+
                                 <input type="text" id=<?= "quantity_" . $prdId ?> class="form-control text-center mx-3" value="1">
-                                <span type="button" class="btn input-group-addon btn-number" data-type="plus"
-                                    data-field=<?= "quantity_" . $prdId ?>> <i class="fas fa-plus"></i> </span>
+
+                                <span type="button" class="btn input-group-addon" onclick="clickIncreasePrdQty('<?= $prdId ?>','<?= $prdQuantity ?>')"> <i class="fas fa-plus"></i> </span>
                             </div>
 
                             <a href="#" class="btn btn-primary w-100 rounded-5"
@@ -75,6 +76,7 @@ if ($rowCount > 0) {
 
                 </div>
             </div>
+         
         </div>
         <?php
     }

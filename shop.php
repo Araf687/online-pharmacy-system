@@ -127,12 +127,13 @@ include('./includes/head.php');
                                         <?= ucwords($shopName) ?>
                                     </h1>
                                     <div class="input-group">
-                                        <?php 
-                                        $searchInputValue=isset($_GET['medicine_name'])?$_GET['medicine_name']:'';
+                                        <?php
+                                        $searchInputValue = isset($_GET['medicine_name']) ? $_GET['medicine_name'] : '';
                                         ?>
                                         <input type="text" class="form-control" id="searchInput"
                                             placeholder="Search Medicine..." aria-label="Search"
-                                            aria-describedby="search-btn" style="min-width:450px" value=<?=$searchInputValue?>>
+                                            aria-describedby="search-btn" style="min-width:450px"
+                                            value=<?= $searchInputValue ?>>
 
                                     </div>
 
@@ -167,9 +168,9 @@ include('./includes/head.php');
                 </div>
 
 
-             
+
                 <h4 id="searchingMessage" class="mt-3"></h4>
-               
+
                 <div class="row mb-3 g-4 mt-1" id="product_list">
 
 

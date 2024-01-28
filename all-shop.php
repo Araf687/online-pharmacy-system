@@ -70,7 +70,7 @@ include('./includes/head.php');
 
                                 <div class="card shadow rounded-4" style="width:100%;">
                                     <div class="p-3" style="background-color:#f2f2f2;">
-                                        <img src=<?= $imgSrc ?> class="card-img-top" style="height:180px;" alt="..." onerror="this.src='assets/img/default.jpg'">
+                                        <img src=<?= $imgSrc ?> class="card-img-top" style="height:180px;" alt="..." onerror="this.src='default.jpg'">
                                     </div>
 
                                     <div class="card-body">

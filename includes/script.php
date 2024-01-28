@@ -4,7 +4,7 @@ include("cart/cartModal.php")
 
     ?>
 
-<script>
+<!-- <script>
     $(document).ready(function () {
         $('.btn-number').click(function (e) {
             e.preventDefault();
@@ -16,8 +16,7 @@ include("cart/cartModal.php")
             const productId = parseInt(fieldName.split("_")[1]);
             const productQuantity = parseInt($(`#product_qty_${productId}`).val());
 
-            //   console.log(currentVal,input,type,fieldName)
-            //   console.log(productId,productQuantity)
+       
 
             if (productQuantity >= currentVal+1) {
                 if (!isNaN(currentVal)) {
@@ -38,13 +37,12 @@ include("cart/cartModal.php")
                     icon: "error",
                     title: "Oops...",
                     text: `We have only ${productQuantity} in stock.`,
-                   
                 });
             }
         });
     });
 
-</script>
+</script> -->
 <!-- jquery link -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
