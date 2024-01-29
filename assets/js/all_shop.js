@@ -153,7 +153,7 @@ const clickDecreasePrdQty = (productId) => {
   const currentValue = parseInt($(`#quantity_${productId}`).val());
   const newValue = currentValue - 1;
   if (currentValue > 1) {
-    $(`quantity_${productId}`).val(newValue);
+    $(`#quantity_${productId}`).val(newValue);
   }
 };
 const clickIncreasePrdQty = (productId, productQty) => {

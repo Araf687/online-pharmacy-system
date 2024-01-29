@@ -293,7 +293,7 @@
 
                         // Wait for distance calculations to complete
                         const newPharmacyList = await getRouteDistance(resultedPharmacyList);
-                        showNearestPharmacy(resultedPharmacyList,searchData);
+                        showNearestPharmacy(resultedPharmacyList,searchData,searchOption);
                     }
                     else {
                         hideLoadingMessage();
@@ -328,7 +328,7 @@
             };
 
 
-            const showNearestPharmacy = (newPharmacyList,searchData) => {
+            const showNearestPharmacy = (newPharmacyList,searchData,searchOption) => {
 
                 // Sorting the array based on the 'distance' property
                 newPharmacyList.sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
@@ -337,7 +337,7 @@
                 clearDiv(cardParent);
 
                 newPharmacyList.forEach(element => {
-                    createShopCard(element, cardParent,searchData);
+                    createShopCard(element, cardParent,searchData,searchOption);
                 });
                 hideLoadingMessage();
             }
@@ -371,7 +371,7 @@
                 return objectArray;
             };
 
-            const createShopCard = (cardData, cardParent,searchData) => {
+            const createShopCard = (cardData, cardParent,searchData,searchOption) => {
 
                 // Sample data
                 const imgSrc = "../pipharm-admin-panel/assets/images/store/banner/" + cardData.shopImage;
@@ -379,7 +379,19 @@
                 const address = cardData.address;
                 const distance = cardData.distance;
                 const shopId = cardData.id;
-                const href=searchData?`shop.php?id=${shopId}&medicine_name=${searchData}`:`shop.php?id='${shopId}'`;
+                let href;
+                if(searchData){
+                    if(searchOption=='type_medicine'){
+                        href=`shop.php?id=${shopId}&medicine_name=${searchData}`;
+                    }
+                    else{
+                        href=`shop.php?id=${shopId}`;
+                    }
+
+                }
+                else{
+                    href=`shop.php?id=${shopId}`;
+                }
 
                 // Create a new div element
                 const cardContainer = document.createElement('div');
