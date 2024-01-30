@@ -60,6 +60,7 @@
                             style="width: 35px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="user-profile.php" ><i class="fa-solid fa-user me-2" style="color:#12dab9;"></i>Profile</a>
+                            <a class="dropdown-item" href="reset-password.php" ><i class="fa-solid fa-screwdriver-wrench me-2" style="color:#12dab9;"></i></i>Reset Password</a>
                             <a class="dropdown-item" href="logout.php"><i class="fa-solid fa-power-off me-2" style="color:red;"></i>Logout</a>
 
                         </div>

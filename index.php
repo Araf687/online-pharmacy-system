@@ -6,6 +6,30 @@ include('./includes/check-login.php');
 ?>
 
 <body class='bg-light-subtle'>
+<?php
+    if (isset($_SESSION['status'])) {
+
+        if ($_SESSION['status'] == "successReset") {
+            echo "<script>Swal.fire(
+            'Great!',
+            'Reset Password Successfully!',
+            'success'
+        );
+        </script>";
+        }
+        
+        else if ($_SESSION['status'] == "failReset") {
+            echo "<script>Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Invalid Current Password!',
+
+          });
+        </script>";
+        }
+        unset($_SESSION['status']);
+    }
+    ?>
 
     <section>
         <section class="d-flex justify-content-center stickyNav">
