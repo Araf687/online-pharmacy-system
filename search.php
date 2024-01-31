@@ -12,7 +12,7 @@
         <div class="container">
             <div class="row p-3 pt-4">
                 <div class="col-md-12">
-                    <div class="mb-2" >
+                    <div class="mb-2">
                         <input type="text" class="d-none" value='<?= $_SESSION['userLatitude'] ?>' id="userLat">
                         <input type="text" class="d-none" value='<?= $_SESSION['userLongitude'] ?>' id="userLong">
                         <button type="button" class="btn btn-primary" data-mdb-ripple-init
@@ -54,7 +54,9 @@
 
                         </div>
                         <div class="col-md-12">
-                            <div class="row" id="searchResult"></div>
+                            <div class="row" id="searchResult">
+
+                            </div>
                         </div>
 
 
@@ -67,142 +69,6 @@
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
         <!-- leaflet routing machine js file link -->
         <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
-
-        <!-- <script>
-            const userLat = parseFloat($('#userLat').val());
-            const userLong = parseFloat($('#userLong').val());
-
-            // Assuming you have a Leaflet map instance
-            var map = L.map('map');
-
-            const handleClickSearchNearestPharmacy = () => {
-                // Fetch data using AJAX
-                $.ajax({
-                    url: "php_backend/search/search-nearest-pharmacy.php", // Replace with your server endpoint
-                    method: "POST",
-                    data: {
-                        userLat: userLat,
-                        userLong: userLong,
-                    },
-                    success: function (data) {
-                        const resultData = JSON.parse(data);
-                        console.log(resultData);
-                        const resultedPharmacyList = resultData.data.resultData;
-
-
-                        // const newPharmacyList = getRouteDistance(resultedPharmacyList);
-
-                        getRouteDistance(resultData.data.resultData)
-                            .then((result) => {
-                                // This block will be executed after all distances are calculated
-                                console.log(result);
-                                newPharmacyList=result;
-                                // Sorting the array based on the 'distance' property
-                                newPharmacyList.sort((a, b) => {
-                                    return parseFloat(a.distance) - parseFloat(b.distance)
-                                });
-
-                                const cardParent = document.getElementById('searchResult');
-                                cardParent.innerHTML = '';
-
-                                newPharmacyList.forEach(element => {
-                                    createShopCard(element, cardParent)
-                                });
-                            })
-                            .catch((error) => {
-                                console.error(error);
-                            });
-
-
-
-
-
-
-
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        console.log("Error fetching data:", errorThrown);
-                    },
-                });
-            };
-
-            const getRouteDistance = async (objectArray) => {
-                console.log(objectArray)
-                // Iterate over the array and calculate distance for each pair
-                objectArray.forEach(function (element) {
-                    var start = L.latLng(userLat, userLong);
-                    var end = L.latLng(parseFloat(element.latitude), parseFloat(element.longitude));
-
-                    var control = L.Routing.control({
-                        waypoints: [start, end],
-                    });
-
-                    // Listen for the routeselected event
-                    control.on('routeselected', function (event) {
-                        // Access the route information including distance
-                        var route = event.route;
-                        var distance = route.summary.totalDistance;
-                        element.distance = (distance / 1000).toFixed(2);
-                        // console.log('Route Distance:', (distance/1000).toFixed(2),"km");
-                    });
-
-                    // Add the control to the map
-                    control.addTo(map);
-                });
-
-                return objectArray;
-
-            }
-
-            const createShopCard = (cardData, cardParent) => {
-
-                // Sample data
-                const imgSrc = "../pipharm-admin-panel/assets/images/store/banner/" + cardData.shopImage;
-                const shopName = cardData.shopName;
-                const address = cardData.address;
-                const distance = cardData.distance;
-                const shopId = cardData.id;
-
-                // Create a new div element
-                const cardContainer = document.createElement('div');
-                cardContainer.className = 'col-md-3 pt-4';
-
-                // Create the card structure
-                cardContainer.innerHTML = `
-                    <div class="card shadow rounded-4" style="width:100%;">
-                        <div class="p-3" style="background-color:#f2f2f2;">
-                            <img src="${imgSrc}" class="card-img-top" style="height:180px;" alt="..." onerror="this.src='assets/img/default.jpg'">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title text-center">${shopName}</h5>
-                            <div>
-                                <div class="my-1">
-                                    <p class="text-center">
-                                        ${Array.from({ length: 5 }, (_, i) => `<i class="fa-regular fa-star"></i>`).join('')}
-                                    </p>
-                                    <div class="d-flex align-items-center" style="height:50px">
-                                        <div class="p-2 border me-2 rounded"><i class="fa-solid fa-location-dot "></i></div>
-                                        <small>${address}</small>
-                                    </div>
-                                    <div class="d-flex align-items-center" style="height:50px">
-                                        <div class="p-2 border me-2 rounded"><i class="fa-solid fa-location-dot "></i></div>
-                                        <small>Distance: ${distance}</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-center border-top">
-                                <a href="shop.php?id=${shopId}" style="color:#022314">Visit <i class="fa-solid fa-arrow-right ps-1"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                `;
-
-                // Append the new card to the container
-                cardParent.appendChild(cardContainer);
-            }
-
-
-        </script> -->
 
         <script>
             const userLat = parseFloat($('#userLat').val());
@@ -270,9 +136,9 @@
                 }
             };
 
-            const handleClickSearch = async () => {
-                const searchOption = $('#searchOption').val();
-                const searchData = $('#searchInput').val();
+            const handleClickSearch = async (customSearchOpt, customSearchData) => {
+                const searchOption = customSearchOpt ? customSearchOpt : $('#searchOption').val();
+                const searchData = customSearchData ? customSearchData : $('#searchInput').val();
                 const postData = {
                     searchData: searchData,
                     searchOption: searchOption
@@ -293,7 +159,7 @@
 
                         // Wait for distance calculations to complete
                         const newPharmacyList = await getRouteDistance(resultedPharmacyList);
-                        showNearestPharmacy(resultedPharmacyList,searchData,searchOption);
+                        showNearestPharmacy(resultedPharmacyList, searchData, searchOption);
                     }
                     else {
                         hideLoadingMessage();
@@ -328,16 +194,24 @@
             };
 
 
-            const showNearestPharmacy = (newPharmacyList,searchData,searchOption) => {
+            const showNearestPharmacy = (newPharmacyList, searchData, searchOption) => {
 
                 // Sorting the array based on the 'distance' property
                 newPharmacyList.sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
 
                 const cardParent = document.getElementById('searchResult');
                 clearDiv(cardParent);
+                // Create a new div element
+                const cardContainer = document.createElement('div');
+                cardContainer.className = 'col-md-12 pt-1';
+                // Create the card structure
+                cardContainer.innerHTML = searchOption == "type_medicine" ? `<h5>Showing pharmacy list which sell ${searchData} </h5>` : searchData ? `<h5>Showing pharmacy search result for: ${searchData} </h5>` : `<h5>Nearest pharmacy list </h5>`
+                // Append the new card to the container
+                cardParent.appendChild(cardContainer);
+
 
                 newPharmacyList.forEach(element => {
-                    createShopCard(element, cardParent,searchData,searchOption);
+                    createShopCard(element, cardParent, searchData, searchOption);
                 });
                 hideLoadingMessage();
             }
@@ -371,7 +245,7 @@
                 return objectArray;
             };
 
-            const createShopCard = (cardData, cardParent,searchData,searchOption) => {
+            const createShopCard = (cardData, cardParent, searchData, searchOption) => {
 
                 // Sample data
                 const imgSrc = "../pipharm-admin-panel/assets/images/store/banner/" + cardData.shopImage;
@@ -380,22 +254,22 @@
                 const distance = cardData.distance;
                 const shopId = cardData.id;
                 let href;
-                if(searchData){
-                    if(searchOption=='type_medicine'){
-                        href=`shop.php?id=${shopId}&medicine_name=${searchData}`;
+                if (searchData) {
+                    if (searchOption == 'type_medicine') {
+                        href = `shop.php?id=${shopId}&medicine_name=${searchData}`;
                     }
-                    else{
-                        href=`shop.php?id=${shopId}`;
+                    else {
+                        href = `shop.php?id=${shopId}`;
                     }
 
                 }
-                else{
-                    href=`shop.php?id=${shopId}`;
+                else {
+                    href = `shop.php?id=${shopId}`;
                 }
 
                 // Create a new div element
                 const cardContainer = document.createElement('div');
-                cardContainer.className = 'col-md-3 pt-4';
+                cardContainer.className = 'col-md-3 pt-3';
 
                 // Create the card structure
                 cardContainer.innerHTML = `
@@ -433,6 +307,21 @@
             const clearDiv = (div) => {
                 div.innerHTML = '';
             }
+
+            $(document).ready(function () {
+                const urlParams = new URLSearchParams(window.location.search);
+                const searchedMedicine = urlParams.get('medicine_name'); // Gets the value of param1
+
+                if (searchedMedicine) {
+                    $('#searchOption').val("type_medicine");
+                    $('#searchInput').val(searchedMedicine)
+                    handleClickSearch("type_medicine", searchedMedicine)
+                }
+
+            });
+
+
+
         </script>
 
 
