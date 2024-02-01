@@ -39,7 +39,7 @@ include('./includes/check-login.php');
         </section>
         <div>
             <?php include('./includes/slider-banner.php') ?>
-            <div style="
+            <!-- <div style="
                 height: 400px;
                 background: #355a0638;
                 position: absolute;
@@ -68,7 +68,7 @@ include('./includes/check-login.php');
                         </a>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <section class="d-flex justify-content-center" style="background-color:white">
 

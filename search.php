@@ -13,8 +13,8 @@
             <div class="row p-3 pt-4">
                 <div class="col-md-12">
                     <div class="mb-2">
-                        <input type="text" class="d-none" value='<?= $_SESSION['userLatitude'] ?>' id="userLat">
-                        <input type="text" class="d-none" value='<?= $_SESSION['userLongitude'] ?>' id="userLong">
+                        <input type="text" class="d-none" value='<?= isset($_SESSION['userLatitude'])?$_SESSION['userLatitude']:null ?>' id="userLat">
+                        <input type="text" class="d-none" value='<?= isset($_SESSION['userLongitude'])?$_SESSION['userLongitude']:null ?>' id="userLong">
                         <button type="button" class="btn btn-primary" data-mdb-ripple-init
                             onclick="handleClickSearchNearestPharmacy()" style="font-size:18px"><i
                                 class="fa-brands fa-searchengin me-1"></i>Nearest Pharmacy</button>
@@ -113,6 +113,7 @@
                     }
                     else {
                         if (resultData.data.hasOwnProperty("error")) {
+                           
                             Swal.fire({
                                 icon: "error",
                                 title: "Oops...",
@@ -120,6 +121,7 @@
                             });
                         }
                         else {
+                   
                             Swal.fire({
                                 icon: "error",
                                 title: "Oops...",
@@ -182,13 +184,27 @@
                     }
 
                 } catch (error) {
+                    const userLat=$('#userLat').val();
+                    const userLong=$('#userLat').val();
+                    console.log(userLat,userLong);
 
-                    console.error("Error fetching data:", error);
-                    Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: "Something went wrong!",
-                    });
+                    if (userLat && userLat) {
+                        hideLoadingMessage();
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Something went wrong!",
+                        });
+
+                    }
+                    else {
+                        hideLoadingMessage();
+                        Swal.fire({
+                            icon: "error",
+                            title: "Cant search without login",
+                            text: "You must be login first!",
+                        });
+                    }
 
                 }
             };
