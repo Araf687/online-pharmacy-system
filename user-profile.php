@@ -14,16 +14,20 @@ include('./includes/supportiveFunctions/supportiveFunctions.php');
         icon: 'success'
       })</script>";
         unset($_SESSION['userUpdate']);
-    } 
-    else if(isset($_SESSION['order_status'])){
+    } else if (isset($_SESSION['order_status'])) {
         echo "<script> Swal.fire({
             title: 'Good job!',
             text: 'User Update Successfully',
             icon: 'success'
           })</script>";
-            unset($_SESSION['order_status']);
+          if (isset($_SESSION['pharmacy_list'])) {
+            $pharmacyList=json_encode($_SESSION['pharmacy_list']);
+            echo "<script> $(document).ready(function() {getReview($pharmacyList)}) </script>";
+          
+          }
+        unset($_SESSION['order_status']);
     }
-        ?>
+    ?>
     <section class="d-flex justify-content-center position-sticky shadow stickyNav" style="background-color:white">
         <section class="w-75">
             <?php include('./includes/navbar.php') ?>
@@ -148,6 +152,7 @@ include('./includes/supportiveFunctions/supportiveFunctions.php');
                                                     <th style="text-align: left;padding: 8px;">Order Status</th>
                                                     <th style="text-align: left;padding: 8px;">Delivery Status</th>
                                                     <th style="text-align: left;padding: 8px;">Date</th>
+                                                    <!-- <th style="text-align: left;padding: 8px;">Action</th> -->
 
                                                 </tr>
                                                 <?php
@@ -213,6 +218,32 @@ include('./includes/supportiveFunctions/supportiveFunctions.php');
                                                             <?= formatDateTime($date_time) ?>
 
                                                         </td>
+                                                        <!-- <td style="text-align: left;padding: 8px;">
+
+
+                                                            <div>
+                                                                <img src="" id="dropdownMenuButton"
+                                                                    class="rounded-circle dropdown-toggle"
+                                                                    style="width: 35px; cursor:pointer"
+                                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                                    aria-expanded="false" />
+                                                                <div class="dropdown-menu"
+                                                                    aria-labelledby="dropdownMenuButton">
+                                                                    <a class="dropdown-item" href="user-profile.php"><i
+                                                                            class="fa-solid fa-user me-2"
+                                                                            style="color:#12dab9;"></i>Profile</a>
+                                                                    <a class="dropdown-item" href="reset-password.php"><i
+                                                                            class="fa-solid fa-screwdriver-wrench me-2"
+                                                                            style="color:#12dab9;"></i></i>Reset
+                                                                        Password</a>
+                                                                    <a class="dropdown-item" href="logout.php"><i
+                                                                            class="fa-solid fa-power-off me-2"
+                                                                            style="color:red;"></i>Logout</a>
+
+                                                                </div>
+                                                            </div>
+
+                                                        </td> -->
 
                                                     </tr>
 
@@ -239,7 +270,15 @@ include('./includes/supportiveFunctions/supportiveFunctions.php');
 
     </section>
 
+    <script>
+        const getReview=(pharmacyList)=>{
+            console.log(pharmacyList,typeof(pharmacyList));
+            
+        }
+    </script>
+
     <?php include('./includes/script.php') ?>
+
 
 </body>
 

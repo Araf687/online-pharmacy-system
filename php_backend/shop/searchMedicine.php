@@ -2,6 +2,8 @@
 include("../../config/dbConn.php");
 session_start();
 
+$userId=isset($_SESSION["loggedInId"]) ? $_SESSION["loggedInId"] : -1;
+
 $pharmacy_id = isset($_POST["shopId"]) ? intval($_POST["shopId"]) : 0;
 $searchTerm = isset($_POST['searchTerm']) ? $_POST['searchTerm'] : null;
 
