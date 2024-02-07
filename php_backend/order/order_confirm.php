@@ -26,10 +26,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $sql_setOrderItems = "INSERT INTO orderitems (`order_code`, `prod_id`,`qty`, `subTotal`) VALUES ('$orderCode', $product_id, $qty,$subTotal)";
                 $result_setOrderItems = mysqli_query($conn, $sql_setOrderItems);
 
+
+
                 $allCartItemId = $allCartItemId . ',' . $cartItemId;
 
                 if ($result_setOrderItems) {
-                    $flag = 1;
+
+                    $sql_update_product_quantity="UPDATE product
+                    SET quantity = quantity - $qty
+                    WHERE prd_id = $product_id";
+
+                    $result_update_product_quantity= mysqli_query($conn, $sql_update_product_quantity);
+                    if($result_update_product_quantity){
+                        $flag = 1;
+                    }
+                    else{
+                        $flag = 0;
+                    }
+                    
               
                 } else {
                     $flag = 0;

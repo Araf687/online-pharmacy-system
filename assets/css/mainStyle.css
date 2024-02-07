@@ -15,12 +15,14 @@
   align-items: center;
 }
 #loginForm,
-#registerForm {
+#registerForm,
+#reset-password-form {
   background-color: white;
   padding: 20px 17px;
   border-radius: 10px;
 }
 #loginForm,
+#reset-password-form,
 #registerForm input {
   width: 350px;
 }

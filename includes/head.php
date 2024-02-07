@@ -91,4 +91,8 @@
 session_start();
 
 include('./config/dbConn.php');
+if(!isset($_SESSION['loggedInId'])){
+  echo "<script>localStorage.removeItem('loggedInData');</script>";
+}
+
 ?>

@@ -13,8 +13,12 @@
             <div class="row p-3 pt-4">
                 <div class="col-md-12">
                     <div class="mb-2">
-                        <input type="text" class="d-none" value='<?= isset($_SESSION['userLatitude'])?$_SESSION['userLatitude']:null ?>' id="userLat">
-                        <input type="text" class="d-none" value='<?= isset($_SESSION['userLongitude'])?$_SESSION['userLongitude']:null ?>' id="userLong">
+                        <input type="text" class="d-none"
+                            value='<?= isset($_SESSION['userLatitude']) ? $_SESSION['userLatitude'] : null ?>'
+                            id="userLat">
+                        <input type="text" class="d-none"
+                            value='<?= isset($_SESSION['userLongitude']) ? $_SESSION['userLongitude'] : null ?>'
+                            id="userLong">
                         <button type="button" class="btn btn-primary" data-mdb-ripple-init
                             onclick="handleClickSearchNearestPharmacy()" style="font-size:18px"><i
                                 class="fa-brands fa-searchengin me-1"></i>Nearest Pharmacy</button>
@@ -113,7 +117,7 @@
                     }
                     else {
                         if (resultData.data.hasOwnProperty("error")) {
-                           
+
                             Swal.fire({
                                 icon: "error",
                                 title: "Oops...",
@@ -121,7 +125,7 @@
                             });
                         }
                         else {
-                   
+
                             Swal.fire({
                                 icon: "error",
                                 title: "Oops...",
@@ -141,74 +145,72 @@
             const handleClickSearch = async (customSearchOpt, customSearchData) => {
                 const searchOption = customSearchOpt ? customSearchOpt : $('#searchOption').val();
                 const searchData = customSearchData ? customSearchData : $('#searchInput').val();
+                const isLoggedIn = localStorage.getItem('loggedInData');
+                console.log(isLoggedIn);
+
                 const postData = {
                     searchData: searchData,
                     searchOption: searchOption
                 };
                 try {
                     showLoadingMessage();
-                    const data = await $.ajax({
-                        url: "php_backend/search/searchCode.php",
-                        method: "POST",
-                        data: postData,
-                    });
+                    if (isLoggedIn) {
+                        const data = await $.ajax({
+                            url: "php_backend/search/searchCode.php",
+                            method: "POST",
+                            data: postData,
+                        });
 
-                    const resultData = JSON.parse(data);
+                        const resultData = JSON.parse(data);
 
 
-                    if (resultData.isSuccess) {
-                        const resultedPharmacyList = resultData.data.resultData;
+                        if (resultData.isSuccess) {
+                            const resultedPharmacyList = resultData.data.resultData;
 
-                        // Wait for distance calculations to complete
-                        const newPharmacyList = await getRouteDistance(resultedPharmacyList);
-                        showNearestPharmacy(resultedPharmacyList, searchData, searchOption);
-                    }
-                    else {
-                        hideLoadingMessage();
-                        if (searchOption == "type_medicine") {
-                            Swal.fire({
-                                icon: "error",
-                                title: "Oops...",
-                                text: "No pharmacy has been found that sells this " + searchData + " !",
-                            });
+                            // Wait for distance calculations to complete
+                            const newPharmacyList = await getRouteDistance(resultedPharmacyList);
+                            showNearestPharmacy(resultedPharmacyList, searchData, searchOption);
                         }
                         else {
-                            Swal.fire({
-                                icon: "error",
-                                title: "Oops...",
-                                text: resultData.message,
-                            });
+                            hideLoadingMessage();
+                            if (searchOption == "type_medicine") {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Oops...",
+                                    text: "No pharmacy has been found that sells this " + searchData + " !",
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Oops...",
+                                    text: resultData.message,
+                                });
+                            }
+
+
                         }
-
-
-                    }
-
-                } catch (error) {
-                    const userLat=$('#userLat').val();
-                    const userLong=$('#userLat').val();
-                    console.log(userLat,userLong);
-
-                    if (userLat && userLat) {
-                        hideLoadingMessage();
-                        Swal.fire({
-                            icon: "error",
-                            title: "Oops...",
-                            text: "Something went wrong!",
-                        });
-
                     }
                     else {
-                        hideLoadingMessage();
-                        Swal.fire({
-                            icon: "error",
-                            title: "Cant search without login",
-                            text: "You must be login first!",
-                        });
+                        // Redirect to another PHP page
+                        window.location.href = 'http://localhost/medicinesystem/online-medicine-system/login.php';
                     }
+
+
+                } catch (error) {
+                    console.log(error)
+
+                    hideLoadingMessage();
+                    Swal.fire({
+                        icon: "error",
+                        title: "Check your profile!",
+                        text: "Set your location if it is not set yet!",
+                    });
+
+
 
                 }
             };
-
 
             const showNearestPharmacy = (newPharmacyList, searchData, searchOption) => {
 

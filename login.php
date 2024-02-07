@@ -30,7 +30,7 @@ include('includes/head.php');
                     </div>
                     <div class="d-flex justify-content-between mt-2">
                         <div><small>Remember me</small></div>
-                        <div><small>Forgot password</small></div>
+                        <div><a href="forgot-password.php"><small>Forgot password</small></a></div>
                     </div>
                     <button type="submit" class="btn btn-primary mt-4 w-100 mb-2" aria-label="Close">SUBMIT</button>
                     <div>

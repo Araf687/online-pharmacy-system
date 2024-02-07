@@ -1,8 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-include('./includes/head.php');
-include('./includes/supportiveFunctions/supportiveFunctions.php');
+include('includes/head.php');
+function formatDateTime($dbDateTime)
+{
+    // Create a DateTime object from the database datetime string
+    $dateTime = new DateTime($dbDateTime);
+
+    // Format the DateTime as desired (e.g., "M d, Y h:i A" for "Jan 01, 2022 12:30 PM")
+    $formattedDateTime = $dateTime->format("M d, Y h:i A");
+
+    return $formattedDateTime;
+}
 ?>
 
 <body>
@@ -20,11 +29,11 @@ include('./includes/supportiveFunctions/supportiveFunctions.php');
             text: 'User Update Successfully',
             icon: 'success'
           })</script>";
-          if (isset($_SESSION['pharmacy_list'])) {
-            $pharmacyList=json_encode($_SESSION['pharmacy_list']);
+        if (isset($_SESSION['pharmacy_list'])) {
+            $pharmacyList = json_encode($_SESSION['pharmacy_list']);
             echo "<script> $(document).ready(function() {getReview($pharmacyList)}) </script>";
-          
-          }
+
+        }
         unset($_SESSION['order_status']);
     }
     ?>
@@ -271,9 +280,9 @@ include('./includes/supportiveFunctions/supportiveFunctions.php');
     </section>
 
     <script>
-        const getReview=(pharmacyList)=>{
-            console.log(pharmacyList,typeof(pharmacyList));
-            
+        const getReview = (pharmacyList) => {
+            console.log(pharmacyList, typeof (pharmacyList));
+
         }
     </script>
 
