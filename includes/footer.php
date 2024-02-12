@@ -1,9 +1,10 @@
-<div style="height:350px;background-color:#022314;" class="p-5">
-    <div class="d-flex justify-content-center">
-        <div class="d-flex w-75 text-center">
-            <div class="text-light w-25 d-flex justify-content-center align-items-center" style="height:300px">
-                <div>
-                    <div class="d-flex" style="line-height:5px">
+<!-- <div style="height:350px;background-color:#022314;" class="p-5"> -->
+<div class="container p-5" style="background-color:#022314;">
+    <div class="row">
+        <div class="col-md-4 col-xs-12">
+            <!-- <div class="text-light d-flex justify-content-center align-items-center">
+                <div> -->
+                    <div class="d-flex">
                         <div style="padding-right:2px; color:#75aa22;" class="m-0 p-0">
                             <p style="font-weight:700; font-size:44px">Pi</p>
                         </div>
@@ -16,12 +17,12 @@
                         <p><i class="fa-solid fa-tty fa-beat" style="color: #f8a75e;"></i><strong
                                 class="ms-1">031-128569</strong> </p>
                     </div>
-                </div>
+                <!-- </div>
 
-            </div>
-            <div class="text-light w-25">
-            </div>
-            <div class="text-light w-25">
+            </div> -->
+        </div>
+        <div class="col-md-4 col-xs-12">
+            <div class="text-light  d-xs-none">
                 <p style="text-align:left;color:#b9997c;">About Us</p>
                 <div style="text-align:left;">
                     <ul style="list-style:none;padding-left:0;" class="footer-about-list">
@@ -32,7 +33,9 @@
                 </div>
 
             </div>
-            <div class="text-light w-25">
+        </div>
+        <div class="col-md-4 col-xs-12">
+            <div class="text-light">
                 <p style="text-align:left;color:#b9997c;">Customer Care</p>
                 <div style="text-align:left;">
                     <ul style="list-style:none;padding-left:0;" class="footer-about-list">
@@ -52,7 +55,6 @@
             </div>
         </div>
     </div>
-
-
 </div>
-<?php include('includes/script.php')?>
+<!-- </div> -->
+<?php include('includes/script.php') ?>
