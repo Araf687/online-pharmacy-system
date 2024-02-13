@@ -1,29 +1,47 @@
-<nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container-fluid">
-
+<nav class="navbar navbar-expand-lg navbar-light stickyNav">
+    <div class="container-fluid ">
         <a class="navbar-brand" href="index.php" style="text-decoration:none">
-            <div class="d-flex">
-                <div style="padding-right:2px; color:#75aa22;">
-                    <h3 style="font-weight:700; font-size:40px">Pi</h3>
+            <div class="row g-0">
+                <div class="col" style="color:#75aa22;">
+                    <h3 class="m-0 p-0 brandName">Pi<span style="color:#426e0a;" class="m-0 p-0">Pharm</span></h3>
                 </div>
-                <div class="pe-1">
-                    <h3 style="font-weight:700; font-size:40px; color:#426e0a">Pharm</h3>
+                <div class="col">
+                    <div class="brandNameSideTextArea">
+                        <p class="my-0 py-0" style="color:#b9997c"><small class="brandNameSideText"
+                                style="font-weight:600">online</small></p>
+                        <p class="my-0 py-0" style="color:#b9997c"><small class="brandNameSideText"
+                                style="font-weight:600">store</small> </p>
+                    </div>
                 </div>
-                <div style="line-height: 0.85;
-                margin-top: 14px;">
-                    <p class="my-0 py-0" style="color:#b9997c"><span style="font-weight:600">online</span></p>
-                    <p class="my-0 py-0" style="color:#b9997c"><span style="font-weight:600">store</span> </p>
-                </div>
-
             </div>
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="d-flex">
+            <span class="navbar-toggler custom-toggler me-3" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </span>
+            <span class="position-relative mt-1 me-1 cartIconMobile" style="cursor:pointer" data-toggle="modal"
+                data-target="#cartModal">
+                <span><i class="fa-solid fa-cart-shopping" style="font-size:20px"></i></span>
+                <span id="cart" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    <?php
+                    if (isset($_SESSION['loggedInId'])) {
+                        $userId = $_SESSION['loggedInId'];
+                        $sql = "SELECT * FROM cartitem WHERE `cust_id`=$userId";
+                        $result = mysqli_query($conn, $sql);
+                        $row_count = mysqli_num_rows($result);
+                        echo $row_count;
+                    }
+                    ?>
+                </span>
+            </span>
+        </div>
+
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-            <ul class="navbar-nav">
-                <li class="nav-item dropdown">
+            <ul class="navbar-nav px-5">
+                <li class="nav-item dropdown me-2">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         categories
@@ -165,21 +183,39 @@
                         ?>
                     </ul>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item active me-2">
                     <a href="all-shop.php" class="nav-link link-underline-light text-decoration-none">Shops</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item me-2">
                     <a href="search.php" class="nav-link link-underline-light text-decoration-none">Search</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item me-2">
                     <a href="about.php" class="nav-link link-underline-light text-decoration-none">About</a>
+                </li>
+                <li class="nav-item me-4 cartIconWeb">
+                    <span class="position-relative" style="cursor:pointer;top: 10px;" data-toggle="modal"
+                        data-target="#cartModal">
+                        <span><i class="fa-solid fa-cart-shopping" style="font-size:20px"></i></span>
+                        <span id="cart"
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            <?php
+                            if (isset($_SESSION['loggedInId'])) {
+                                $userId = $_SESSION['loggedInId'];
+                                $sql = "SELECT * FROM cartitem WHERE `cust_id`=$userId";
+                                $result = mysqli_query($conn, $sql);
+                                $row_count = mysqli_num_rows($result);
+                                echo $row_count;
+                            }
+                            ?>
+                        </span>
+                    </span>
                 </li>
                 <span>
                     <?php
                     if (isset($_SESSION['userType']) == false) {
                         ?>
 
-                        <li class="nav-item">
+                        <li class="nav-item me-2">
                             <a href="login.php" class="nav-link link-underline-light text-decoration-none"><i
                                     class="fa-solid fa-arrow-right-to-bracket me-1"></i>login</a>
                         </li>
@@ -189,7 +225,7 @@
                             $imgSrc = $_SESSION['user_img'] ? "assets/img/user/" . $_SESSION['user_img'] : "assets/img/user/user.png";
                         }
                         ?>
-                        <li class="nav-item ms-2 d-xs-none" >
+                        <li class="nav-item me-2 d-xs-none nav-item-web">
                             <img src=<?= $imgSrc ?> id="dropdownMenuButton" class="rounded-circle dropdown-toggle"
                                 style="width: 35px; cursor:pointer" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false" />
@@ -203,25 +239,24 @@
                                         style="color:red;"></i>Logout</a>
 
                             </div>
-                    </li>
+                        </li>
+                        <!-- <li class="nav-item me-2 d-xs-none nav-item-mobile">
+                            <img src=<?= $imgSrc ?> id="dropdownMenuButton" class="rounded-circle dropdown-toggle"
+                                style="width: 35px; cursor:pointer" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false" />
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="user-profile.php"><i class="fa-solid fa-user me-2"
+                                        style="color:#12dab9;"></i>Profile</a>
+                                <a class="dropdown-item" href="reset-password.php"><i
+                                        class="fa-solid fa-screwdriver-wrench me-2" style="color:#12dab9;"></i></i>Reset
+                                    Password</a>
+                                <a class="dropdown-item" href="logout.php"><i class="fa-solid fa-power-off me-2"
+                                        style="color:red;"></i>Logout</a>
+
+                            </div>
+                        </li> -->
                     <?php } ?>
                 </span>
-
-                <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div> -->
-
-                <!-- </li> -->
-                <!-- <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li> -->
             </ul>
         </div>
     </div>

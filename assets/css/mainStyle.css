@@ -107,6 +107,25 @@ a {
   text-decoration: none !important;
 }
 
+.navArea {
+  width:75%;
+}
+
+.brandName{
+  font-weight:700; 
+  font-size:35px;
+}
+.brandNameSideTextArea{
+  line-height: 0.85;
+}
+.cartIconWeb{
+  display:block;
+}
+.cartIconMobile{
+  display:none;
+}
+
+
 
 /* added in shop.php */
 /* Custom styles for overlay */
@@ -124,5 +143,56 @@ a {
 .overlay-content {
   padding: 20px;
   color: white; /* Change text color as needed */
+}
+
+/* Add custom styles for the small toggler button */
+.custom-toggler {
+  padding: .25rem .5rem; /* Customize padding as needed */
+  font-size: 80%; /* Adjust font size as needed */
+  line-height: 1; /* Ensure the button's height is not affected by line-height */
+}
+
+
+/* Responsive styles for smaller screens */
+@media screen and (max-width: 768px) {
+  .container {
+    width: 90%;
+  }
+
+ 
+  /* Additional styles for smaller screens go here */
+}
+
+/* Responsive styles for even smaller screens */
+@media screen and (max-width: 480px) {
+  .container {
+    width: 100%;
+  }
+  #cartIcon{
+    font-size:15px
+  }
+  .brandName{
+    font-size: 26px;
+  }
+  .brandNameSideText{
+    font-size:13px
+  }
+  .brandNameSideTextArea{
+    line-height: 0.58;
+  }
+  .navArea {
+    width:90%;
+  }
+
+  .cartIconWeb{
+    display:none;
+  }
+  .cartIconMobile{
+    display:block;
+  }
+  
+
+
+  /* Additional styles for even smaller screens go here */
 }
 

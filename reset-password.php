@@ -17,10 +17,11 @@
         unset($_SESSION['status']);
     }
     ?>
-    <section class="d-flex justify-content-center position-sticky shadow stickyNav" style="background-color:white">
-        <section class="w-75">
+    <section class="d-flex justify-content-center stickyNav" style="background-color:white">
+        <section class="navArea position-sticky">
             <?php include('./includes/navbar.php') ?>
         </section>
+
     </section>
     <section style="min-height:400px">
         <div class="container mt-5">
@@ -49,7 +50,8 @@
                                     <input type="password" class="form-control" id="confirmPassword"
                                         name="confirmPassword" required>
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-block mt-3 w-100">Reset Password</button>
+                                <button type="submit" class="btn btn-primary btn-block mt-3 w-100">Reset
+                                    Password</button>
                             </form>
                             <!-- End Password Reset Form -->
                         </div>

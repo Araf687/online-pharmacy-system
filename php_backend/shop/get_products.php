@@ -33,12 +33,12 @@ if ($rowCount > 0) {
 
         $imgSrc = $prdImage ? "../pipharm-admin-panel/assets/images/product/" . $prdImage : 'assets/img/default.jpg';
         ?>
-        <div class="col-md-3">
+        <div class="col-md-3 mb-4">
             <!-- hidden inputs -->
             <input type="number" class="d-none" value='<?= $prdQuantity ?>' id='<?= "product_qty_" . $prdId ?>'>
 
 
-            <div class="card p-2 rounded-3" style="width: 100%;height:100%">
+            <div class="card rounded-3" style="width: 100%;height:100%">
                 <img src=<?= $imgSrc ?> class="card-img-top" alt="..." onerror="this.src='assets/img/default.jpg'"
                     style="height:200px;">
                 <div class="card-body">

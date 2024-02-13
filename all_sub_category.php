@@ -4,7 +4,7 @@
 
 <body class='bg-light-subtle'>
     <section class="d-flex justify-content-center stickyNav" style="background-color:white">
-        <section class="w-75 position-sticky">
+        <section class="navArea position-sticky">
             <?php include('./includes/navbar.php') ?>
         </section>
 
@@ -55,7 +55,8 @@
                         <div style="min-height:43.9vh" class="d-flex align-items-center justify-content-center">
                             <div class="p-5">
                                 <h5 class="text-center">Sub Categories not found!</h5>
-                                <p class="text-secondary fs-5 my-4">You can view the details of the store that sells the medicine under the category you clicked!</p>
+                                <p class="text-secondary fs-5 my-4">You can view the details of the store that sells the
+                                    medicine under the category you clicked!</p>
                                 <div class="text-center">
                                     <a href=<?= "all-shop.php?category_id=" . $category_id ?>>
                                         <button type="button" class="btn btn-primary">Go to Shop <i

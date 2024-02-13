@@ -37,11 +37,12 @@ function formatDateTime($dbDateTime)
         unset($_SESSION['order_status']);
     }
     ?>
-    <section class="d-flex justify-content-center position-sticky shadow stickyNav" style="background-color:white">
-        <section class="w-75">
-            <?php include('./includes/navbar.php') ?>
+     <section class="d-flex justify-content-center stickyNav" style="background-color:white">
+            <section class="navArea position-sticky">
+                <?php include('./includes/navbar.php') ?>
+            </section>
+
         </section>
-    </section>
     <section>
         <section class="d-flex align-items-center" style="background-color: #eee; height:92.5vh">
             <div class="container">

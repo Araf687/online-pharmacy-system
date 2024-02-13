@@ -4,9 +4,10 @@
 
 <body class='bg-light-subtle'>
     <section class="d-flex justify-content-center stickyNav" style="background-color:white">
-        <section class="w-75 position-sticky">
+        <section class="navArea position-sticky">
             <?php include('./includes/navbar.php') ?>
         </section>
+
     </section>
     <section>
         <section style="background-color: #eee; min-height:91.3vh">
@@ -30,7 +31,7 @@
                      WHERE cartitem.cust_id = $userId";
                         $result = mysqli_query($conn, $sql);
                         $i = $total_qty = $total = 0;
-                        $pharmacy_id_list=[];
+                        $pharmacy_id_list = [];
 
                         $row_count = mysqli_num_rows($result);
 
@@ -43,7 +44,7 @@
                             $product_image = $row["prd_image"];
                             $product_qty = $row["qty"];
 
-                            if(!in_array($pharmacy_id, $pharmacy_id_list)){
+                            if (!in_array($pharmacy_id, $pharmacy_id_list)) {
                                 $pharmacy_id_list[] = $pharmacy_id;
                             }
 
@@ -129,7 +130,7 @@
                             <!-- credit card info-->
                             <div id="nav-tab-card" class="tab-pane fade show active">
                                 <p class="alert alert-success">Some text success or error</p>
-                                <?php include("./includes/paymentForm/Card.php")?>
+                                <?php include("./includes/paymentForm/Card.php") ?>
                             </div>
                             <!-- End -->
 

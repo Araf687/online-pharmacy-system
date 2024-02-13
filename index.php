@@ -30,9 +30,12 @@ include('./includes/check-login.php');
     ?>
 
     <section>
+        <section class="d-flex justify-content-center stickyNav" style="background-color:white">
+            <section class="navArea position-sticky">
+                <?php include('./includes/navbar.php') ?>
+            </section>
 
-
-        <?php include('./includes/navbar.php') ?>
+        </section>
 
 
         <div>

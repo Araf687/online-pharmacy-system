@@ -3,14 +3,15 @@
 <?php include('./includes/head.php') ?>
 
 <body class='bg-light-subtle'>
-    <section class="d-flex justify-content-center position-sticky shadow stickyNav" style="background-color:white">
-        <section class="w-75">
+    <section class="d-flex justify-content-center stickyNav" style="background-color:white">
+        <section class="navArea position-sticky">
             <?php include('./includes/navbar.php') ?>
         </section>
+
     </section>
     <section style="min-height:458px">
         <div class="container">
-            <div class="row p-3 pt-4">
+            <div class="row p-3 pt-4 ">
                 <div class="col-md-12">
                     <div class="mb-2">
                         <input type="text" class="d-none"
@@ -19,25 +20,29 @@
                         <input type="text" class="d-none"
                             value='<?= isset($_SESSION['userLongitude']) ? $_SESSION['userLongitude'] : null ?>'
                             id="userLong">
+
                         <button type="button" class="btn btn-primary" data-mdb-ripple-init
                             onclick="handleClickSearchNearestPharmacy()" style="font-size:18px"><i
                                 class="fa-brands fa-searchengin me-1"></i>Nearest Pharmacy</button>
                     </div>
-                    <div class="input-group">
-                        <select class="form-select" aria-label="Default select example" id="searchOption"
-                            style="max-width:190px">
-                            <option selected>Select Option</option>
-                            <option value="type_medicine">Search by Medicine</option>
-                            <option value="type_pharmacy">Search Pharmacy</option>
+                </div>
+                <div class="col-md-12">
+                    <div class="row input-group g-0">
+                        <div class="col-md-2 mb-2">
+                            <select class="form-select" aria-label="Default select example" id="searchOption">
+                                <option selected>Select Option</option>
+                                <option value="type_medicine">Search by Medicine</option>
+                                <option value="type_pharmacy">Search Pharmacy</option>
 
-                        </select>
-                        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-                            aria-describedby="search-addon" id="searchInput" />
-                        <button type="button" class="btn btn-outline-primary" data-mdb-ripple-init
-                            onclick="handleClickSearch()">search</button>
-
+                            </select>
+                        </div>
+                        <div class="col-md-9 mb-2"><input type="search" class="form-control rounded" placeholder="Search"
+                                aria-label="Search" aria-describedby="search-addon" id="searchInput" /></div>
+                        <div class="col-md-1 mb-2">
+                            <button type="button" class="btn btn-outline-primary w-100" data-mdb-ripple-init
+                                onclick="handleClickSearch()">search</button>
+                        </div>
                     </div>
-
                 </div>
                 <div id="map" class="d-none"></div>
                 <div class="col-md-12">
@@ -95,7 +100,6 @@
 
             const handleClickSearchNearestPharmacy = async () => {
                 try {
-
                     showLoadingMessage();
                     const data = await $.ajax({
                         url: "php_backend/search/search-nearest-pharmacy.php",
@@ -107,10 +111,11 @@
                     });
 
                     const resultData = JSON.parse(data);
-
+                    
                     if (resultData.isSuccess) {
                         const resultedPharmacyList = resultData.data.resultData;
-
+                        console.log(resultedPharmacyList);
+                       
                         // Wait for distance calculations to complete
                         const newPharmacyList = await getRouteDistance(resultedPharmacyList);
                         showNearestPharmacy(resultedPharmacyList);
@@ -239,7 +244,7 @@
                 await Promise.all(objectArray.map(async function (element) {
                     var start = L.latLng(userLat, userLong);
                     var end = L.latLng(parseFloat(element.latitude), parseFloat(element.longitude));
-
+                    
                     var control = L.Routing.control({
                         waypoints: [start, end],
                     });

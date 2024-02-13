@@ -5,17 +5,18 @@
 
 
 include('./includes/head.php');
-if(!isset($_SESSION['loggedInId'])){
-  header( "Location: index.php" );  
+if (!isset($_SESSION['loggedInId'])) {
+  header("Location: index.php");
 }
 
 ?>
 
 <body>
-  <section class="d-flex justify-content-center position-sticky shadow stickyNav" style="background-color:white">
-    <section class="w-75">
+  <section class="d-flex justify-content-center stickyNav" style="background-color:white">
+    <section class="navArea position-sticky">
       <?php include('./includes/navbar.php') ?>
     </section>
+
   </section>
   <section class="mt-3 ">
 
