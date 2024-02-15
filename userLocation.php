@@ -20,10 +20,10 @@ if (!isset($_SESSION['loggedInId'])) {
   </section>
   <section class="mt-3 ">
 
-    <div class="container card p-4">
+    <div class="container card p-3">
       <form id="updateUserForm">
         <div class="row">
-          <div class="col-md-12 mb-4">
+          <div class="col-md-12 mb-2">
             <h3 class="text-center">Edit User</h3>
           </div>
 
@@ -116,13 +116,12 @@ if (!isset($_SESSION['loggedInId'])) {
               </div>
               <div class="col-md-12 form-group">
 
-                <button type="button" class="btn btn-success" onclick="getLocationFromBrowser()">Current
+                <button type="button" class="btn btn-success mb-1" onclick="getLocationFromBrowser()">Current
                   Location</button>
                 <div id="myHiddenDiv" style="display: none;">
-                  <p class="text-danger mt-1">location is required. Press on current
+                  <p class="text-danger mt-2">location is required. Press on current
                     location button.</p>
                 </div>
-
                 <div class="ms-2 d-none"><span>Latitude & Longitude</span>
                   <div><input type="text" name='latLong' id="LatLong" value=<?= $latLong ?>></div>
                   <?php

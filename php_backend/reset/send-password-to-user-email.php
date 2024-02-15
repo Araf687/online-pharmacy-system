@@ -26,6 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ";
 
                 $sendMailResult = sendMail($mail_to, $recipientName, $mailBody, $mailSubject);
+                
 
                 if ($sendMailResult["isSuccess"]) {
 
@@ -45,10 +46,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
 
             } else {
-                echo json_encode(["isSuccess" => false, "data" => ["error" => mysqli_error($conn)], "message" => "Email is incorrect"]);
+                echo json_encode(["isSuccess" => false, "data" => ["error" => mysqli_error($conn)], "message" => "user not found"]);
             }
         } else {
-            echo json_encode(["isSuccess" => false, "data" => ["error" => mysqli_error($conn)], "message" => "Email is incorrect"]);
+            echo json_encode(["isSuccess" => false, "data" => ["error" => mysqli_error($conn)], "message" => "user not found. Email is incorrect"]);
         }
     } catch (Exception $e) {
         echo json_encode(["isSuccess" => false, "data" => [], "message" => "Failed to send mail"]);

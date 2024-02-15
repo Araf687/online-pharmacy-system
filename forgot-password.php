@@ -93,10 +93,11 @@ include('includes/head.php');
                     const jsonData = $.parseJSON(response);
 
                     if (jsonData?.isSuccess) {
+                        console.log(jsonData)
                         document.getElementById('modalCloseBTN').click();
                         Swal.fire({
                             title: "Good job!",
-                            text: "You clicked the button!",
+                            text: "New Password sent to "+jsonData.data.result.data.destinationMail,
                             icon: "success"
                         });
                     } else {

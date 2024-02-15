@@ -16,8 +16,9 @@
             </div>
         </a>
         <div class="d-flex">
-            <span class="navbar-toggler custom-toggler me-3" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler custom-toggler me-3" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
 
                 <span class="navbar-toggler-icon"></span>
 
@@ -41,6 +42,9 @@
 
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav px-5">
+                <li class="nav-item me-2">
+                    <a href="user-profile.php" class="nav-link link-underline-light text-decoration-none avatarSectionListItems">Profile</a>
+                </li>
                 <li class="nav-item dropdown me-2">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
@@ -210,7 +214,14 @@
                         </span>
                     </span>
                 </li>
-                <span>
+                <li class="nav-item me-2 avatarSectionListItems">
+                    <a href="reset-password.php" class="nav-link link-underline-light text-decoration-none">Reset
+                                    Password</a>
+                </li>
+                <li class="nav-item me-2 avatarSectionListItems">
+                    <a href="logout.php" class="nav-link link-underline-light text-decoration-none">Logout</a>
+                </li>
+                <span id="avatarSection">
                     <?php
                     if (isset($_SESSION['userType']) == false) {
                         ?>

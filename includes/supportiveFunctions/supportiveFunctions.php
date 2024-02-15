@@ -18,7 +18,7 @@ function sendMail($mailTo, $recipientName,$mailBody,$mailSubject)
         $mail->Host = 'smtp.gmail.com';               // Specify main and backup SMTP servers
         $mail->SMTPAuth = true;                             // Enable SMTP authentication
         $mail->Username = 'pharmacypi012@gmail.com';         // SMTP username
-        $mail->Password = 'pizeocqeceaeczjx';            // SMTP password
+        $mail->Password = 'ykxjqdjjtrkrvaoq';            // SMTP password
         $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
         $mail->Port = 587;                              // TCP port to connect to
 
@@ -32,7 +32,7 @@ function sendMail($mailTo, $recipientName,$mailBody,$mailSubject)
         $mail->Body = $mailBody;
 
         if($mail->send()){
-                return ["isSuccess" => true, "data" => [], "message" => "send mail successfully!"];
+                return ["isSuccess" => true, "data" => ["destinationMail"=>$mailTo, "recipientName"=>$recipientName], "message" => "send mail successfully!"];
         } 
         
     } catch (Exception $e) {

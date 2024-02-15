@@ -152,13 +152,25 @@ a {
   line-height: 1; /* Ensure the button's height is not affected by line-height */
 }
 
+#avatarSection{
+  display: block;
+}
+.avatarSectionListItems{
+  display: none;
+}
+
 
 /* Responsive styles for smaller screens */
 @media screen and (max-width: 768px) {
   .container {
     width: 90%;
   }
-
+  #avatarSection{
+    display: none;
+  }
+  .avatarSectionListItems{
+    display: block;
+  }
  
   /* Additional styles for smaller screens go here */
 }
@@ -190,6 +202,14 @@ a {
   .cartIconMobile{
     display:block;
   }
+
+  #avatarSection{
+    display: none;
+  }
+  .avatarSectionListItems{
+    display: block;
+  }
+ 
   
 
 
