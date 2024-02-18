@@ -88,11 +88,6 @@ function fetchDataSearchTerm(searchTerm) {
 function addToCart(productId, productPrice, userId = null, pharmacyId) {
   var quantity = parseInt($("#quantity_" + productId).val());
 
-  // Perform action to add product with productId and quantity to cart
-  // For example, use AJAX to send this data to the server (e.g., PHP endpoint)
-  // $.post('add_to_cart.php', { productId: productId, quantity: quantity }, function(data) {
-  //     // Handle response from server (e.g., success message)
-  // });
   var dataToSend = {
     id: productId,
     qty: quantity,
@@ -108,12 +103,15 @@ function addToCart(productId, productPrice, userId = null, pharmacyId) {
         console.log(response);
         // Handle the response from the server
         const res = JSON.parse(response);
+        console.log(res.type)
 
         if (res.type == "add") {
           //update cart
-          var currentValue = parseInt($("#cart").text());
+          var currentValue = parseInt($("#cart-web").text());
           var incrementedValue = currentValue + 1;
-          $("#cart").text(incrementedValue);
+          
+          $("#cart-web").text(incrementedValue);
+          $("#cart-mobile").text(incrementedValue);
 
           const inputId = "#quantity_" + productId;
           $(inputId).val(1);

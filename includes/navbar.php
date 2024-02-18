@@ -26,7 +26,7 @@
             <span class="position-relative mt-1 me-1 cartIconMobile" style="cursor:pointer" data-toggle="modal"
                 data-target="#cartModal">
                 <span><i class="fa-solid fa-cart-shopping" style="font-size:20px"></i></span>
-                <span id="cart" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                <span id="cart-web" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                     <?php
                     if (isset($_SESSION['loggedInId'])) {
                         $userId = $_SESSION['loggedInId'];
@@ -34,6 +34,7 @@
                         $result = mysqli_query($conn, $sql);
                         $row_count = mysqli_num_rows($result);
                         echo $row_count;
+                        echo "<script>console.log($row_count)</script>";
                     }
                     ?>
                 </span>
@@ -200,7 +201,7 @@
                     <span class="position-relative" style="cursor:pointer;top: 10px;" data-toggle="modal"
                         data-target="#cartModal">
                         <span><i class="fa-solid fa-cart-shopping" style="font-size:20px"></i></span>
-                        <span id="cart"
+                        <span id="cart-mobile"
                             class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                             <?php
                             if (isset($_SESSION['loggedInId'])) {
