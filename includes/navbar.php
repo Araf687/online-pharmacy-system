@@ -26,7 +26,8 @@
             <span class="position-relative mt-1 me-1 cartIconMobile" style="cursor:pointer" data-toggle="modal"
                 data-target="#cartModal">
                 <span><i class="fa-solid fa-cart-shopping" style="font-size:20px"></i></span>
-                <span id="cart-web" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                <span id="cart-web"
+                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                     <?php
                     if (isset($_SESSION['loggedInId'])) {
                         $userId = $_SESSION['loggedInId'];
@@ -43,7 +44,8 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav px-5">
                 <li class="nav-item me-2">
-                    <a href="user-profile.php" class="nav-link link-underline-light text-decoration-none avatarSectionListItems">Profile</a>
+                    <a href="user-profile.php"
+                        class="nav-link link-underline-light text-decoration-none avatarSectionListItems">Profile</a>
                 </li>
                 <li class="nav-item dropdown me-2">
                     <a class="nav-link dropdown-toggle" href="category.php" role="button" data-bs-toggle="dropdown"
@@ -113,7 +115,7 @@
                                                         ?>
 
                                                         <li class="dropdown-submenu">
-                                                            <a class="dropdown-item"  href=<?= "all-shop.php?category_id=" . $category_id . "&sub_category_id=" . $sub_category_id ?>>
+                                                            <a class="dropdown-item" href=<?= "all-shop.php?category_id=" . $category_id . "&sub_category_id=" . $sub_category_id ?>>
                                                                 <?= $sub_category_name ?> <span
                                                                     class="float-end custom-toggle-arrow">&#187</span>
                                                             </a>
@@ -216,7 +218,7 @@
                 </li>
                 <li class="nav-item me-2 avatarSectionListItems">
                     <a href="reset-password.php" class="nav-link link-underline-light text-decoration-none">Reset
-                                    Password</a>
+                        Password</a>
                 </li>
                 <li class="nav-item me-2 avatarSectionListItems">
                     <a href="logout.php" class="nav-link link-underline-light text-decoration-none">Logout</a>
@@ -251,21 +253,7 @@
 
                             </div>
                         </li>
-                        <!-- <li class="nav-item me-2 d-xs-none nav-item-mobile">
-                            <img src=<?= $imgSrc ?> id="dropdownMenuButton" class="rounded-circle dropdown-toggle"
-                                style="width: 35px; cursor:pointer" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false" />
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="user-profile.php"><i class="fa-solid fa-user me-2"
-                                        style="color:#12dab9;"></i>Profile</a>
-                                <a class="dropdown-item" href="reset-password.php"><i
-                                        class="fa-solid fa-screwdriver-wrench me-2" style="color:#12dab9;"></i></i>Reset
-                                    Password</a>
-                                <a class="dropdown-item" href="logout.php"><i class="fa-solid fa-power-off me-2"
-                                        style="color:red;"></i>Logout</a>
-
-                            </div>
-                        </li> -->
+                      
                     <?php } ?>
                 </span>
             </ul>
