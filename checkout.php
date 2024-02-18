@@ -107,11 +107,11 @@
                                     Credit Card
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a data-toggle="pill" href="#nav-tab-paypal" class="nav-link rounded-pill">
                                     <i class="fa fa-paypal"></i>
                                     Bkash
-                                    <!-- <img src="assets/img/checkout/bkash-logo2.png" alt=""> -->
+                             
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -119,7 +119,7 @@
                                     <i class="fa fa-university"></i>
                                     Nagad
                                 </a>
-                            </li>
+                            </li> -->
                         </ul>
                         <!-- End -->
 
@@ -129,7 +129,7 @@
 
                             <!-- credit card info-->
                             <div id="nav-tab-card" class="tab-pane fade show active">
-                                <p class="alert alert-success">Some text success or error</p>
+                                <!-- <p class="alert alert-success">Some text success or error</p> -->
                                 <?php include("./includes/paymentForm/Card.php") ?>
                             </div>
                             <!-- End -->

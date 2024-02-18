@@ -33,7 +33,7 @@
    <input type="text" name="payment_method" value="card" class="d-none">
     <div class="form-group">
         <label for="username">Full name (on the card)</label>
-        <input type="text" name="username" placeholder="Jason Doe" required class="form-control" required>
+        <input type="text" name="username" placeholder="Your name.." required class="form-control" required>
     </div>
     <div class="form-group my-3">
         <label for="cardNumber">Card number</label>

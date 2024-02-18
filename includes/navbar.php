@@ -34,7 +34,6 @@
                         $result = mysqli_query($conn, $sql);
                         $row_count = mysqli_num_rows($result);
                         echo $row_count;
-                        echo "<script>console.log($row_count)</script>";
                     }
                     ?>
                 </span>
@@ -47,7 +46,7 @@
                     <a href="user-profile.php" class="nav-link link-underline-light text-decoration-none avatarSectionListItems">Profile</a>
                 </li>
                 <li class="nav-item dropdown me-2">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle" href="category.php" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         categories
                     </a>
@@ -70,7 +69,7 @@
 
                                         ?>
                                         <li class="dropdown-submenu">
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href=<?= "all_sub_category.php?sub_category_id=" . $category_id ?>>
                                                 <?= $category_name ?>
                                                 <span class="float-end custom-toggle-arrow">&#187</span>
                                             </a>
@@ -86,7 +85,7 @@
                                                     if ($result_product_by_sub_category && mysqli_num_rows($result_product_by_sub_category) > 0) {
                                                         ?>
                                                         <li class="dropdown-submenu">
-                                                            <a class="dropdown-item" href="#">
+                                                            <a class="dropdown-item" href=<?= "all-shop.php?category_id=" . $category_id . "&sub_category_id=" . $sub_category_id ?>>
                                                                 <?= $sub_category_name ?> <span
                                                                     class="float-end custom-toggle-arrow">&#187</span>
                                                             </a>
@@ -114,7 +113,7 @@
                                                         ?>
 
                                                         <li class="dropdown-submenu">
-                                                            <a class="dropdown-item" href="#">
+                                                            <a class="dropdown-item"  href=<?= "all-shop.php?category_id=" . $category_id . "&sub_category_id=" . $sub_category_id ?>>
                                                                 <?= $sub_category_name ?> <span
                                                                     class="float-end custom-toggle-arrow">&#187</span>
                                                             </a>
@@ -145,7 +144,7 @@
                                             ?>
                                             <li class="dropdown-submenu">
 
-                                                <a class="dropdown-item" href="#">
+                                                <a class="dropdown-item" href=<?= "all_sub_category.php?sub_category_id=" . $category_id ?>>
                                                     <?= $category_name ?>
                                                     <span class="float-end custom-toggle-arrow">&#187</span>
                                                 </a>

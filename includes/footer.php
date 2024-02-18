@@ -14,8 +14,8 @@
                 </div>
                 <div style="line-height:1">
                     <h3 style="font-weight:600; font-size:28px; color:#b9997c">Online Store</h3>
-                    <p><i class="fa-solid fa-tty fa-beat" style="color: #f8a75e;"></i><strong
-                            class="ms-1 text-white">031-128569</strong> </p>
+                    <p><i class="fa-solid fa-mobile-screen fa-beat" style="color: #f8a75e;"></i><strong
+                            class="ms-1 text-white">+880 16 3230 7542</strong> </p>
                 </div>
                 <!-- </div>
 

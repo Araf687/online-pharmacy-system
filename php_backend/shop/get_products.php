@@ -45,6 +45,7 @@ if ($rowCount > 0) {
                     <h5 class="card-title text-center">
                         <?= $prdName ?>
                     </h5>
+                    <p class="text-center"><i class="fa-solid fa-bangladeshi-taka-sign me-1"></i><?=$prdPrice?></p>
                     <?php
                     if ($prdQuantity > 0) {
                         ?>
