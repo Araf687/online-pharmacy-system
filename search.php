@@ -36,8 +36,9 @@
 
                             </select>
                         </div>
-                        <div class="col-md-9 mb-2"><input type="search" class="form-control rounded" placeholder="Search"
-                                aria-label="Search" aria-describedby="search-addon" id="searchInput" /></div>
+                        <div class="col-md-9 mb-2"><input type="search" class="form-control rounded"
+                                placeholder="Search" aria-label="Search" aria-describedby="search-addon"
+                                id="searchInput" /></div>
                         <div class="col-md-1 mb-2">
                             <button type="button" class="btn btn-outline-primary w-100" data-mdb-ripple-init
                                 onclick="handleClickSearch()">search</button>
@@ -111,11 +112,11 @@
                     });
 
                     const resultData = JSON.parse(data);
-                    
+
                     if (resultData.isSuccess) {
                         const resultedPharmacyList = resultData.data.resultData;
                         console.log(resultedPharmacyList);
-                       
+
                         // Wait for distance calculations to complete
                         const newPharmacyList = await getRouteDistance(resultedPharmacyList);
                         showNearestPharmacy(resultedPharmacyList);
@@ -160,41 +161,52 @@
                 try {
                     showLoadingMessage();
                     if (isLoggedIn) {
-                        const data = await $.ajax({
-                            url: "php_backend/search/searchCode.php",
-                            method: "POST",
-                            data: postData,
-                        });
+                        if (userLat != 0 && userLong != 0) {
+                            const data = await $.ajax({
+                                url: "php_backend/search/searchCode.php",
+                                method: "POST",
+                                data: postData,
+                            });
 
-                        const resultData = JSON.parse(data);
+                            const resultData = JSON.parse(data);
 
 
-                        if (resultData.isSuccess) {
-                            const resultedPharmacyList = resultData.data.resultData;
+                            if (resultData.isSuccess) {
+                                const resultedPharmacyList = resultData.data.resultData;
 
-                            // Wait for distance calculations to complete
-                            const newPharmacyList = await getRouteDistance(resultedPharmacyList);
-                            showNearestPharmacy(resultedPharmacyList, searchData, searchOption);
-                        }
-                        else {
-                            hideLoadingMessage();
-                            if (searchOption == "type_medicine") {
-                                Swal.fire({
-                                    icon: "error",
-                                    title: "Oops...",
-                                    text: "No pharmacy has been found that sells this " + searchData + " !",
-                                });
+                                // Wait for distance calculations to complete
+                                const newPharmacyList = await getRouteDistance(resultedPharmacyList);
+                                showNearestPharmacy(resultedPharmacyList, searchData, searchOption);
                             }
                             else {
-                                Swal.fire({
-                                    icon: "error",
-                                    title: "Oops...",
-                                    text: resultData.message,
-                                });
+                                hideLoadingMessage();
+                                if (searchOption == "type_medicine") {
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: "Oops...",
+                                        text: "No pharmacy has been found that sells this " + searchData + " !",
+                                    });
+                                }
+                                else {
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: "Oops...",
+                                        text: resultData.message,
+                                    });
+                                }
+
+
                             }
-
-
                         }
+                        else {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Location error!",
+                                text: "User location has not given yet!",
+                                footer: 'Please set your location in your profile.'
+                            });
+                        }
+
                     }
                     else {
                         // Redirect to another PHP page
@@ -242,27 +254,32 @@
             const getRouteDistance = async (objectArray) => {
                 // Use Promise.all to await all distance calculations in parallel
                 await Promise.all(objectArray.map(async function (element) {
-                    var start = L.latLng(userLat, userLong);
-                    var end = L.latLng(parseFloat(element.latitude), parseFloat(element.longitude));
-                    
-                    var control = L.Routing.control({
-                        waypoints: [start, end],
-                    });
+                    if (userLat != 0 && userLong != 0 && element.latitude != 0 && element.longitude != 0) {
+                        var start = L.latLng(userLat, userLong);
+                        var end = L.latLng(parseFloat(element.latitude), parseFloat(element.longitude));
 
-                    // Promisify the routing control event
-                    const routeSelectedPromise = new Promise((resolve) => {
-                        control.on('routeselected', function (event) {
-                            var route = event.route;
-                            var distance = route.summary.totalDistance;
-                            element.distance = (distance / 1000).toFixed(2);
-                            resolve();
+                        var control = L.Routing.control({
+                            waypoints: [start, end],
                         });
-                    });
 
-                    control.addTo(map);
+                        // Promisify the routing control event
+                        const routeSelectedPromise = new Promise((resolve) => {
+                            control.on('routeselected', function (event) {
+                                var route = event.route;
+                                var distance = route.summary.totalDistance;
+                                element.distance = (distance / 1000).toFixed(2);
+                                resolve();
+                            });
+                        });
 
-                    // Wait for the routeSelectedPromise to complete
-                    await routeSelectedPromise;
+                        control.addTo(map);
+
+                        // Wait for the routeSelectedPromise to complete
+                        await routeSelectedPromise;
+
+                    }
+
+
                 }));
 
                 return objectArray;
@@ -309,11 +326,11 @@
                                         </p>
                                         <div class="d-flex align-items-center" style="height:50px">
                                             <div class="p-2 border me-2 rounded"><i class="fa-solid fa-location-dot "></i></div>
-                                            <small>${address}</small>
+                                            <small>${address && address != " " ? address : "N/A"}</small>
                                         </div>
                                         <div class="d-flex align-items-center" style="height:50px">
                                             <div class="p-2 border me-2 rounded"><i class="fa-solid fa-location-dot "></i></div>
-                                            <small>Distance: ${distance} km</small>
+                                            <small>Distance: ${distance ? distance + "km" : "location is not added"}</small>
                                         </div>
                                     </div>
                                 </div>
