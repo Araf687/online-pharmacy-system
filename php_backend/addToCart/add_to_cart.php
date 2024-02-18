@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pharmacy_id = intval($_POST['pharmacy_id']);
     $data=array("product_id"=>$product_id,"qty"=>$qty,"price"=>$price);
 
-    $isProductExistQuery="SELECT * FROM cartitem WHERE prod_id = $product_id";
+    $isProductExistQuery="SELECT * FROM cartitem WHERE prod_id = $product_id AND cust_id=$userId";
     $isProductExistResult=mysqli_query($conn, $isProductExistQuery);
     if(mysqli_num_rows($isProductExistResult)> 0) {
         // Product exists, update its quantity
