@@ -135,7 +135,7 @@
                             <!-- End -->
 
                             <!-- Paypal info -->
-                            <div id="nav-tab-paypal" class="tab-pane fade">
+                            <!-- <div id="nav-tab-paypal" class="tab-pane fade">
                                 <p>Paypal is easiest way to pay online</p>
                                 <p>
                                     <button type="button" class="btn btn-primary rounded-pill"><i
@@ -145,11 +145,11 @@
                                     adipisicing elit, sed do eiusmod tempor incididunt ut labore et
                                     dolore magna aliqua.
                                 </p>
-                            </div>
+                            </div> -->
                             <!-- End -->
 
                             <!-- bank transfer info -->
-                            <div id="nav-tab-bank" class="tab-pane fade">
+                            <!-- <div id="nav-tab-bank" class="tab-pane fade">
                                 <h6>Bank account details</h6>
                                 <dl>
                                     <dt>Bank</dt>
@@ -167,7 +167,7 @@
                                     adipisicing elit, sed do eiusmod tempor incididunt ut labore et
                                     dolore magna aliqua.
                                 </p>
-                            </div>
+                            </div> -->
                             <!-- End -->
                         </div>
                         <!-- End -->

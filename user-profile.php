@@ -161,7 +161,7 @@ function formatDateTime($dbDateTime)
                                                 <th style="text-align: left;padding: 8px;">Order Status</th>
                                                 <th style="text-align: left;padding: 8px;">Delivery Status</th>
                                                 <th style="text-align: left;padding: 8px;">Date</th>
-                                                <!-- <th style="text-align: left;padding: 8px;">Action</th> -->
+                                                <th style="text-align: left;padding: 8px;">Action</th>
 
                                             </tr>
                                             <?php
@@ -173,6 +173,7 @@ function formatDateTime($dbDateTime)
                                             
                                             while ($row = $result_all_orders->fetch_assoc()) {
                                                 // Display order information (Modify this part as needed)
+                                                $orderId = $row["id"];
                                                 $orderCode = $row["order_code"];
                                                 $total = $row["sale_amount"] + $row["tax"] + $row["shipping_cost"];
                                                 $order_status = $row["order_status"];
@@ -228,53 +229,16 @@ function formatDateTime($dbDateTime)
                                                         <?= formatDateTime($date_time) ?>
 
                                                     </td>
-                                                    <!-- <td style="text-align: left;padding: 8px;cursor:pointer"
-                                                        data-toggle="tooltip" data-placement="top" title="Give Review">
-                                                        <i class="fa-regular fa-beat fa-star" style="font-size:12px"></i>
-                                                    </td> -->
-                                                    <!-- <td style="text-align: left;padding: 8px;"> -->
+                                                    <td style="text-align: left;padding: 8px;">
 
+                                                        <div>
+                                                            <a href=<?= "order-details.php?id=" . $orderId ?>><i
+                                                                    class="fa-regular fa-eye"
+                                                                    style="cursor:pointer"></i></a>
+                                                        </div>
 
-                                                    <!-- <div>
-                                                            <span id="dropdownMenuButton"
-                                                                class="rounded-circle dropdown-toggle"
-                                                                style="cursor:pointer" data-toggle="dropdown"
-                                                                aria-haspopup="true" aria-expanded="false"><i
-                                                                    class="fa-solid fa-ellipsis-vertical"></i></span>
-                                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                <span class="dropdown-item" data-toggle="modal" data-target="#exampleReviewModal" >
-                                                                    <i class="fa-regular fa-beat fa-star me-2"
-                                                                        style="font-size:14px"></i>
-                                                                    Give Review
-                                                                </span>
+                                                    </td>
 
-                                                            </div> -->
-
-                                                    <!-- Modal -->
-                                                    <!-- <div class="modal fade" id="exampleReviewModal" tabindex="-1"
-                                                                role="dialog" aria-labelledby="exampleModalLabel"
-                                                                aria-hidden="true">
-                                                                <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                                                            
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            ...
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-secondary"
-                                                                                data-dismiss="modal">Close</button>
-                                                                            <button type="button"
-                                                                                class="btn btn-primary">Submit</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div> -->
-
-
-                                                    <!-- </td> -->
 
                                                 </tr>
 

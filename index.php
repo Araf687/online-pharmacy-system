@@ -56,7 +56,7 @@ include('./includes/check-login.php');
                                     INNER JOIN pharmacy_address pad ON pa.id = pad.pharmacy_id
                                     GROUP BY pa.id
                                     ORDER BY total_sales DESC
-                                    LIMIT 8";
+                                    LIMIT 4";
 
                     $result = mysqli_query($conn, $sql);
                     $row_count = mysqli_num_rows($result);

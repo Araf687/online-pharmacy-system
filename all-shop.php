@@ -21,7 +21,7 @@ include('./includes/head.php');
                 $sub_category_id = isset($_GET['sub_category_id']) ? $_GET['sub_category_id'] : null;
                 $query1 = "SELECT *
                         FROM pharmacy_admin
-                        JOIN pharmacy_address ON pharmacy_admin.id = pharmacy_address.pharmacy_id;
+                        JOIN pharmacy_address ON pharmacy_admin.id = pharmacy_address.pharmacy_id
                         ";
 
                 $query2 = "SELECT DISTINCT s.*, sa.*
@@ -31,7 +31,7 @@ include('./includes/head.php');
                     LEFT JOIN pharmacy_address sa ON s.id = sa.pharmacy_id
                     WHERE sc.category_id = $category_id AND sc.id=$sub_category_id";
 
-                $query3 = "SELECT pa.*, pad.*
+                $query3 = "SELECT DISTINCT pa.*, pad.*
                     FROM pharmacy_admin pa
                     INNER JOIN pharmacy_address pad ON pa.id = pad.pharmacy_id
                     INNER JOIN product p ON pa.id = p.pharmacy_id

@@ -2,11 +2,11 @@
 include('../../config/dbConn.php');
 session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $pharmacy_id_list = explode(", ", $_POST["pharmacy_id_list"]);
+    $pharmacy_id_list = explode(",", $_POST["pharmacy_id_list"]);
     $user_id = $_POST["user_id"];
     $payment_method = $_POST["payment_method"];
     $flag = 0;
-    
+
     foreach ($pharmacy_id_list as $id) {
         $sql_getCartItem = "SELECT * from cartitem WHERE `cust_id`=$user_id AND pharmacy_id=$id";
         $result_getCartItem = mysqli_query($conn, $sql_getCartItem);
@@ -22,29 +22,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $product_id = $row_getCartItem['prod_id'];
                 $subTotal = $row_getCartItem['price'] * $qty;
                 $total_sale_amount = $total_sale_amount + $subTotal;
-                
+
                 $sql_setOrderItems = "INSERT INTO orderitems (`order_code`, `prod_id`,`qty`, `subTotal`) VALUES ('$orderCode', $product_id, $qty,$subTotal)";
                 $result_setOrderItems = mysqli_query($conn, $sql_setOrderItems);
-
 
 
                 $allCartItemId = $allCartItemId . ',' . $cartItemId;
 
                 if ($result_setOrderItems) {
 
-                    $sql_update_product_quantity="UPDATE product
+                    $sql_update_product_quantity = "UPDATE product
                     SET quantity = quantity - $qty
                     WHERE prd_id = $product_id";
 
-                    $result_update_product_quantity= mysqli_query($conn, $sql_update_product_quantity);
-                    if($result_update_product_quantity){
+                    $result_update_product_quantity = mysqli_query($conn, $sql_update_product_quantity);
+                    if ($result_update_product_quantity) {
                         $flag = 1;
-                    }
-                    else{
+                    } else {
                         $flag = 0;
                     }
-                    
-              
+
+
                 } else {
                     $flag = 0;
                 }
@@ -67,18 +65,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo "order not added" . " " . $deleteCartItemSQL;
             }
 
+            // code for add notification
+            $order_id=mysqli_insert_id($conn); 
+            $pharmacy_id = $id;
+            $customer_id = $user_id;
+            $title = "New order has been placed!";
+            $myDateTime = DateTime::createFromFormat('Y-m-d H:i:s', date("Y-m-d H:i:s"));
+            $date = $myDateTime->format('jS F Y');
+            $time = $myDateTime->format('g:ia');
+            $currentDateTime=$date.' '.$time;
+            $description = "You have an order of " . $cartItem_row_count . " medicine on " . $currentDateTime . ".";
+            $status = 0;
+            $notification_user_type = "pharmacy";
+
+            $sql_notification = "INSERT INTO notifications (`order_id`,`pharmacy_id`,`customer_id`,`order_code`,`title`,`description`,`status`,`notification_user_type`) Values ('$order_id','$pharmacy_id','$customer_id','$orderCode','$title','$description','$status','$notification_user_type')";
+
+            $result_add_notification = mysqli_query($conn, $sql_notification);
+            if ($result_add_notification) {
+                echo "succeed";
+            } else {
+                print_r(mysqli_error($conn));
+                exit;
+            }
+
         } else {
             echo "cart item not found";
         }
+
+
+
     }
-    if($flag){
+    if ($flag) {
         $_SESSION['order_status'] = true;
-        $_SESSION['pharmacy_list']=$pharmacy_id_list;
-        header( "Location: ../../user-profile.php" );  
-    }
-    else{
+        $_SESSION['pharmacy_list'] = $pharmacy_id_list;
+        header("Location: ../../user-profile.php");
+    } else {
         $_SESSION['order_status'] = false;
-        header( "Location: ../../user-profile.php" );  
+        header("Location: ../../user-profile.php");
     }
 
 } ?>
