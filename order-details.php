@@ -21,7 +21,7 @@ include('./includes/head.php');
                     <?php
                     $ord_id = $_GET['id'];
 
-                    $fetchCatQuerry = "SELECT orders.*,pharmacy_admin.id, pharmacy_admin.first_name, pharmacy_admin.last_name,pharmacy_admin.admin_email,pharmacy_admin.admin_phone
+                    $fetchCatQuerry = "SELECT orders.*,pharmacy_admin.id, pharmacy_admin.shop_name, pharmacy_admin.admin_email,pharmacy_admin.admin_phone
                     FROM `orders` 
                     INNER JOIN pharmacy_admin ON orders.pharmacy_id = pharmacy_admin.id AND orders.id=$ord_id";
 
@@ -35,11 +35,10 @@ include('./includes/head.php');
                             $rows = mysqli_fetch_assoc($querry_result);
 
                             //pharmacy details
-                            $pharmacy_id=$rows['id'];
-                            $pharmacy_first_name=$rows['first_name'];
-                            $pharmacy_last_name=$rows['last_name'];
-                            $pharmacy_email=$rows['admin_email'];
-                            $pharmacy_phone=$rows['admin_phone'];
+                            $pharmacy_id = $rows['id'];
+                            $pharmacy_name = $rows['shop_name'];
+                            $pharmacy_email = $rows['admin_email'];
+                            $pharmacy_phone = $rows['admin_phone'];
 
                             //order details
                             $ord_date = $rows['created_date'];
@@ -54,8 +53,8 @@ include('./includes/head.php');
                             $myDateTime = DateTime::createFromFormat('Y-m-d H:i:s', $ord_date);
                             $date = $myDateTime->format('jS F Y');
                             $time = $myDateTime->format('g:ia');
-                            
-                    
+
+
                             $address = explode("@", $rows['shipping_address']);
                             $contact = $rows['contact_no'];
 
@@ -78,6 +77,11 @@ include('./includes/head.php');
                             ?>
                             <div class="card-body">
                                 <div class="title-header title-header-block package-card">
+                                    <div>
+                                        <p class="p-0 m-0"><span style="font-weight:600">Pharmacy Name: </span><?=$pharmacy_name?></p>
+                                        <p class="p-0 m-0"><span style="font-weight:600">Email: </span><?=$pharmacy_email?></p>
+                                        <p class="p-0 mb-2"><span style="font-weight:600">Phone: </span><?=$pharmacy_phone?$pharmacy_phone:"N/A"?></p>
+                                    </div>
                                     <div>
                                         <h5>
                                             <?php echo $ord_code; ?>
@@ -269,9 +273,9 @@ include('./includes/head.php');
                             </div>
                             <?php
                         }
-                    } else{
+                    } else {
                         echo mysqli_error($conn);
-                    }?>
+                    } ?>
                 </div>
 
             </div>
