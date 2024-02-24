@@ -35,6 +35,8 @@
                         $result = mysqli_query($conn, $sql);
                         $row_count = mysqli_num_rows($result);
                         echo $row_count;
+                    } else {
+                        echo 0;
                     }
                     ?>
                 </span>
@@ -211,9 +213,33 @@
                                 $result = mysqli_query($conn, $sql);
                                 $row_count = mysqli_num_rows($result);
                                 echo $row_count;
+                            } else {
+                                echo 0;
                             }
                             ?>
                         </span>
+                    </span>
+                </li>
+                <li class="nav-item me-2 cartIconWeb">
+                    <span class="position-relative" style="cursor:pointer;top: 10px;" data-toggle="modal"
+                        data-target="#cartModal">
+                        <span><i class="fa-regular fa-bell" style="font-size:20px"></i></span>
+                        <?php
+                        if (isset($_SESSION['loggedInId'])) {
+                            $userId = $_SESSION['loggedInId'];
+                            $sql = "SELECT * FROM cartitem WHERE `cust_id`=$userId";
+                            $result = mysqli_query($conn, $sql);
+                            $row_count = mysqli_num_rows($result);
+                           
+                            ?>
+                            <span id="cart-mobile"
+                                class="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-danger">
+                                <?=$row_count?> 
+                            </span>
+                            <?php
+                        }
+                        ?>
+
                     </span>
                 </li>
                 <li class="nav-item me-2 avatarSectionListItems">
@@ -253,7 +279,7 @@
 
                             </div>
                         </li>
-                      
+
                     <?php } ?>
                 </span>
             </ul>
